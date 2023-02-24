@@ -1,5 +1,5 @@
 @echo off
-set /p "message=Enter Message: "
+set /p "message=Commit-Message: "
 C:\Users\ohnrz\OneDrive\Desktop\Parallax
 git add .
 git commit -m "%message%"
