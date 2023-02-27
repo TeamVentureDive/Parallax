@@ -7,11 +7,21 @@
  ```
  git checkout -b BRANCHNAME
  ```
- * ```git add .```
- * ```git commit -m MESSAGE```
- * ```git push``` 
- (Falls eine error meldung kommt, dann einfach den command benutzen, der Vorgeschlagen wird 
- [```git push --set-upstream origin BRANCHNAME```])
+```
+git add .
+```
+```
+git commit -m MESSAGE
+```
+```
+git push
+``` 
+---
+Falls eine error meldung kommt, dann einfach den command benutzen, der Vorgeschlagen wird 
+
+```
+git push --set-upstream origin BRANCHNAME
+```
   
  ### Git GUI:
  * Rescan
