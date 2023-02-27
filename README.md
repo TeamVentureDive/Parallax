@@ -4,7 +4,9 @@
 
 ### Command Line:
 
- * `git checkout -b BRANCHNAME`
+ ```
+ git checkout -b BRANCHNAME
+ ```
  * ```git add .```
  * ```git commit -m MESSAGE```
  * ```git push``` 
