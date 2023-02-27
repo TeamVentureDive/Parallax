@@ -1,6 +1,6 @@
 # Bitte gute Namen für eure Commits verwenden!
 
-##Pull Requests:
+## Pull Requests:
 
 ### Command Line:
 
