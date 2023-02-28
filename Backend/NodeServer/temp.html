@@ -7,8 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="localhost/upload">
-        <input type="file">
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="upload">
+        <button>Submit</button>
     </form>
 </body>
 </html>

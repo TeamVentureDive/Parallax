@@ -1,18 +1,24 @@
 const formidable = require("formidable");
 const express = require("express");
+const fs = require("fs");
 const app = express();
 const port = 1234;
 
 app.get("/", (req, res) => {
-    res.setHeader("Content-Type", "text/html");
-    res.send('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Document</title></head><body><form action="upload"><input type="file"></form></body></html>');
+    res.setHeader("Content-Type", "text/html");    
+    let data = fs.readFileSync("temp.html");
+    
+    res.send(data);
 });
 
-app.get("/upload", (req, res) =>{
-    const form = formidable({multiples: true});
+app.post("/upload", (req, res) =>{
+    const form = formidable({});
 
     form.parse(req, (err, fields, files) => {
-        res.json({fields, files});
+        console.log(err);
+        console.log(fields);
+        console.log(files);
+        res.send(files);
     });
 });
 
