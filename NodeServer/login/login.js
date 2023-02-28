@@ -11,7 +11,7 @@ const db = new sqlite3.Database('../para.db', (error) => {
 
 
 app.get('/login', (req, res) => {
-    db.all('SELECT * FROM a_accounts inner join f_files on a_accounts.a_userid =f_files.f_u_userid WHERE u_username = ' + req.body.username + ' AND password like ' + req.body.password, (err, rows) => {
+    db.all('SELECT * FROM a_accounts inner join f_files on a_accounts.a_userid =f_files.f _u_userid WHERE u_username LIKE ' + req.body.username + ' AND password like ' + req.body.password, (err, rows) => {
        if(err) throw err;
 
        const json_data = JSON.stringify(rows);
@@ -22,11 +22,11 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/signup', (req, res) => {
-    db.get('SELECT id FROM a_accounts WHERE a_username = ?', a_username, (err, row) => {
+    db.get('SELECT id FROM a_accounts WHERE a_username like ?', req.body.username, (err, row) => {
         if(row){
             res.status(409).send('User already exists');
         } else {
-            db.run('INSERT INTO a_accounts (a_username, a_email, a_password) values(?, ?, ?)', row.body.username, row.body.email, row.body.password, (err) => {
+            db.run(`INSERT INTO a_accounts (a_username, a_email, a_password) values(${row.body.username}, ${row.body.email}, ${row.body.password})`, (err) => {
                 if(err){
                     console.error(err);
                     res.status(500).send('Internal Server Error!');
