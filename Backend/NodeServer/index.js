@@ -6,9 +6,10 @@ const port = 1234;
 
 app.get("/", (req, res) => {
     res.setHeader("Content-Type", "text/html");    
-    let data = fs.readFileSync("temp.html");
-    
-    res.send(data);
+    fs.readFile("temp.html", (err, data) => {
+        if (err) throw err;
+        res.send(data);
+    });
 });
 
 app.post("/upload", (req, res) =>{
