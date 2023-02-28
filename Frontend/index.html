@@ -7,6 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <form action="localhost:1234/upload" method="post" enctype="multipart/form-data">
+        <input type="file" mutiple="multiple" name="files[]">
+        <input type="submit" value="Upload">
+    </form>
 </body>
 </html>
