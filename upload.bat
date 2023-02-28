@@ -4,6 +4,6 @@ set /p "branche=BranchName: "
 C:\Users\ohnrz\OneDrive\Desktop\Parallax
 git add .
 git commit -m "%message%"
-%branche%
+git push --set-upstream origin %branche%
 pause
 @echo on
