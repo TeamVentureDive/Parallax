@@ -14,15 +14,13 @@ app.get("/", (req, res) => {
 });
 
 app.post("/upload", (req, res) =>{
-    const form = new formidable.IncomingForm();
-    form.uploadDir = path.join(__dirname, "uploaded_files");
+    const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
     console.log(form);
 
     form.parse(req, (err, fields, files) => {
-        const data = (err) ? err : fs.readFileSync(files.upload.filepath);
-        res.json({formData:data});
+        console.log(files.upload);
     });
-
+    res.send("sent");
 });
 
 app.listen(port, () => {
