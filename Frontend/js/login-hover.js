@@ -4,11 +4,11 @@ let element = '#login'; // <-- id of the button we're transitioning
 // Pct refers to the percentage position of the gradient stop point.
 const gradientStopOne = [
     { pct: 0,  color: { r: 77, g: 25, b: 77 } }, // The first color in your gradient
-    { pct: 100, color: { r: 100, g: 49, b: 100 } }   // The color you want your first color to transition to
+    { pct: 100, color: { r: 100, g: 9, b: 50 } }   // The color you want your first color to transition to
 ];
 const gradientStopTwo = [
     { pct: 0,  color: { r: 33, g: 47, b: 69 } }, // The second color in your gradient
-    { pct: 100, color: { r: 42, g: 56, b: 77 } }  // The color you want your second color to transition to
+    { pct: 100, color: { r: 42, g: 6, b: 70 } }  // The color you want your second color to transition to
 ]
 
 // Apply our gradient programmatically so we can completely manipulate the gradient from JS rather than CSS
@@ -17,7 +17,7 @@ let c2 = gradientStopTwo[0].color;
 
 
 
-let transitionTime = 1000           // <-- 100 ms - time our animation will last
+let transitionTime = 300           // <-- 100 ms - time our animation will last
 let previousTime, start = 0;        // <-- stores data on animation
 let angle = 45;                    // <-- angle of gradient
 let animationDirection = 'forwards' // <-- stores the animation direction
