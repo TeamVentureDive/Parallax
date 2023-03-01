@@ -14,13 +14,13 @@
         <input type="file" mutiple="multiple" name="files[]">
         <input type="submit" value="Upload">
     </form>-->
-    <div class="w-[55vw] h-[100vh] absolute bg-gradient-to-tl from-[#212F45] to-[#006466] ">
+    <div class="w-[65vw] h-[100vh] absolute bg-gradient-to-tl from-[#212F45] to-[#006466]">
 
     </div>
-    <div class="w-[45vw] h-[100%] top-0 right-0 absolute bg-white">
+    <div class="w-[35vw] h-[100%] top-0 right-0 absolute bg-gray-100">
         <div class="mt-14 flex mx-24 h-min items-center">
             <div>
-                <img src="img/logo-login_signup.svg" class="flex-none w-20">
+                <a href="https://www.apple.com/at/"><img src="img/logo-login_signup.svg" class="flex-none w-20"></a> <!-- Hier wir dann später Haupt erklärseite verlinkt -->
             </div>
             <div class="grow text-center">
                 <h1 class="text-5xl font-[700]">Login</h1>
@@ -31,8 +31,8 @@
         <div class="mx-20 grid h-[45vh] mt-[8%]">
 
             <div>
-                <p class="ml-8 text-2xl font-[600]">Email</p>
-                <input type="email" class="shadow-xl placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-full py-4 pl-9 pr-3 
+                <p class="ml-9 text-xl font-[600] tracking-wide">Email</p>
+                <input type="email" class="shadow-xl placeholder:text-slate-400 block bg-white w-full rounded-full py-4 pl-9 pr-3 
                 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                 invalid:border-pink-500 invalid:text-pink-600
@@ -41,14 +41,15 @@
             </div>
 
             <div>
-                <p class="ml-8 text-2xl font-[600]">Password</p>
-                <input type="password" class="shadow-xl placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-full py-4 pl-9 pr-3 
-                shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" 
+                <p class="ml-9 text-xl font-[600] tracking-wide">Password</p>
+                <input type="password" class="shadow-xl placeholder:text-slate-400 block bg-white w-full rounded-full py-4 pl-9 pr-3 
+                focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" 
                 placeholder="Type your password" type="text" name="email-input"/>
             </div>
 
-            <div class="flex justify-center">
-                <button class="rounded-2xl bg-gradient-to-tl from-[#4D194D] to-[#212F45] w-7/12 h-[55px] text-white text-xl font-[500] tracking-wide filter shadow-lg transition-all hover:shadow-xl"><p>Login</p></button>
+            <div class="flex justify-center ">
+                <button class="rounded-2xl bg-gradient-to-tl from-[#4D194D] to-[#212F45] w-7/12 h-[55px] text-white text-xl font-[500] tracking-wide filter shadow-lg hover:shadow-2xl hover:from-[#643164] hover:to-[#2a384d] transition-all
+                "><p>Login</p></button> <!-- Da ist leider keine Transition? Predrag TODO-->
             </div>
 
             <div class="mx-auto">
@@ -64,11 +65,11 @@
         </div>
 
         <div class="mx-20 grid justify-items-center gap-4 mt-8">
-            <button class="rounded-2xl w-7/12 h-14 border border-gray-500 text-xl font-[500] transition all hover:shadow-lg"><span class="flex flex-row place-items-center"> <img src="img/apple-logo.svg" class="w-9 h-9 left-14 relative"> <a class="grow">Login with Apple</a> <div class="w-9"></div></span></button>
-            <button class="rounded-2xl w-7/12 h-14 border border-gray-500 text-xl font-[500] transition all hover:shadow-lg"><span class="flex flex-row place-items-center"> <img src="img/google-logo.svg" class="w-9 h-9 left-14 relative"> <a class="grow">Login with Google</a> <div class="w-9"></div></span></button>
+            <button class="rounded-2xl w-7/12 h-14 bg-black text-white text-lg font-[500] transition all hover:shadow-xl"><span class="flex flex-row place-items-center"> <img src="img/apple-logo.svg" class="w-9 h-9 left-9 relative"> <a class="grow">Login with Apple</a> <div class="w-3"></div></span></button>
+            <button class="rounded-2xl w-7/12 h-14 bg-white text-lg font-[500] transition all hover:shadow-lg"><span class="flex flex-row place-items-center"> <img src="img/google-logo.svg" class="w-9 h-9 left-10 relative top-1"> <a class="grow">Login with Google</a> <div class="w-0"></div></span></button>
         </div>
 
-        <div class="mx-[30%] text-center bottom-10 absolute">
+        <div class="mx-[25%] text-center bottom-10 absolute">
             <span>By using our services you are agreeing to our 
                 <a href="#" class="text-blue-500 font-[700] transition-all hover:text-blue-600">Terms</a> and 
                 <a href="#" class="text-blue-500 font-[700] transition-all hover:text-blue-600">Privacy Policy</a>
