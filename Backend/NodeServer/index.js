@@ -1,4 +1,5 @@
 const formidable = require("formidable");
+const path = require("path");
 const express = require("express");
 const fs = require("fs");
 const app = express();
@@ -13,14 +14,15 @@ app.get("/", (req, res) => {
 });
 
 app.post("/upload", (req, res) =>{
-    const form = formidable({});
+    const form = new formidable.IncomingForm();
+    form.uploadDir = path.join(__dirname, "uploaded_files");
+    console.log(form);
 
     form.parse(req, (err, fields, files) => {
-        console.log(err);
-        console.log(fields);
-        console.log(files);
-        res.send(files);
+        const data = (err) ? err : fs.readFileSync(files.upload.filepath);
+        res.json({formData:data});
     });
+
 });
 
 app.listen(port, () => {
