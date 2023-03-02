@@ -14,18 +14,22 @@ db.close();
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: 'Gmail',
   auth: {
-    user: 'parallax.venturedive.team@gmail.com',
-    pass: 'Nf13vVjQR17agch'
+    type: 'OAuth2',
+    user: process.env.MAIL_USERNAME =  "parallax.venturedive.team@gmail.com",
+    pass: process.env.MAIL_PASSWORD =  "Nf13vVjQR17agch",
+    clientId: process.env.OAUTH_CLIENTID = "198579156679-v1m64hc9f0fbumfhmbf59qtpns05pu4i.apps.googleusercontent.com",
+    clientSecret: process.env.OAUTH_CLIENT_SECRET = "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",
+    refreshToken: process.env.OAUTH_REFRESH_TOKEN = "1//04iEEtM1mHuBsCgYIARAAGAQSNwF-L9Irr8INppTE6POJlTi2sfGkPhyr4u3OW7cJwcwgq7ANeTgPD0q88lozM39KX7xVNrrVPGg"
   }
 });
 
 var mailOptions = {
   from: 'parallax.venturedive.team@gmail.com',
-  to: `${email}`,
+  to: `alex1907654@gmail.com`,
   subject: 'Ihr Einmalcode',
-  text: `Hallo ${email},
+  text: `Hallo alex1907654@gmail.com,
 
   wir haben Ihre Anforderung für einen Einmalcode für Ihr Parallax-Konto erhalten.
   
