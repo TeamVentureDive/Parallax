@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/TeamVentureDive/Parallax#readme",
   "dependencies": {
-    "animejs": "^3.2.1"
+    "animejs": "^3.2.1",
+    "nodemailer": "^6.9.1"
   }
 }
