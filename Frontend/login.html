@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Parallax Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
 </head>
@@ -19,7 +19,7 @@
         <img src="Wave180.svg" alt="">
     </div>
 
-    <div class="w-[35vw] h-[100%] top-0 right-0 absolute bg-gray-100">
+    <div class="w-[35vw] h-[100%] top-0 right-0 absolute bg-gray-100" style="min-width: 560px"> <!--Hier auf Tailwind Umbauen Predgrag und mobile ansicht anpassen-->
         <div class="mt-14 flex mx-24 h-min items-center">
             <div>
                 <a href="https://www.apple.com/at/"><img src="img/logo-login_signup.svg" class="flex-none w-20"></a> <!-- Hier wir dann später Haupt erklärseite verlinkt -->
@@ -55,8 +55,6 @@
                 font-[500] tracking-wide filter shadow-lg hover:shadow-2xl transition-all
                 " id="login"><p>Login</p></button>
             </div>
-            <!-- Es liegt nicht an Tailwind, sondern an CSS, habegott sei dank was gefunden -->
-
             <div class="mx-auto">
                 <span>New user? </span><span class="text-blue-500 font-[700] transition-all hover:text-blue-600"><a href="#">Sign up here</a></span>
             </div>
@@ -70,7 +68,7 @@
         </div>
 
         <div class="mx-20 grid justify-items-center gap-4 mt-8">
-            <button class="rounded-2xl w-8/12 h-14 bg-black text-white text-lg font-[500] transition all hover:shadow-xl"><span class="flex flex-row place-items-center"> <img src="img/apple-logo.svg" class="w-9 h-9 left-9 relative"> <a class="grow">Login with Apple</a> <div class="w-3"></div></span></button>
+            <button class="rounded-2xl w-8/12 h-14 bg-black text-white text-lg font-[500] transition all hover:shadow-xl"><span class="flex flex-row place-items-center"> <img src="img/apple-logo.svg" class="w-9 h-9 left-9 relative"> <a class="grow">Login with Apple</a> <div class="w-4"></div></span></button>
             <button class="rounded-2xl w-8/12 h-14 bg-white text-lg font-[500] transition all hover:shadow-lg"><span class="flex flex-row place-items-center"> <img src="img/google-logo.svg" class="w-7 h- left-10 relative"> <a class="grow">Login with Google</a> <div class="w-0"></div></span></button>
         </div>
 
