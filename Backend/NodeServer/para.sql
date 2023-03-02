@@ -19,7 +19,7 @@ primary key(f_name)
 
 create table f_friends (
 f1_a_email varchar(30),
-f2_a_email varchar(30) ,
+f2_a_email varchar(30),
 primary key(f1_a_email, f2_a_email)
 );
 
