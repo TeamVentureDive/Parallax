@@ -1,4 +1,5 @@
 const formidable = require("formidable");
+const path = require("path");
 const express = require("express");
 const fs = require("fs");
 const app = express();
@@ -13,14 +14,12 @@ app.get("/", (req, res) => {
 });
 
 app.post("/upload", (req, res) =>{
-    const form = formidable({});
+    const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
 
     form.parse(req, (err, fields, files) => {
-        console.log(err);
-        console.log(fields);
-        console.log(files);
-        res.send(files);
+        console.log(`[FileServer] Saved User-File "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
     });
+    res.send("sent");
 });
 
 app.listen(port, () => {
