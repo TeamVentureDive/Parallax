@@ -1,0 +1,24 @@
+{
+  "name": "parallax",
+  "version": "1.0.0",
+  "description": "```\r  git checkout -b BRANCHNAME\r  ```\r ```\r git add .\r ```\r ```\r git commit -m MESSAGE\r ```\r ```\r git push\r ``` \r ---\r Falls eine error meldung kommt, dann einfach den command benutzen, der Vorgeschlagen wird",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TeamVentureDive/Parallax.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TeamVentureDive/Parallax/issues"
+  },
+  "homepage": "https://github.com/TeamVentureDive/Parallax#readme",
+  "dependencies": {
+    "animejs": "^3.2.1",
+    "nodemailer": "^6.9.1",
+    "sqlite3": "^5.1.4"
+  }
+}
