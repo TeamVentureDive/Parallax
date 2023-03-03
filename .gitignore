@@ -1,4 +1,4 @@
 node_modules/
 Backend/NodeServer/node_modules
 .idea/
-upload.bat
+upload.bat/
