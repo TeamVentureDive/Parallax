@@ -15,10 +15,9 @@ app.get("/", (req, res) => {
 
 app.post("/upload", (req, res) =>{
     const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
-    console.log(form);
 
     form.parse(req, (err, fields, files) => {
-        console.log(files.upload);
+        console.log(`[FileServer] Saved User-File "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
     });
     res.send("sent");
 });
