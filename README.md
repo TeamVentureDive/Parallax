@@ -1,5 +1,5 @@
-#Parallax 
-###*File sharing made easy*
+# Parallax 
+### *File sharing made easy*
 
 
 Welcome to **Parallax** - a modern file sharing website designed and developed by a team of talented HTL Spengergasse students. With the ever-increasing need for sharing files securely and efficiently, our team has created a platform that offers a simple and intuitive user experience. Our website is designed with a sleek and modern interface that caters to the needs of both individuals and businesses.
