@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parallax Login</title>
+    <title>Parallax Signup</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../Backend/js/loginSideFunction.js"></script>
 </head>
 <body>
     <!--
@@ -41,21 +40,31 @@
         sm:left-[20vw] sm:-ml-[600px] 
         md:text-[4vw] md:leading-[3.2vw]
         lg:-ml-[720px] lg:left-[19.5vw] lg:text-[3vw] lg:leading-[3.2vw] lg:font-[750]
-        ">WELCOME <br class="lg:hidden"> BACK TO <br> PARALLAX</p>
+        ">WELCOME <br class="lg:hidden"> TO <br> PARALLAX</p>
     </div>
 
     <div class="w-full md:w-[35vw] h-[100%] top-0 right-0 absolute bg-gray-100 min-w-fit">
         <div class="mt-7 xl:mt-10 flex mx-[10vw] md:mx-24 h-min items-center">
             <div>
-                <a href="https://www.apple.com/at/"><img src="img/logo-login_signup.svg" class="flex-none w-20"></a> <!-- Hier wir dann später Haupt erklärseite verlinkt -->
+                <a href="https://www.apple.com/at/"><img src="img/logo-login_signup.svg" class="flex-none w-16 sm:w-20"></a> <!-- Hier wir dann später Haupt erklärseite verlinkt -->
             </div>
             <div class="grow text-center">
-                <h1 class="text-5xl font-[700]">Login</h1>
+                <h1 class="text-4xl font-[700] sm:text-5xl">Sign up</h1>
             </div>
             <div class="flex-none w-20"></div>
         </div>
 
-        <div class="md:mx-20 grid h-[45vh] mt-[4%] xl:mt-[6%] justify-center">
+        <div class="md:mx-20 grid h-[51vh] mt-[8%] xl:mt-[6%] justify-center">
+
+            <div>
+                <p class="ml-9 text-xl font-[600] tracking-wide">Username</p>
+                <input type="email" class="shadow-xl placeholder:text-slate-400 block bg-white w-[350px] sm:w-[450px] md:w-[400px] lg:w-[500px] rounded-full py-4 pl-9 pr-3 
+                disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+                focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+                invalid:border-pink-500 invalid:text-pink-600
+                focus:invalid:border-pink-500 focus:invalid:ring-red-600" 
+                placeholder="Type your username" type="text" name="username-input"/>
+            </div>
 
             <div>
                 <p class="ml-9 text-xl font-[600] tracking-wide">Email</p>
@@ -77,12 +86,12 @@
 
             <div class="flex justify-center">
                 <button class="rounded-2xl
-                 w-8/12 h-[55px] text-white text-xl 
+                 w-8/12 h-[55px] text-white text-xl mt-3
                 font-[500] tracking-wide filter shadow-lg hover:shadow-2xl transition-all
-                " id="login" onclick="data()"><p>Login</p></button>
+                " id="login"><p>Sign up</p></button>
             </div>
             <div class="mx-auto">
-                <span>New user? </span><span class="text-blue-500 font-[700] transition-all hover:text-blue-600"><a href="#">Sign up here</a></span>
+                <span>Already an account? </span><span class="text-blue-500 font-[700] transition-all hover:text-blue-600"><a href="#">Login here</a></span>
             </div>
 
         </div>
@@ -93,19 +102,19 @@
             <div class="grow border-t border-gray-400"></div>
         </div>
 
-        <div class="sm:mx-20 grid justify-items-center gap-4 mt-2 xl:mt-4">
+        <div class="sm:mx-20 grid justify-items-center gap-4 xl:mt-4">
             <button class="rounded-2xl w-7/12 sm:w-8/12 h-14 bg-black text-white text-lg font-[500] transition all hover:shadow-xl">
                 <span class="flex flex-row place-items-center"> 
-                    <img src="img/apple-logo.svg" class="w-9 h-9 left-[3.6vw] relative"> 
-                    <a class="grow">Login with Apple</a> 
+                    <img src="img/apple-logo.svg" class="w-9 h-9 left-[3vw] relative"> 
+                    <a class="grow">Sign up with Apple</a> 
                     <div class="w-4"></div>
                 </span>
             </button>
 
             <button class="rounded-2xl w-7/12 sm:w-8/12 h-14 bg-white text-lg font-[500] transition all hover:shadow-lg">
                 <span class="flex flex-row place-items-center"> 
-                    <img src="img/google-logo.svg" class="w-7 h- left-[3.8vw] relative"> 
-                    <a class="grow">Login with Google</a> 
+                    <img src="img/google-logo.svg" class="w-7 h- left-[3.2vw] relative"> 
+                    <a class="grow">Sign up with Google</a> 
                     <div class="w-0"></div>
                 </span>
             </button>
