@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const tokenInput = document.getElementById("token-input");
   const tokenFields = tokenInput.querySelectorAll("input");
   const loginButton = document.getElementById("tokenpress");
-  loginButton.style.background= 'linear-gradient(45deg, #C5A9B4, ##343A50)';
   tokenFields.forEach((field, index) => {
     field.addEventListener("input", (event) => {
       const input = event.target;
