@@ -1,4 +1,4 @@
-ument.querySelector('input[type="file"]');
+doument.querySelector('input[type="file"]');
   input.addEventListener('change', (e) => {
     const fd = new FormData();
     // add all selected files
