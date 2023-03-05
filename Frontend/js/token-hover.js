@@ -1,4 +1,4 @@
-let element = '#login'; // <-- id of the button we're transitioning
+let element = '#tokenpress'; // <-- id of the button we're transitioning
 
 // DEFINE YOUR GRADIENT COLORS HERE
 // Pct refers to the percentage position of the gradient stop point.
@@ -65,7 +65,7 @@ const animateGradient = function() {
     }
 };
 
-document.querySelector('#login').style.background = `linear-gradient(${angle}deg, rgb(${c1.r}, ${c1.g}, ${c1.b}), rgb(${c2.r}, ${c2.g}, ${c2.b}))`;
+document.querySelector('#tokenpress').style.background = `linear-gradient(${angle}deg, rgb(${c1.r}, ${c1.g}, ${c1.b}), rgb(${c2.r}, ${c2.g}, ${c2.b}))`;
    
 // This function transitions between two rgb colors
 const getColor = function(pct, colorSet) {
@@ -91,13 +91,13 @@ const getColor = function(pct, colorSet) {
 }
 
 // On hover, run our animation
-document.getElementById('login').addEventListener('mouseenter', function() {
+document.getElementById('tokenpress').addEventListener('mouseenter', function() {
     animationDirection = 'forwards';
     animateGradient();
     
 });
 // On hover out, run our animation again, but backwards
-document.getElementById('login').addEventListener('mouseleave', function() {
+document.getElementById('tokenpress').addEventListener('mouseleave', function() {
     animationDirection = 'backwards';
     animateGradient();
 });

@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parallax Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../Backend/js/loginSideFunction.js"></script>
-    <script src="tailwind.config.js"></script>
 </head>
 <body>
     <!--
@@ -61,14 +59,14 @@
                 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                 invalid:border-pink-500 invalid:text-pink-600
                 focus:invalid:border-pink-500 focus:invalid:ring-red-600" 
-                placeholder="Type old password" type="text" name="email-input"/>
+                placeholder="Type old password" type="text" name="oldpw-input"/>
             </div>
 
             <div>
                 <p class="ml-9 text-xl font-[600] tracking-wide">New Password</p>
                 <input type="password" class="shadow-xl placeholder:text-slate-400 block bg-white w-full sm:w-[450px] md:w-[400px] lg:w-[500px] rounded-full py-4 pl-9 pr-3 
                 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1" 
-                placeholder="Type your new password" type="text" name="email-input"/>
+                placeholder="Type your new password" type="text" name="newpw-input"/>
                 <a class="ml-9 text-red-500 font-[700] top-3 relative tracking-wide hidden hover:text-red-700 transition-all"href="#">Forgot password?</a> <!-- Forgot Password knopf ist disabled, weil nun ja kommt ja erst nach fehlversuchen einfach die klasse per js entfernen-->
             </div>
 
@@ -76,7 +74,7 @@
                 <button class="rounded-2xl
                  w-8/12 h-[55px] text-white text-xl 
                 font-[500] tracking-wide filter shadow-lg hover:shadow-2xl transition-all
-                " id="login" onclick="data()"><p>Change Password</p></button>
+                " id="login"><p>Change Password</p></button>
             </div>
             <div class="mx-auto">
                 <span>Dont know where you are? </span><span class="text-blue-500 font-[700] transition-all hover:text-blue-600"><a href="#">Back home</a></span>
