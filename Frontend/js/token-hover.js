@@ -3,12 +3,12 @@ let element = '#tokenpress'; // <-- id of the button we're transitioning
 // DEFINE YOUR GRADIENT COLORS HERE
 // Pct refers to the percentage position of the gradient stop point.
 const gradientStopOne = [
-    { pct: 0,  color: { r: 77, g: 25, b: 77 } }, // The first color in your gradient
-    { pct: 100, color: { r: 100, g: 9, b: 50 } }   // The color you want your first color to transition to
+    { pct: 0,  color: { r: 197, g: 169, b: 180 } }, // The first color in your gradient
+    { pct: 100, color: { r: 100, g: 9, b: 125 } }   // The color you want your first color to transition to
 ];
 const gradientStopTwo = [
-    { pct: 0,  color: { r: 33, g: 47, b: 69 } }, // The second color in your gradient
-    { pct: 100, color: { r: 42, g: 6, b: 70 } }  // The color you want your second color to transition to
+    { pct: 0,  color: { r: 52, g: 58, b: 80 } }, // The second color in your gradient
+    { pct: 100, color: { r: 96, g: 152, b: 170 } }  // The color you want your second color to transition to
 ]
 
 // Apply our gradient programmatically so we can completely manipulate the gradient from JS rather than CSS
