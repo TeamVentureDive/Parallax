@@ -5,14 +5,19 @@
 function fetchDataFromServer() {
     let login = "http://localhost:6969/login";
     console.log("fetchDataFromServer() called")
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
+    let emailInput = document.getElementById('emailInput');
+    let passwordInput = document.getElementById('passwordInput');
     fetch(
         login,
         {
-            method: "POST",
-            body: {email: email.value, password: password.value}
-        })
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: emailInput.value,
+                password: passwordInput.value
+        })})
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
