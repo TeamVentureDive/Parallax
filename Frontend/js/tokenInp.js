@@ -44,10 +44,11 @@ document.addEventListener("DOMContentLoaded", () => {
           nextInput &&
           event.inputType !== "deleteContentBackward" &&
           event.keyCode !== 8) ||
-        (event.inputType === "insertText" &&
-          input.value.length >= input.maxLength)
-      ) {
-        // Move focus to next field when current field is filled but the user continues typing (even if the field has already reached its maximum length) or if the user typed in a new value after pressing backspace and is in a field with a value
+          (event.inputType === "insertText" &&
+          input.value.length >= input.maxLength) && (undefined === false)
+          ) {
+            console.log(nextInput === undefined)
+            // Move focus to next field when current field is filled but the user continues typing (even if the field has already reached its maximum length) or if the user typed in a new value after pressing backspace and is in a field with a value
         nextInput.focus();
       } else if (!input.value && previousInput) {
         // Move focus to previous field when current field is empty
@@ -107,6 +108,5 @@ document.addEventListener("DOMContentLoaded", () => {
       return token + field.value;
     }, "");
     console.log(token);
-    console.log("shit");
   });
 });
