@@ -1,6 +1,6 @@
 @echo off
-set p message=Commit-Message 
-set p branch=Commit-Branch 
+set /p "message=Commit-Message: "
+set /p "branch=Commit-Branch: "
 git checkout %branch%
 git add .
 git commit -m %message%
