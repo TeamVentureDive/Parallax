@@ -29,7 +29,6 @@ let elapsed = 0;                    // <-- number of frames which have ellapsed
 const animateGradient = function() {
     if(intervalFrame === undefined) {
         intervalFrame = setInterval(() => {
-            console.log(document.querySelector('#login').style.background)
             let time = transitionTime / 1000; // time in seconds
             let numberOfFrames = time * 60; // 60 frames per second -> 1 second = 60 frames
             
