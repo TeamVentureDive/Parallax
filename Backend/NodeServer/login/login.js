@@ -27,11 +27,9 @@ app.use((req, res, next) => {
 // app.get("/web", (req, res) => {
 //     res.sendFile(path.join(__dirname, "../../../Frontend/login.html"));
 // });
-app.use(express.json());
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.post('/login', (req, res) => {
-    console.log(req.body);
     const email = req.body.email;
     const password = req.body.password;
     db.all('SELECT * FROM a_accounts inner join f_files on a_accounts.a_email = f_files.f_a_email WHERE a_email LIKE "' + email + '" AND a_password like "' + password + '"', (err, rows) => {
@@ -51,18 +49,25 @@ app.post('/login', (req, res) => {
 });
 
 app.post('/signup', (req, res) => {
-    db.get('SELECT id FROM a_accounts WHERE a_username like "' + req.body.username + '"', (err, row) => {
-        console.log(req.body.username);
+    console.log(req.body);
+        const username = req.body.username;
+        const email = req.body.email;
+        const password = req.body.password;
+        db.get('SELECT * FROM a_accounts WHERE a_email like "' + email + '"', (err, row) => {
+            console.log("before ifs : " + row);
         if(row){
-            console.log(req.body.username);
-            res.status(409).send('{"Error":"User already exists"}');
+            console.log(username + " " + email + " " + password + ": User Already exists!");
+            res.status(409).send(username + " " + email + " " + password + ":" + '{"Error":"User already exists"}');
         } else {
-            db.run(`INSERT INTO a_accounts (a_username, a_email, a_password) values(${row.body.username}, ${row.body.email}, ${row.body.password})`, (err) => {
+            db.run(`INSERT INTO a_accounts (a_username, a_email, a_password) values("${username}", "${email}", "${password}")`, (err) => {
                 if(err){
-                    console.error(err);
-                    console.log(req.body.username);
-                    res.status(500).send('Internal Server Error!');
+                    console.log(err);
+                    console.log(username + " " + email + " " + password + ": Internal Server error!");
+                    //console.error(err);
+                    //res.send(username + " " + email + " " + password + ":");
+                    res.status(500).send('Internal Server Error!' + row);
                 }else {
+                    console.log(username + " " + email + " " + password + ": user created!");
                     res.status(200).send('User created successfully!');
                 }
             });
