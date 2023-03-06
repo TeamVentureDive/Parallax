@@ -8,7 +8,9 @@
 </head>
 <body>
     <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="upload">
+        <input type="file" name="upload" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
         <button>Submit</button>
     </form>
 </body>

@@ -13,10 +13,16 @@ app.get("/", (req, res) => {
     });
 });
 
+app.use(express.json());
+
 app.post("/upload", (req, res) =>{
     const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
-
     form.parse(req, (err, fields, files) => {
+        if (!isInDatabase(fields.email, fields.password)) {
+            fs.unlinkSync(path.join(__dirname, "uploaded_files", files.upload.newFilename));
+            console.log(`[FileServer] Blocked Upload of File "${files.upload.originalFilename}" due to wrong credentials`);
+            return;
+        }
         console.log(`[FileServer] Saved User-File "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
     });
     res.send("sent");
@@ -25,3 +31,8 @@ app.post("/upload", (req, res) =>{
 app.listen(port, () => {
     console.log("[FileServer] Online");
 });
+
+function isInDatabase(email, password) {
+    //TODO
+    return false;
+}
