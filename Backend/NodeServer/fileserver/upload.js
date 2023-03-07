@@ -3,6 +3,7 @@ const path = require("path");
 const express = require("express");
 const fs = require("fs");
 const app = express();
+const sqlite3 = require("sqlite3").verbose();
 const port = 1234;
 
 app.get("/", (req, res) => {
@@ -32,7 +33,15 @@ app.listen(port, () => {
     console.log("[FileServer] Online");
 });
 
+const db = sqlite3.Database("../para.db", (err) => {
+    if (err) throw err;
+    console.log("[FileServer] Connected to SQLite Database");
+});
+
 function isInDatabase(email, password) {
-    //TODO
+    db.get(`SELECT * FROM a_accounts WHERE a_email LIKE ${email} AND a_password LIKE ${password}`, (err, row) => {
+        if (err) throw err;
+        if (row) return true;
+    });
     return false;
 }
