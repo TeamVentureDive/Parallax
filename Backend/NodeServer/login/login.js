@@ -21,7 +21,6 @@ app.post('/login', (req, res) => {
     db.all('SELECT * FROM a_accounts inner join f_files on a_accounts.a_email = f_files.f_a_email WHERE a_email LIKE "' + req.query.email + '" AND a_password like "' + req.query.password + '"', (err, rows) => {
 
         if(err) {
-           //res.json('User nicht vorhanden!');
            res.json(req.query.email + " " + req.query.password);
            console.log(err);
            return;

@@ -12,8 +12,6 @@ db.run(`INSERT INTO t_tempcode(t_code, t_active) VALUES(${createCode}, ${true})`
   }
 });
 
-db.close();
-
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
@@ -41,9 +39,20 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/sendMail', (req, res) => {
+app.post('/sendMail', async(req, res) => {
   const mail = req.body.email;
-  console.log(mail);
+  const row = await new Promise((resolve, reject) => {
+    db.get(`SELECT * FROM a_accounts WHERE a_email LIKE '${mail}'` , (err , row) => {
+      if (err) return reject(err);
+      resolve(row);
+    });
+  });
+  if (!row) {
+    res.json("No rows found");
+    res.send();
+    return;
+  }
+
   var mailOptions = {
     from: 'parallax.venturedive.team@gmail.com',
     to: `${mail}`,
@@ -73,6 +82,22 @@ app.post('/sendMail', (req, res) => {
   });
 });
 
+app.use('/checkVerification', (req, res) => {
+  const token = req.body.token;
+  db.get(`SELECT * FROM t_tempcode WHERE t_code LIKE ${token}`, (err, row) => {
+    if(err || !row) {
+      res.status = 500;
+      res.json("No rows found");
+      res.send();
+      return;
+    } else {
+      res.status = 200;
+      res.json("Approved");
+      res.send();
+      db.run(`DELETE FROM t_tempcode WHERE t_code LIKE ${token}`);
+    }
+  })
+});
 
 const port = 6969;
 app.listen(port, () => {
