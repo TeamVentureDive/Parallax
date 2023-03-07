@@ -1,19 +1,17 @@
-
-//document.getElementById('login').addEventListener("click", fetchDataFromServer);
-
-
-function fetchDataFromServer() {
-    let login = "http://localhost:6969/login";
-    console.log("login fetch!")
+function fetchDataToServer() {
+    let signup = "http://localhost:6969/signup";
+    console.log("signup fetch!")
+    let usernameInput = document.getElementById('usernameInput');
     let emailInput = document.getElementById('emailInput');
     let passwordInput = document.getElementById('passwordInput');
 
     const formData = new URLSearchParams();
+    formData.append('username', usernameInput.value);
     formData.append('email', emailInput.value);
     formData.append('password', passwordInput.value);
 
     fetch(
-        login,
+        signup,
         {
             method: 'POST',
             headers: {
@@ -21,11 +19,8 @@ function fetchDataFromServer() {
             },
             body: formData
         })
-        .then((response) => response.json())
-        .then((data) => {
+        .then((response) => response.text())
+        .then(data => {
             console.log(data);
         });
 }
-
-
-

@@ -1,11 +1,23 @@
 const sqlite3 = require('sqlite3').verbose();
 const express = require('express');
 const path = require("path");
+const bodyParser = require('body-parser');
+
 const app = express();
+
+
 
 const db = new sqlite3.Database('../para.db', (error) => {
     if (error) throw error;
     console.log('Connected to SQLite database!');
+});
+
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Content-Type', 'application/json');
+    next();
 });
 
 // db.run('INSERT INTO a_accounts (a_username, a_email, a_password) VALUES ("testuser", "test@test.com", "password123")');
@@ -15,42 +27,68 @@ const db = new sqlite3.Database('../para.db', (error) => {
 // app.get("/web", (req, res) => {
 //     res.sendFile(path.join(__dirname, "../../../Frontend/login.html"));
 // });
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.post('/login', (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    db.all('SELECT * FROM a_accounts inner join f_files on a_accounts.a_email = f_files.f_a_email WHERE a_email LIKE "' + req.query.email + '" AND a_password like "' + req.query.password + '"', (err, rows) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    db.all('SELECT * FROM a_accounts inner join f_files on a_accounts.a_email = f_files.f_a_email WHERE a_email LIKE "' + email + '" AND a_password like "' + password + '"', (err, rows) => {
 
         if(err) {
            res.json(req.query.email + " " + req.query.password);
+           //res.json('User nicht vorhanden!');
+           res.json(email + " " + password);
            console.log(err);
            return;
        }
 
        const json_data = JSON.stringify(rows);
 
-       res.json(req.query.email + " " + req.query.password + ":" + json_data);
+       res.json(email + " " + password + ":" + json_data);
 
     });
 });
 
 app.post('/signup', (req, res) => {
-    db.get('SELECT id FROM a_accounts WHERE a_username like "' + req.query.username + '"', (err, row) => {
+    console.log(req.body);
+        const username = req.body.username;
+        const email = req.body.email;
+        const password = req.body.password;
+        if(isEmailValid(email)){
+        db.get('SELECT * FROM a_accounts WHERE a_email like "' + email + '"', (err, row) => {
+            console.log("before ifs : " + row);
         if(row){
-            res.status(409).send('{"Error":"User already exists"}');
+            console.log(username + " " + email + " " + password + ": User Already exists!");
+            res.status(409).send(username + " " + email + " " + password + ":" + '{"Error":"User already exists"}');
         } else {
-            db.run(`INSERT INTO a_accounts (a_username, a_email, a_password) values(${row.query.username}, ${row.query.email}, ${row.query.password})`, (err) => {
+            db.run(`INSERT INTO a_accounts (a_username, a_email, a_password) values("${username}", "${email}", "${password}")`, (err) => {
                 if(err){
-                    console.error(err);
-                    res.status(500).send('Internal Server Error!');
+                    console.log(err);
+                    console.log(username + " " + email + " " + password + ": Internal Server error!");
+                    //console.error(err);
+                    //res.send(username + " " + email + " " + password + ":");
+                    res.send('Internal Server Error!' + row);
                 }else {
+                    console.log(username + " " + email + " " + password + ": user created!");
                     res.status(200).send('User created successfully!');
                 }
             });
         }
-    })
+    });
+        }else{
+            console.log("No valid E-Mail!");
+            res.send('No valid Email!');
+        }
 });
 
 const port = 6969;
 app.listen(port, "localhost", () => {
     console.log(`Database API started on Port: ${port}`);
 });
+
+function isEmailValid(email) {
+    // Definiere den regulären Ausdruck für ein E-Mail-Schema
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Verwende test() Methode, um zu prüfen, ob der String dem Schema entspricht
+    return emailRegex.test(email);
+}
