@@ -43,12 +43,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/sendMail', (req, res) => {
   const mail = req.body.email;
+  console.log(mail);
   var mailOptions = {
     from: 'parallax.venturedive.team@gmail.com',
     to: `${mail}`,
     subject: 'Ihr Einmalcode',
     text: `Hallo ${mail},
-  
     wir haben Ihre Anforderung für einen Einmalcode für Ihr Parallax-Konto erhalten.
     
     Ihr Einmalcode lautet: ${createCode}
@@ -63,9 +63,13 @@ app.post('/sendMail', (req, res) => {
   transporter.sendMail(mailOptions, function(error, info){
     if (error) {
       console.log(error);
+      res.statusCode = 500;
     } else {
       console.log('Email sent: ' + info.response);
+      res.statusCode = 200;
     }
+    res.json("");
+    res.send();
   });
 });
 

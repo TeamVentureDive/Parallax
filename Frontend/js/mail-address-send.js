@@ -15,8 +15,8 @@ document.getElementById('login').addEventListener("click", () => {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+            var s = window.location.href;
+            s = s.substring(0, s.indexOf("/reset"));
+            window.location.href = `${s}/resetPwToken.html`;
     });
-    var s = window.location.href;
-    s = s.substring(0, s.indexOf("/reset"));
-    window.location.href = `${s}/resetPwToken.html`;
 });
