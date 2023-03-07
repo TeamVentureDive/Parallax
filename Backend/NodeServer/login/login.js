@@ -53,6 +53,7 @@ app.post('/signup', (req, res) => {
         const username = req.body.username;
         const email = req.body.email;
         const password = req.body.password;
+        if(isEmailValid(email)){
         db.get('SELECT * FROM a_accounts WHERE a_email like "' + email + '"', (err, row) => {
             console.log("before ifs : " + row);
         if(row){
@@ -65,17 +66,28 @@ app.post('/signup', (req, res) => {
                     console.log(username + " " + email + " " + password + ": Internal Server error!");
                     //console.error(err);
                     //res.send(username + " " + email + " " + password + ":");
-                    res.status(500).send('Internal Server Error!' + row);
+                    res.send('Internal Server Error!' + row);
                 }else {
                     console.log(username + " " + email + " " + password + ": user created!");
                     res.status(200).send('User created successfully!');
                 }
             });
         }
-    })
+    });
+        }else{
+            console.log("No valid E-Mail!");
+            res.send('No valid Email!');
+        }
 });
 
 const port = 6969;
 app.listen(port, "localhost", () => {
     console.log(`Database API started on Port: ${port}`);
 });
+
+function isEmailValid(email) {
+    // Definiere den regulären Ausdruck für ein E-Mail-Schema
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Verwende test() Methode, um zu prüfen, ob der String dem Schema entspricht
+    return emailRegex.test(email);
+}
