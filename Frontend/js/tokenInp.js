@@ -31,6 +31,7 @@ for (let i = 0; i < children.length; i++) {
                 return token + field.value;
               }, "");
               console.log(token);
+              checkDatabaseForCode(token);
             });
             let counter = 0;
             for (let ii = 0; ii < children.length; ii++){
