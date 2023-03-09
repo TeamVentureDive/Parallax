@@ -30,7 +30,7 @@ app.post("/upload", (req, res) =>{
 });
 
 app.listen(port, () => {
-    console.log("[FileServer] Online");
+    console.log("[FileServer] Upload Online");
 });
 
 const db = sqlite3.Database("../para.db", (err) => {
