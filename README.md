@@ -57,10 +57,6 @@ git push --set-upstream origin BRANCHNAME
 
  ## Kannziele:
 
-
-Google Sign in
-
-
 - [ ] Web 3.0 Technologie verwenden (Blockchain Transaktionen   durchführen können)
 - [ ] Direkte Übertragung von Dateien
 - [ ] Encryption 
