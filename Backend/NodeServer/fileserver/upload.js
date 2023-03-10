@@ -25,6 +25,7 @@ app.post("/upload", (req, res) =>{
             return;
         }
         console.log(`[FileServer] Saved User-File "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
+        //TODO ADD ENTRY IN DATABASE
     });
     res.send("sent");
 });
