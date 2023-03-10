@@ -6,7 +6,7 @@ const path = require("path");
 app.get("/:fileId", (req, res) => {
     const fileId = req.params.fileId;
     let file;
-    if (file = getFileFromFileId(fileId)) return res.statusCode = 404;
+    if (file = getFileFromFileId(fileId)) return res.status(404);
     res.sendFile(file.path);
     res.attachment(file.name);
 });

@@ -22,12 +22,20 @@ app.post("/upload", (req, res) =>{
         if (!isInDatabase(fields.email, fields.password)) {
             fs.unlinkSync(path.join(__dirname, "uploaded_files", files.upload.newFilename));
             console.log(`[FileServer] Blocked Upload of File "${files.upload.originalFilename}" due to wrong credentials`);
+            res.status(401).json(JSON.stringify({file: "blocked"}));
+            return;
+        }
+        if (!addToDatabase()) {
+            fs.unlinkSync(path.join(__dirname, "uploaded_files", files.upload.newFilename));
+            console.log(`[FileServer] Blocked Upload of File "${files.upload.originalFilename}" due to a Database-Error`);
+            res.status(500).json(JSON.stringify({file: "blocked"}));
             return;
         }
         console.log(`[FileServer] Saved User-File "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
-        //TODO ADD ENTRY IN DATABASE
     });
-    res.send("sent");
+    //DEBUG Please replace this (me to future me)
+    res.status(200).json(JSON.stringify({file: "uploaded"}));
+    //^^^^^^^^^^^^^^
 });
 
 app.listen(port, () => {
@@ -45,4 +53,8 @@ function isInDatabase(email, password) {
         if (row) return true;
     });
     return false;
+}
+
+function addToDatabase(file) {
+    // TODO
 }
