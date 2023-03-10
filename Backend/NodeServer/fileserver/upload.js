@@ -33,9 +33,7 @@ app.post("/upload", (req, res) =>{
         }
         console.log(`[FileServer] Saved User-File "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
     });
-    //DEBUG Please replace this (me to future me)
     res.status(200).json(JSON.stringify({file: "uploaded"}));
-    //^^^^^^^^^^^^^^
 });
 
 app.listen(port, () => {
