@@ -36,7 +36,7 @@ app.listen(port, () => {
 
 const db = sqlite3.Database("../para.db", (err) => {
     if (err) throw err;
-    console.log("[FileServer] Connected to SQLite Database");
+    console.log("[FileServer] Upload Connected to SQLite Database");
 });
 
 function isInDatabase(email, password) {
