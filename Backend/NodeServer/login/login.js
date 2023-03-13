@@ -32,21 +32,19 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    db.all('SELECT * FROM a_accounts inner join f_files on a_accounts.a_email = f_files.f_a_email WHERE a_email LIKE "' + email + '" AND a_password like "' + password + '"', (err, rows) => {
-
-        if(err) {
-           res.json(req.query.email + " " + req.query.password);
-           //res.json('User nicht vorhanden!');
-           res.json(email + " " + password);
-           console.log(err);
-           return;
-       }
-
-       const json_data = JSON.stringify(rows);
-
-       res.json(email + " " + password + ":" + json_data);
-
-    });
+    if(isEmailValid(email)) {
+        db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "` + email + '" AND a_password LIKE "' + password + '"', (err, row) => {
+            if(!row || err){
+            db.all('SELECT * FROM a_accounts inner join f_files on a_accounts.a_email = f_files.f_a_email WHERE a_email LIKE "' + email + '" AND a_password like "' + password + '"', (err, rows) => {
+                const json_data = JSON.stringify(rows);
+                if (err) res.json(email + 'User nicht in der Datenbank!');
+                res.json(email + 'User nicht in der Datenbank!');
+                });
+            }else{
+                res.json("Login success!");
+            }
+        });
+    }
 });
 
 app.post('/signup', (req, res) => {
@@ -55,29 +53,21 @@ app.post('/signup', (req, res) => {
         const email = req.body.email;
         const password = req.body.password;
         if(isEmailValid(email)){
-        db.get('SELECT * FROM a_accounts WHERE a_email like "' + email + '"', (err, row) => {
-            console.log("before ifs : " + row);
+        db.get('SELECT * FROM a_accounts WHERE a_email LIKE "' + email + '"', (err, row) => {
         if(row){
-            console.log(username + " " + email + " " + password + ": User Already exists!");
-            res.status(409).send(username + " " + email + " " + password + ":" + '{"Error":"User already exists"}');
+            res.status(409).json("User already exists");
         } else {
             db.run(`INSERT INTO a_accounts (a_username, a_email, a_password) values("${username}", "${email}", "${password}")`, (err) => {
                 if(err){
-                    console.log(err);
-                    console.log(username + " " + email + " " + password + ": Internal Server error!");
-                    //console.error(err);
-                    //res.send(username + " " + email + " " + password + ":");
-                    res.send('Internal Server Error!' + row);
+                    res.json('Internal Server Error!' + row);
                 }else {
-                    console.log(username + " " + email + " " + password + ": user created!");
-                    res.status(200).send('User created successfully!');
+                    res.status(200).json('User created successfully!');
                 }
             });
         }
     });
         }else{
-            console.log("No valid E-Mail!");
-            res.send('No valid Email!');
+            res.json('"' + email + '" is not a valid Email!');
         }
 });
 
