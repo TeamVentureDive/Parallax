@@ -19,7 +19,8 @@ app.use(express.json());
 app.post("/upload", (req, res) => {
     const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
     form.parse(req, (err, fields, files) => {
-        if (!isInDatabase(fields.email, fields.password)) {
+        isInDatabase(fields.email, fields.password, files.upload);
+        /*if (!isInDatabase(fields.email, fields.password)) {
             fs.unlinkSync(path.join(__dirname, "uploaded_files", files.upload.newFilename));
             console.log(`[FileServer] Blocked Upload of File "${files.upload.originalFilename}" due to wrong credentials`);
             res.status(401).json(JSON.stringify({file: "blocked"}));
@@ -32,7 +33,8 @@ app.post("/upload", (req, res) => {
             return;
         }
         console.log(`[FileServer] Saved User-File "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
-        res.status(200).json(JSON.stringify({file: "uploaded"}));
+        res.status(200).json(JSON.stringify({file: "uploaded"}));*/
+
     });
 });
 
@@ -45,12 +47,16 @@ const db = new sqlite3.Database("../para.db", (err) => {
     console.log("[FileServer] Upload Connected to SQLite Database");
 });
 
-async function isInDatabase(email, password) {
+function isInDatabase(email, password, file) {
     db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
         //keine ahnung wie ich das async machen werde.
+        if (err) throw err;
+        if (row) addToDatabase(file, email);
     });
 }
 
 function addToDatabase(file, email) {
-    db.get(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", ${new Date(Date.now()).toDateString()})`);
+    db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
+        if (err) throw err;
+    });
 }
