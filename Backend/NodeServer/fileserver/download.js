@@ -15,14 +15,14 @@ app.listen(420, () => {
     console.log("[FileServer] Download Online");
 });
 
-const db = sqlite3.Database("../para.db", (err) => {
+const db = new sqlite3.Database("../para.db", (err) => {
     if (err) throw err;
     console.log("[FileServer] Download Connected to SQLite Database");
 });
 
 function getFileFromFileId(fileId) {
-    db.get(`SELECT FROM f_files WHERE f_id = ${fileId}`, (err, row) => {
+    db.get(`SELECT * FROM f_files WHERE f_id = "${fileId}"`, (err, row) => {
         if (err) throw err;
-        return row;
+        //CALLBACK hell
     });
 }
