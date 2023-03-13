@@ -62,6 +62,8 @@ git push --set-upstream origin BRANCHNAME
 - [ ] Encryption 
 - [ ] Google Sign in
 - [ ] Discord Bot 
+- [ ] Electron App
+
 
 
 
