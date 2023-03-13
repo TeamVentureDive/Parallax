@@ -8,6 +8,7 @@ const port = 1234;
 
 app.get("/", (req, res) => {
     res.setHeader("Content-Type", "text/html");    
+    
     fs.readFile("temp.html", (err, data) => {
         if (err) throw err;
         res.send(data);
@@ -16,32 +17,40 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 
-app.post("/upload", (req, res) =>{
+app.post("/upload", (req, res) => {
     const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
     form.parse(req, (err, fields, files) => {
-        if (!isInDatabase(fields.email, fields.password)) {
-            fs.unlinkSync(path.join(__dirname, "uploaded_files", files.upload.newFilename));
-            console.log(`[FileServer] Blocked Upload of File "${files.upload.originalFilename}" due to wrong credentials`);
-            return;
-        }
-        console.log(`[FileServer] Saved User-File "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
+        isInDatabase(fields.email, fields.password, files.upload);
     });
-    res.send("sent");
 });
 
 app.listen(port, () => {
-    console.log("[FileServer] Online");
+    console.log("[FileServer] Upload Online");
 });
 
-const db = sqlite3.Database("../para.db", (err) => {
+const db = new sqlite3.Database("../para.db", (err) => {
     if (err) throw err;
-    console.log("[FileServer] Connected to SQLite Database");
+    console.log("[FileServer] Upload Connected to SQLite Database");
 });
 
-function isInDatabase(email, password) {
-    db.get(`SELECT * FROM a_accounts WHERE a_email LIKE ${email} AND a_password LIKE ${password}`, (err, row) => {
+function isInDatabase(email, password, file) {
+    db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
+        
         if (err) throw err;
-        if (row) return true;
+        
+        if (row) {
+            addToDatabase(file, email);
+            return;
+        }
+        
+        fs.unlinkSync(path.join(__dirname, "uploaded_files", files.upload.newFilename));
+        console.log(`[FileServer] Blocked Upload of File "${files.upload.originalFilename}" due to wrong credentials`);
+        res.status(401).json(JSON.stringify({file: "blocked"}));
     });
-    return false;
+}
+
+function addToDatabase(file, email) {
+    db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
+        if (err) throw err;
+    });
 }
