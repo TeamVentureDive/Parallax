@@ -5,7 +5,6 @@
     const errortext = document.getElementById("errormsg");
 
 
-    errormsg
     restbut.addEventListener("click", () => {
         if(newpw.value === confnewpw.value&& newpw.value !=""&& confnewpw.value !=""){
             console.log("Passwords match");
