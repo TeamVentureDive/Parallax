@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 
 app.use(express.json());
 
-app.post("/upload", (req, res) =>{
+app.post("/upload", (req, res) => {
     const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
     form.parse(req, (err, fields, files) => {
         if (!isInDatabase(fields.email, fields.password)) {
@@ -25,34 +25,32 @@ app.post("/upload", (req, res) =>{
             res.status(401).json(JSON.stringify({file: "blocked"}));
             return;
         }
-        if (!addToDatabase()) {
+        if (!addToDatabase(files.upload, fields.email)) {
             fs.unlinkSync(path.join(__dirname, "uploaded_files", files.upload.newFilename));
             console.log(`[FileServer] Blocked Upload of File "${files.upload.originalFilename}" due to a Database-Error`);
             res.status(500).json(JSON.stringify({file: "blocked"}));
             return;
         }
         console.log(`[FileServer] Saved User-File "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
+        res.status(200).json(JSON.stringify({file: "uploaded"}));
     });
-    res.status(200).json(JSON.stringify({file: "uploaded"}));
 });
 
 app.listen(port, () => {
     console.log("[FileServer] Upload Online");
 });
 
-const db = sqlite3.Database("../para.db", (err) => {
+const db = new sqlite3.Database("../para.db", (err) => {
     if (err) throw err;
     console.log("[FileServer] Upload Connected to SQLite Database");
 });
 
-function isInDatabase(email, password) {
-    db.get(`SELECT * FROM a_accounts WHERE a_email LIKE ${email} AND a_password LIKE ${password}`, (err, row) => {
-        if (err) throw err;
-        if (row) return true;
+async function isInDatabase(email, password) {
+    db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
+        //keine ahnung wie ich das async machen werde.
     });
-    return false;
 }
 
-function addToDatabase(file) {
-    // TODO
+function addToDatabase(file, email) {
+    db.get(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", ${new Date(Date.now()).toDateString()})`);
 }
