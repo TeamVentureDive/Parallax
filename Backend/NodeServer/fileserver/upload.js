@@ -51,7 +51,13 @@ function isInDatabase(email, password, file) {
     db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
         //keine ahnung wie ich das async machen werde.
         if (err) throw err;
-        if (row) addToDatabase(file, email);
+        if (row) {
+            addToDatabase(file, email);
+            return;
+        }
+        fs.unlinkSync(path.join(__dirname, "uploaded_files", files.upload.newFilename));
+        console.log(`[FileServer] Blocked Upload of File "${files.upload.originalFilename}" due to wrong credentials`);
+        res.status(401).json(JSON.stringify({file: "blocked"}));
     });
 }
 
