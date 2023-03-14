@@ -54,3 +54,18 @@ git push --set-upstream origin BRANCHNAME
  * Dort, über den Files, ist eine große bunte Box wo rechts "Compare & pull request" steht, darauf klicken
  * Title und comment nach belieben bearbeiten
  * Unten rechts dann auf "Create Pull request"
+
+ ## Kannziele:
+
+- [ ] Web 3.0 Technologie verwenden (Blockchain Transaktionen   durchführen können)
+- [ ] Direkte Übertragung von Dateien
+- [ ] Encryption 
+- [ ] Google Sign in
+- [ ] Discord Bot 
+- [ ] Electron App
+
+
+
+
+
+
