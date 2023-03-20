@@ -1,22 +1,26 @@
 document.getElementById('login').addEventListener("click", () => {
-    let login = "http://localhost:6969/sendMail";
+    let sendTo = "http://localhost:2500/sendMail";
     let emailInput = document.getElementById('email');
-    console.log(emailInput);
+    sessionStorage.setItem("email", emailInput.value);
     fetch(
-        login,
-        {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: emailInput.value
-        })})
+            sendTo, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: emailInput.value
+                })
+            })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-    });
-    var s = window.location.href;
-    s = s.substring(0, s.indexOf("/reset"));
-    window.location.href = `${s}/resetPwToken.html`;
+            if (data === "No rows found") {
+                console.log("Not in database!");
+                //Bitte hier label mit ansprechenen Fehler
+            } else {
+                var s = window.location.href;
+                s = s.substring(0, s.indexOf("/reset"));
+                window.location.href = `${s}/resetPwToken.html`;
+            }
+        });
 });
