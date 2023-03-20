@@ -1,5 +1,5 @@
 function checkDatabaseForCode(token) {
-     let sendTo = "http://localhost:6969/checkVerification";
+     let sendTo = "http://localhost:2500/checkVerification";
      fetch(
         sendTo, {
             method: "POST",
@@ -14,6 +14,7 @@ function checkDatabaseForCode(token) {
         .then((data) => {
             if (data === "No rows found") {
                 console.log("Not in database!");
+                //Bitte hier label mit ansprechenen Fehler!
             } else {
                 var s = window.location.href;
                 s = s.substring(0, s.indexOf("/reset"));
