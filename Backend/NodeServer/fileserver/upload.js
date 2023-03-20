@@ -3,8 +3,7 @@ const path = require("path");
 const express = require("express");
 const fs = require("fs");
 const app = express();
-const sqlite3 = require("sqlite3").verbose();
-const port = 1234;
+const db = require("../connectDb");
 
 app.get("/", (req, res) => {
     res.setHeader("Content-Type", "text/html");    
@@ -24,17 +23,8 @@ app.post("/upload", (req, res) => {
     });
 });
 
-app.listen(port, () => {
-    console.log("[FileServer] Upload Online");
-});
-
-const db = new sqlite3.Database("../para.db", (err) => {
-    if (err) throw err;
-    console.log("[FileServer] Upload Connected to SQLite Database");
-});
-
 function isInDatabase(email, password, file) {
-    db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
+    db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
         
         if (err) throw err;
         
@@ -53,7 +43,7 @@ function isInDatabase(email, password, file) {
 }
 
 function addToDatabase(file, email) {
-    db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
+    db.db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
         if (err) throw err;
     });
 }
