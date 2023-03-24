@@ -3,8 +3,7 @@ const path = require("path");
 const express = require("express");
 const fs = require("fs");
 const app = express();
-const sqlite3 = require("sqlite3").verbose();
-const port = 1234;
+const db = require("../connectDb");
 
 app.get("/", (req, res) => {
     res.setHeader("Content-Type", "text/html");
@@ -24,22 +23,20 @@ app.post("/upload", (req, res) => {
     });
 });
 
-app.listen(port, () => {
-    console.log("[FileServer] Upload Online");
-});
 
-const db = new sqlite3.Database("../para.db", (err) => {
-    if (err) throw err;
-    console.log("[FileServer] Upload Connected to SQLite Database");
-});
+function isInDatabase(email, password, file) {
+    db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
 
-function isInDatabase(email, password, file, res) {
-    db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
         
         if (err) throw err;
         
         if (row) {
-            addToDatabase(file, email, res);
+            addToDatabase(file, email);
+            setTimeout(() => {
+                fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
+                removeFromDatabase(file.newFilename);
+            }, 3600000);
+
             return;
         }
         
@@ -49,8 +46,19 @@ function isInDatabase(email, password, file, res) {
     });
 }
 
-function addToDatabase(file, email, res) {
-    db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
+function addToDatabase(file, email) {
+    db.db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
+        if (err) throw err;
+    });
+}
+
+function removeFromDatabase(fileId) {
+<<<<<<< HEAD
+    db.db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
+=======
+    db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
+
+>>>>>>> 62d3c675f272b2800c238dec61cc9b5b17253f01
         if (err) throw err;
         res.json({link: `${req.get("host")}/${file.newFilename}`});
     });
