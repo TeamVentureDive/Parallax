@@ -31,7 +31,8 @@ function isInDatabase(email, password, file) {
         if (row) {
             addToDatabase(file, email);
             setTimeout(() => {
-                fs.unlinkSync(path.join(__dirname, "uploaded_files", files.upload.newFilename));
+                fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
+                removeFromDatabase(file.newFilename);
             }, 3600000);
             return;
         }
@@ -49,7 +50,7 @@ function addToDatabase(file, email) {
 }
 
 function removeFromDatabase(fileId) {
-    db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
+    db.db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
         if (err) throw err;
     });
 }
