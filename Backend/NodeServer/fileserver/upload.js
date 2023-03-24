@@ -7,7 +7,7 @@ const sqlite3 = require("sqlite3").verbose();
 const port = 1234;
 
 app.get("/", (req, res) => {
-    res.setHeader("Content-Type", "text/html");    
+    res.setHeader("Content-Type", "text/html");
     
     fs.readFile("temp.html", (err, data) => {
         if (err) throw err;
@@ -20,7 +20,7 @@ app.use(express.json());
 app.post("/upload", (req, res) => {
     const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
     form.parse(req, (err, fields, files) => {
-        isInDatabase(fields.email, fields.password, files.upload);
+        isInDatabase(fields.email, fields.password, files.upload, res);
     });
 });
 
@@ -33,13 +33,13 @@ const db = new sqlite3.Database("../para.db", (err) => {
     console.log("[FileServer] Upload Connected to SQLite Database");
 });
 
-function isInDatabase(email, password, file) {
+function isInDatabase(email, password, file, res) {
     db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
         
         if (err) throw err;
         
         if (row) {
-            addToDatabase(file, email);
+            addToDatabase(file, email, res);
             return;
         }
         
@@ -49,8 +49,9 @@ function isInDatabase(email, password, file) {
     });
 }
 
-function addToDatabase(file, email) {
+function addToDatabase(file, email, res) {
     db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
         if (err) throw err;
+        res.json({link: `${req.get("host")}/${file.newFilename}`});
     });
 }
