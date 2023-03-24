@@ -40,8 +40,8 @@ function isInDatabase(email, password, file) {
             return;
         }
         
-        fs.unlinkSync(path.join(__dirname, "uploaded_files", files.upload.newFilename));
-        console.log(`[FileServer] Blocked Upload of File "${files.upload.originalFilename}" due to wrong credentials`);
+        fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
+        console.log(`[FileServer] Blocked Upload of File "${file.originalFilename}" due to wrong credentials`);
         res.status(401).json(JSON.stringify({file: "blocked"}));
     });
 }
@@ -53,12 +53,7 @@ function addToDatabase(file, email) {
 }
 
 function removeFromDatabase(fileId) {
-<<<<<<< HEAD
     db.db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
-=======
-    db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
-
->>>>>>> 62d3c675f272b2800c238dec61cc9b5b17253f01
         if (err) throw err;
         res.json({link: `${req.get("host")}/${file.newFilename}`});
     });
