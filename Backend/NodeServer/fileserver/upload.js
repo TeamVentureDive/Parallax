@@ -19,14 +19,29 @@ app.use(express.json());
 app.post("/upload", (req, res) => {
     const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
     form.parse(req, (err, fields, files) => {
-        isInDatabase(fields.email, fields.password, files.upload, res);
+        if (files.upload.length) {
+            //TODO mutliple files
+            return;
+        }
+        //isInDatabase(fields.email, fields.password, files.upload, res);
+        //DEBUG ^^^trying to implement better solution^^^
+        if (isValidAccount(fields.email, fields.password)) {
+
+        }
     });
 });
 
+function isValidAccount() {
+    let returnValue = false;
+    db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
+
+    });
+
+    db.db.
+}
 
 function isInDatabase(email, password, file) {
     db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
-
         
         if (err) throw err;
         
@@ -34,7 +49,7 @@ function isInDatabase(email, password, file) {
             addToDatabase(file, email);
             setTimeout(() => {
                 fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
-                removeFromDatabase(file.newFilename);
+                removeFromDatabase(file, file.newFilename);
             }, 3600000);
 
             return;
@@ -52,7 +67,7 @@ function addToDatabase(file, email) {
     });
 }
 
-function removeFromDatabase(fileId) {
+function removeFromDatabase(file, fileId) {
     db.db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
         if (err) throw err;
         res.json({link: `${req.get("host")}/${file.newFilename}`});
