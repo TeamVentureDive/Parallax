@@ -5,6 +5,7 @@ const fs = require("fs");
 const app = express();
 const db = require("../connectDb");
 
+//DEBUG VVV
 app.get("/", (req, res) => {
     res.setHeader("Content-Type", "text/html");
     
@@ -13,31 +14,51 @@ app.get("/", (req, res) => {
         res.send(data);
     });
 });
+//DEBUG ^^^
 
 app.use(express.json());
 
-app.post("/upload", (req, res) => {
+app.post("/upload", async (req, res) => {
     const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
-    form.parse(req, (err, fields, files) => {
+    form.parse(req, async (err, fields, files) => {
         if (files.upload.length) {
-            //TODO mutliple files
+            for (let i = 0; i < files.upload.length; i++) {
+                uploadFile(res, files, files.upload[i]);
+            }
+            //still need to send a response after upload
             return;
         }
         //isInDatabase(fields.email, fields.password, files.upload, res);
         //DEBUG ^^^trying to implement better solution^^^
-        if (isValidAccount(fields.email, fields.password)) {
-
-        }
+        uploadFile(res, fields, files.upload); // new implementation
+            //still need to send a response after upload
     });
 });
 
-function isValidAccount() {
+function uploadFile(res, fields, file) {
+    db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${fields.email}" AND a_password LIKE "${fields.password}"`, async (err, row) => {
+        if (err) throw err;
+        if (!row) {
+            fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
+            removeFromDatabase(file.newFilename);
+            res.status(401).json({upload:"blocked"}); //bugalert
+            return;
+        }
+        addToDatabase(file, fields.email);
+        setTimeout(() => {
+            fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
+            removeFromDatabase(file.newFilename);
+        }, 3600000);
+        res.status(401).json({upload:"uploaded"}); // multiple calls to res.json() will result in bugs!!!
+        //CHANGE PLEASE ^^^
+    });
+}
+
+function isValidAccount(email, password) {
     let returnValue = false;
     db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
 
     });
-
-    db.db.
 }
 
 function isInDatabase(email, password, file) {
@@ -67,9 +88,9 @@ function addToDatabase(file, email) {
     });
 }
 
-function removeFromDatabase(file, fileId) {
+function removeFromDatabase(fileId) {
     db.db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
         if (err) throw err;
-        res.json({link: `${req.get("host")}/${file.newFilename}`});
+        //res.json({link: `${req.get("host")}/${file.newFilename}`});
     });
 }
