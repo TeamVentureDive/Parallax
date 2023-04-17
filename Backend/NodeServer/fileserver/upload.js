@@ -54,6 +54,7 @@ function uploadFile(res, fields, file) {
             removeFromDatabase(file.newFilename);
         }, 3600000);
         res.status(400).setHeader("Content-Type", "application/json").send(JSON.stringify({upload: "uploaded"}))
+        //TODO STILL HAVE TO SEND THE LINK TO THE FILE BACK
     });
 }
 
