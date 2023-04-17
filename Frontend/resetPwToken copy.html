@@ -6,53 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parallax Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="../Backend/js/loginSideFunction.js"></script>
+    <script src="js/tokenInp.js"></script>
 </head>
-<body class=" bg-[#212F45]">
-    <div class="transition-[width] w-[0] md:w-[55vw] lg:w-[65vw] h-[100vh] relative duration-500 
-    bg-gradient-to-tl from-[#212F45] to-[#006466] overflow-clip text-center select-none min-w-fit grid">
+<body>
+    <div class="w-[0] md:w-[60vw] h-[100vh] absolute bg-gradient-to-tl from-[#212F45] to-[#006466] overflow-clip text-center">
+       
+        <img src="img/Wave.svg" alt="" class="-bottom-20 absolute">
 
-        <img src="img/Wave.svg" alt="" class="bottom-0 absolute">
-
-        <img src="img/Wave180.svg" alt="" class=" top-0 right-0 absolute">
-
-        <p class="text-white z-10 antialiased text-[3vw] leading-[2.6vw] font-[650] absolute place-self-center md:block hidden
-        ">WELCOME <br class="lg:hidden"> BACK TO <br> PARALLAX</p>
-
+        <img src="img/Wave180.svg" alt="" class="
+        sm:scale-[150%] sm:top-16 sm:right-16 transition-transform duration-500
+        lg:-right-[22vw] lg:top-[10vw] lg:mr-[295px] lg:-mt-[40px] lg:scale-[150%] absolute
+        xl:-right-[40vw] xl:top-[10vw] xl:mr-[525px] xl:-mt-[40px] xl:scale-[160%]
+        2xl:-right-[53vw] 2xl:top-[20vw] 2xl:mr-[725px] 2xl:-mt-[194px] 2xl:scale-[170%]
+        ">
 
         <img src="img/Login-Ellipse.svg" alt="" class="
-        sm:scale-[60%] sm:right-[14%] sm:top-[6%]
-        lg:scale-[70%] lg:right-[18%] lg:top-[14%]
-        xl:scale-[80%] xl:right-[22%] xl:top-[18%]
-        2xl:scale-[90%] 2xl:right-[25%] 2xl:top-[21%]
-         transition-all duration-500 absolute rotate-180">
+        sm:bottom-[7vw] sm:left-[14%] sm:scale-[70%] 
+        lg:left-[25%] lg:-ml-[74px] lg:bottom-[15vw] lg:-mb-[82px] 
+        xl:scale-[80%] xl:-ml-[74px] xl:left-[25%]  duration-500
+        2xl:scale-[90%] 2xl:bottom-[17vw] 2xl:-mb-[114px]   transition-transform absolute">
+
         <img src="img/Login-Ellipse.svg" alt="" class="
-        sm:scale-[60%] sm:left-[14%] sm:bottom-[10%]
-        lg:scale-[70%] lg:left-[15%] lg:bottom-[16%]
-        xl:scale-[80%] xl:left-[18%] xl:bottom-[22%]
-        2xl:scale-[90%] 2xl:left-[25%] 2xl:bottom-[21%] 
-        duration-500 transition-all absolute">
-
-
+        sm:top-[4vw] sm:left-[20%] sm:-ml-[100px] sm:scale-[70%] transition-transform duration-500
+        lg:top-[4vw] lg:left-[80%] lg:-ml-[500px] 
+        xl:scale-[80%] xl:top-[5vw] xl:left-[100%] xl:-ml-[665px] xl:-mt-[13px]
+        2xl:scale-[90%] 2xl:top-[14vw] 2xl:left-[130%] 2xl:-ml-[965px] 2xl:-mt-[150px] 3xl: scale-150
+        absolute rotate-180">
         
+        <p class="text-white relative z-10 sm:mr-[15%] md:-[10%] lg:mr-[0%]
+        top-[45%] antialiased text-[3vw] leading-[2.6vw] font-[650] select-none
+        ">CHANGE <br class="lg:hidden"> YOUR <br> PASSWORD</p>
     </div>
 
-    <div class="transition-[width] w-full md:w-[45vw] lg:w-[35vw] h-[100vh] top-0 right-0 absolute bg-gray-100 overflow-auto ">
-        <div class="mt-3 xl:mt-6 mx-[10vw] md:mx-12 h-min items-center">
+    <div class="w-full md:w-[40vw] h-[100%] top-0 right-0 absolute bg-gray-100 min-w-fit overflow-y-scroll">
+        <div class="mt-10 xl:mt-8 mx-[10vw] md:mx-14 h-min items-center mb-[20%] justify-center">
             <div class="flex items-center justify-center mb-8 xl:mb-10">
                 <a href="https://www.apple.com/at/"><img src="img/logo-login_signup.svg" class="flex-none w-40 items-center"></a> <!-- Hier wir dann später Haupt erklärseite verlinkt -->
             </div>
             <div class="grow text-center">
-                <h1 class="text-5xl font-[700] text-center">Change Password</h1>
+                <h1 class="text-4xl font-[700] text-center">Change Password</h1>
             </div>
-            <br>
         </div>
-        
-        
-        <div class="md:mx-0 grid h-max mt-[12%] xl:mt-[8%] gap-8 place-items-stretch">
-
-
-            <div class="md:mx-10 grid h-[35vh] mt-[2%] xl:mt-[2%] justify-center">
+        <div class=" xl:mt-[6%] text-center font-[400] text-gray-500">
+            Enter 7 digit code from email
+        </div>
+        <div class="md:mx-10 grid h-[35vh] mt-[2%] xl:mt-[2%] justify-center">
                 <div class="flex justify-center">
                     <div id="token-input" class="flex space-x-4">
                       <input type="text" class="w-12 h-14 text-4xl font-[500] text-gray-400 text-center rounded-lg border-gray-400 border-2 focus:border-blue-500 focus:outline-none focus:border-solid border-dashed border-b-2" maxlength="1"> <!--Why funktioniert focus nicht?-->
@@ -73,20 +71,18 @@
             <div class="mx-auto">
                 <span>Dont know why you are here? </span><span class="text-blue-500 font-[700] transition-all hover:text-blue-600"><a href="#">Back home</a></span>
             </div>
+        
 
-
-            
-
-        <div class="text-center bottom-6 absolute justify-self-center">
-            <span>By using our services you are agreeing to our <br>
+        <div class="text-center -bottom-5 relative justify-self-center">
+            <span>By using our services you are agreeing to our <br> 
                 <a href="#" class="text-blue-500 font-[700] transition-all hover:text-blue-600">Terms</a> and 
                 <a href="#" class="text-blue-500 font-[700] transition-all hover:text-blue-600">Privacy Policy</a>
             </span>
         </div>
     </div>
     </div>
+    
 </body>
-<script src="js/loginSideFunction.js"></script>
 <script src="js/index.js"></script>
-<script src="js/login-hover.js"></script>
+<script src="js/mail-token-send.js"></script>
 </html>
