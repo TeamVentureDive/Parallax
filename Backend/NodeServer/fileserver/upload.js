@@ -23,7 +23,7 @@ app.post("/upload", async (req, res) => {
     form.parse(req, async (err, fields, files) => {
         if (files.upload.length) {
             for (let i = 0; i < files.upload.length; i++) {
-                uploadFile(res, files, files.upload[i]);
+                uploadFile(res, fields, files.upload[i]);
             }
             //still need to send a response after upload
             return;
@@ -32,8 +32,11 @@ app.post("/upload", async (req, res) => {
         //DEBUG ^^^trying to implement better solution^^^
         uploadFile(res, fields, files.upload); // new implementation
             //still need to send a response after upload
+        console.log(`[Fileserver-Upload] ${fields.email} uploaded file "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
     });
 });
+
+app.listen(611, "localhost");
 
 function uploadFile(res, fields, file) {
     db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${fields.email}" AND a_password LIKE "${fields.password}"`, async (err, row) => {
@@ -41,7 +44,8 @@ function uploadFile(res, fields, file) {
         if (!row) {
             fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
             removeFromDatabase(file.newFilename);
-            res.status(401).json({upload:"blocked"}); //bugalert
+            res.status(401).json({upload:"blocked"});
+            console.log(`[FileServer-Upload] Blocked Upload of File "${file.originalFilename}" due to wrong credentials`);
             return;
         }
         addToDatabase(file, fields.email);
@@ -49,11 +53,11 @@ function uploadFile(res, fields, file) {
             fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
             removeFromDatabase(file.newFilename);
         }, 3600000);
-        res.status(401).json({upload:"uploaded"}); // multiple calls to res.json() will result in bugs!!!
-        //CHANGE PLEASE ^^^
+        res.status(400).setHeader("Content-Type", "application/json").send(JSON.stringify({upload: "uploaded"}))
     });
 }
 
+//OLD CODE VVV
 function isValidAccount(email, password) {
     let returnValue = false;
     db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
@@ -81,6 +85,7 @@ function isInDatabase(email, password, file) {
         res.status(401).json(JSON.stringify({file: "blocked"}));
     });
 }
+//OLD CODE ^^^
 
 function addToDatabase(file, email) {
     db.db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
@@ -94,3 +99,5 @@ function removeFromDatabase(fileId) {
         //res.json({link: `${req.get("host")}/${file.newFilename}`});
     });
 }
+
+console.debug("debug: 1");
