@@ -1,9 +1,9 @@
 const express = require('express');
+const app = express();
 const bodyParser = require('body-parser');
 const dbc = require('../connectDb.js');
 
-const app = express();
-
+app.set('view engine', 'ejs');
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,17 +19,22 @@ app.post('/login', (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
     if(isEmailValid(email)) {
-        dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "` + email + '" AND a_password LIKE "' + password + '"', (err, row) => {
-            if(!row || err){
-                dbc.db.all('SELECT * FROM a_accounts inner join f_files on a_accounts.a_email = f_files.f_a_email WHERE a_email LIKE "' + email + '" AND a_password like "' + password + '"', (err, rows) => {
-                const json_data = JSON.stringify(rows);
-                if (err) res.json(email + 'User nicht in der Datenbank!');
-                res.json(email + 'User nicht in der Datenbank!');
-                });
-            }else{
-                res.json("Login success!");
-            }
+        // dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "` + email + '" AND a_password LIKE "' + password + '"', (err, row) => {
+        //         dbc.db.all('SELECT * FROM f_files WHERE f_a_email LIKE "' + email, (err, rows) => {
+        //             const json_data = JSON.stringify(rows);
+        //             if (err) res.json(email + 'User nicht in der Datenbank!');
+        //             res.json(json_data);
+        //     });
+        //         res.send(row);
+        // });
+
+
+        dbc.db.all(`SELECT * from a_accounts as a inner join f_files as f on a.a_email = f.f_a_email WHERE a.a_email LIKE "` + email + '" AND a.a_password LIKE "' + password + '"',
+            (err, rows) => {
+                res.json(rows);
         });
+
+
     }
 });
 
@@ -56,7 +61,6 @@ app.post('/signup', (req, res) => {
             res.json('"' + email + '" is not a valid Email!');
         }
 });
-
 
 const port = 6969;
 app.listen(port, "localhost", () => {
