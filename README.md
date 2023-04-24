@@ -1,4 +1,5 @@
 # Parallax 
+###[Installationanleitung](howToInstall.md)
 ### *File sharing made easy*
 
 
