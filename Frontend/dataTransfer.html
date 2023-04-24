@@ -7,7 +7,9 @@
     <script src="https://kit.fontawesome.com/4bda37b7cb.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
+    <Style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+    </Style>
 </head>
 <body class="grid-cols-7 grid font-[Poppins] font-[300] text-[16px] bg-blue-500">
     <div class="col-span-1 h-[100vh] bg-white block">
@@ -15,14 +17,11 @@
             <div class="mt-[5vh] ml-[4.5vh]">
                 <img src="" id="image" alt="Click to upload" />
                 <div class="hidden fixed top-0 left-0 z-1 w-100% h-100% overflow-auto bg-white-100/[.4]">
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <h2>Upload Image</h2>
-                        <input type="file" id="fileInput" accept="image/*" />
-                        <img id="preview" alt="Image Preview" />
-                    </div>
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <input id="imageUpload" type="file" name="image">
+                        <button type="submit">Upload</button>
+                    </form>
                 </div>
-                <script src="scripts.js"></script>
                 <h4 class="text-[17px] font-[700] mt-5">Max Musterman</h4>
             </div>
             <ul class="ml-[2vh] mt-[5vh]">
@@ -157,5 +156,6 @@
             </div>
         </div>
     </div>
+    <script src="./js/DataTransfer.js"></script>
 </body>
 </html>
