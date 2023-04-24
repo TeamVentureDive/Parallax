@@ -4,6 +4,7 @@ const express = require("express");
 const fs = require("fs");
 const app = express();
 const db = require("../connectDb");
+const urlHostname = "localhost"
 
 //DEBUG VVV
 app.get("/", (req, res) => {
@@ -21,22 +22,20 @@ app.use(express.json());
 app.post("/upload", async (req, res) => {
     const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
     form.parse(req, async (err, fields, files) => {
+        res.status(400).setHeader("Content-Type", "application/json");
         if (files.upload.length) {
             for (let i = 0; i < files.upload.length; i++) {
                 uploadFile(res, fields, files.upload[i]);
             }
-            //still need to send a response after upload
+            res.send(JSON.stringify({uploadLink:  `https://${urlHostname}/${file.newFilename}`}));
             return;
         }
-        //isInDatabase(fields.email, fields.password, files.upload, res);
-        //DEBUG ^^^trying to implement better solution^^^
-        uploadFile(res, fields, files.upload); // new implementation
-            //still need to send a response after upload
+        uploadFile(res, fields, files.upload); // New Implementation
         console.log(`[Fileserver-Upload] ${fields.email} uploaded file "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
     });
 });
 
-app.listen(611, "localhost");
+app.listen(611, urlHostname);
 
 function uploadFile(res, fields, file) {
     db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${fields.email}" AND a_password LIKE "${fields.password}"`, async (err, row) => {
@@ -53,8 +52,7 @@ function uploadFile(res, fields, file) {
             fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
             removeFromDatabase(file.newFilename);
         }, 3600000);
-        res.status(400).setHeader("Content-Type", "application/json").send(JSON.stringify({upload: "uploaded"}))
-        //TODO STILL HAVE TO SEND THE LINK TO THE FILE BACK
+        res.send(JSON.stringify({uploadLink:  `https://${urlHostname}/${file.newFilename}`}));
     });
 }
 
@@ -97,8 +95,5 @@ function addToDatabase(file, email) {
 function removeFromDatabase(fileId) {
     db.db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
         if (err) throw err;
-        //res.json({link: `${req.get("host")}/${file.newFilename}`});
     });
 }
-
-console.debug("debug: 1");
