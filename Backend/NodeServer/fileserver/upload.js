@@ -26,11 +26,12 @@ app.post("/upload", async (req, res) => {
         if (files.upload.length) {
             for (let i = 0; i < files.upload.length; i++) {
                 uploadFile(res, fields, files.upload[i]);
+                res.send(JSON.stringify({uploadLink:  `http://${urlHostname}:420/${file.newFilename}`}));
             }
-            res.send(JSON.stringify({uploadLink:  `https://${urlHostname}/${file.newFilename}`}));
             return;
         }
         uploadFile(res, fields, files.upload); // New Implementation
+        res.send(JSON.stringify({uploadLink:  `http://${urlHostname}:420/${files.upload.newFilename}`}));
         console.log(`[Fileserver-Upload] ${fields.email} uploaded file "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
     });
 });
@@ -52,7 +53,6 @@ function uploadFile(res, fields, file) {
             fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
             removeFromDatabase(file.newFilename);
         }, 3600000);
-        res.send(JSON.stringify({uploadLink:  `https://${urlHostname}/${file.newFilename}`}));
     });
 }
 
@@ -64,11 +64,11 @@ function isValidAccount(email, password) {
     });
 }
 
-function isInDatabase(email, password, file) {
+function isInDatabase(res, email, password, file) {
     db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, row) => {
-        
+
         if (err) throw err;
-        
+
         if (row) {
             addToDatabase(file, email);
             setTimeout(() => {
@@ -78,7 +78,7 @@ function isInDatabase(email, password, file) {
 
             return;
         }
-        
+
         fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
         console.log(`[FileServer] Blocked Upload of File "${file.originalFilename}" due to wrong credentials`);
         res.status(401).json(JSON.stringify({file: "blocked"}));
