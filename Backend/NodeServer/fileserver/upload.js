@@ -38,6 +38,15 @@ app.post("/upload", async (req, res) => {
 
 app.listen(611, urlHostname);
 
+db.db.all(`SELECT * FROM f_files`, (err, rows) => {
+    rows.forEach(element => {
+        setTimeout(() => {
+            removeFromDatabase(element.f_id);
+            fs.unlinkSync(path.join(__dirname, "uploaded_files", element.f_id));
+        }, 3600000)
+    });
+});
+
 function uploadFile(res, fields, file) {
     db.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${fields.email}" AND a_password LIKE "${fields.password}"`, async (err, row) => {
         if (err) throw err;
