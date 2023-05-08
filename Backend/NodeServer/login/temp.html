@@ -8,14 +8,19 @@
 </head>
 <body>
     <script>
-        fetch("/", 
+        fetch("/unfriend", 
         {
+            headers: {
+                "Content-Type": "application/json"
+            },
             method: "POST",
-            body: {
-
-            }
+            body: JSON.stringify({
+                email2: "alex1907654@gmail.com",
+                email1: "fue22560@spengergasse.at",
+                password1: "amina187"
+            })
         })
-        .then(response => response.json())
+        .then(response => response.text())
         .then(data => {
             console.log(data);
         });
