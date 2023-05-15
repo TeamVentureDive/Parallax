@@ -16,7 +16,7 @@ document.getElementById('login').addEventListener("click", () => {
         .then((data) => {
             if (data === "No rows found") {
                 console.log("Not in database!");
-                //Bitte hier label mit ansprechenen Fehler
+                //Bitte hier label mit ansprechenen Fehler!
             } else {
                 var s = window.location.href;
                 s = s.substring(0, s.indexOf("/reset"));
