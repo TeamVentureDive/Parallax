@@ -1,5 +1,5 @@
 const express = require("express");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
 const fs = require("fs");
@@ -8,6 +8,7 @@ const dbc = require('../connectDb.js');
 
 app.use(bodyParser.json());
 
+//DEBUG
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "temp.html"));
 }),
