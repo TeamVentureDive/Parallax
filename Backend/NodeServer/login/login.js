@@ -41,40 +41,32 @@ app.post("/login", (req, res) => {
   }
 });
 
-function checkToken(token) {
-    var check = false;
-    dbc.db.get(
+async function checkToken(token) {
+    let check = false;
+    console.log(token);
+    await dbc.db.get(
         'SELECT * FROM a_accounts WHERE a_hash LIKE "' + token + '"',
         (err, row) => {
-          if (row) {
+          if (!row || err) {
+            check = true;
+          } else if(row) {
             check = false;
-          } else {
-            
           }
         }
     );
+    //console.log(check);
     return check;
 }
 
 app.post("/signup", (req, res) => {
-  console.log(req.body);
-  const token = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
+  var token = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-  if (isTokenValid(token)) {
-    dbc.db.get(
-        'SELECT * FROM a_accounts WHERE a_hash LIKE "' + token + '"',
-        (err, row) => {
-          if (row) {
-            token = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
-          } else {
-            
-          }
-        }
-    );
+  while (checkToken(token) === false) {
+    token = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
   }
-  if (isEmailTokenValid(email)) {
+  if (isEmailValid(email)) {
     dbc.db.get(
       'SELECT * FROM a_accounts WHERE a_email LIKE "' + email + '"',
       (err, row) => {
@@ -83,7 +75,7 @@ app.post("/signup", (req, res) => {
         } else {
           dbc.db.run(
             `INSERT INTO a_accounts (a_hash, a_username, a_email, a_password) values("${token}", ${username}", "${email}", "${password}")`,
-            (err) => {
+            (err, row) => {
               if (err) {
                 res.json("Internal Server Error!" + row);
               } else {
