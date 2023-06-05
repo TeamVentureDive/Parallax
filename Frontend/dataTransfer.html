@@ -183,17 +183,20 @@
                 </div>
                 <div class="mx-auto">
                     <div class="bg-blue-400 w-[37.2vw] h-[28vh] rounded-2xl relative -top-14 -left-1.5">
-                        <div class="bg-blue-300 w-[36.1vw] outline-dashed outline-white outline-2 h-[21vh] rounded-2xl absolute left-[1vh] top-[1vh]">
-                            <div class="mx-auto h-[4.3rem] w-20"><img src="./img/PutInFile.png" alt="Input" class></div>
+                        <div id="file-drop-area" class="bg-blue-300 w-[36.1vw] outline-dashed outline-white outline-2 h-[21vh] rounded-2xl absolute left-[1vh] top-[1vh] transition-all">
+                            <div class="mx-auto h-[4.3rem] w-20"><img src="./img/PutInFile.png" alt="Input"></div>
                             <div class="text-center font-[650] text-white text-sm">Drop Files here</div>
-                            <div class="text-center font-[500] mt-1 text-white text-sm">Drag an drop your Files Here.</div>
-                            <img src="./img/Grid.svg" class="-top-28 absolute left-20" alt="Grid.svg">
+                            <div class="text-center font-[500] mt-1 text-white text-sm">Drag and drop your Files Here.</div>
+                            <img src="./img/Grid.svg" class="-top-28 absolute left-20 inset-0" alt="Grid.svg">
                             <div class="mx-auto absolute right-11">
                                 <input type="file" name="upload" class="rounded-lg block w-28 mx-auto mr-52 text-white file:mr-4
                                 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold bg-[#4453F9] file:bg-transparent
                                 file:text-white hover:bg-[#AACCFF] ease-in-out duration-500 transition-all">
                             </div>
                         </div>
+
+
+                    </div>
                     </div>
                 </div>
             </div>
