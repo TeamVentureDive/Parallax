@@ -1,9 +1,13 @@
-const express = require("express");
-const app = express();
+const app = require("./webserver");
 const fs = require("fs");
 const path = require("path");
 const dbc = require("../connectDb");
 const bodyParser = require("body-parser");
+
+const download = require("../fileserver/download");
+const upload = require("../fileserver/upload");
+const passwordForget = require("../passwordForget");
+const friendSystem = require("../login/friendsystem");
 
 app.use(bodyParser.json());
 

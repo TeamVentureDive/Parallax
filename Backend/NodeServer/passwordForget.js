@@ -1,12 +1,11 @@
-var createCode = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
+var createCode = Math.floor(Math.random() * 9000000) + 1000000;
 
-const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('para.db');
+let dbc = require("./connectDb");
 const express = require('express');
 const app = express();
 var bodyParser  = require("body-parser");
 
-db.run(`INSERT INTO t_tempcode(t_code, t_active) VALUES(${createCode}, ${true})`, function(err) {
+dbc.db.run(`INSERT INTO t_tempcode(t_code, t_active) VALUES(${createCode}, ${true})`, function(err) {
   if (err) {
     return console.log(err.message);
   }
@@ -42,7 +41,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/sendMail', async(req, res) => {
   const mail = req.body.email;
   const row = await new Promise((resolve, reject) => {
-    db.get(`SELECT * FROM a_accounts WHERE a_email LIKE '${mail}'` , (err , row) => {
+    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE '${mail}'` , (err , row) => {
       if (err) return reject(err);
       resolve(row);
     });
@@ -84,7 +83,7 @@ app.post('/sendMail', async(req, res) => {
 
 app.use('/checkVerification', (req, res) => {
   const token = req.body.token;
-  db.get(`SELECT * FROM t_tempcode WHERE t_code LIKE ${token}`, (err, row) => {
+  dbc.db.get(`SELECT * FROM t_tempcode WHERE t_code LIKE ${token}`, (err, row) => {
     if(err || !row) {
       res.status = 500;
       res.json("No rows found");
@@ -94,7 +93,7 @@ app.use('/checkVerification', (req, res) => {
       res.status = 200;
       res.json("Approved");
       res.send();
-      db.run(`DELETE FROM t_tempcode WHERE t_code LIKE ${token}`);
+      dbc.db.run(`DELETE FROM t_tempcode WHERE t_code LIKE ${token}`);
     }
   })
 });
@@ -110,7 +109,7 @@ app.use('/passwordCheck', (req, res) => {
     res.send();
     return;
   } else {
-    db.get(
+    dbc.db.get(
       `SELECT * FROM a_accounts WHERE a_email LIKE '${email}'`,
       (err, row) => {
         if (err || !row) {
@@ -122,7 +121,7 @@ app.use('/passwordCheck', (req, res) => {
           res.status = 200;
           res.json("Approved");
           res.send();
-          db.run(
+          dbc.db.run(
             `UPDATE a_accounts SET a_password = '${pw1}' WHERE a_email LIKE '${email}'`
           )
         }
