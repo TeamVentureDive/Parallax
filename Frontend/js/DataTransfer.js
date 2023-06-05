@@ -52,21 +52,19 @@ function uploadFile(files) {
 }
 
 
-const searchInput = document.getElementById('searchInput');
-const searchableDiv = document.getElementById('searchableDiv');
-const items = searchableDiv.getElementsByClassName('border-2');
 
-searchInput.addEventListener('input', function(event) {
-    const query = event.target.value.toLowerCase();
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    let searchQuery = this.value.toLowerCase();
+    let names = document.getElementsByClassName('searchable-name');
 
-    for (let i = 0; i < items.length; i++) {
-        const item = items[i];
-        const text = item.textContent.toLowerCase();
+    for (let i = 0; i < names.length; i++) {
+    let name = names[i].textContent.toLowerCase();
+    let parentDiv = names[i].closest('.border-2');
 
-        if (text.includes(query)) {
-            item.style.display = 'block';
-        } else {
-            item.style.display = 'none';
-        }
-    }
+    if (name.includes(searchQuery)) {
+    parentDiv.style.display = '';
+} else {
+    parentDiv.style.display = 'none';
+}
+}
 });
