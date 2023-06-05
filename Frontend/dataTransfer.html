@@ -15,42 +15,42 @@
     </Style>
 </head>
 <body class="grid-cols-7 grid font-[Poppins] font-[300] text-[16px] bg-blue-500">
-    <div class="col-span-1 h-[100vh] bg-white block">
+    <div class="col-span-1 h-[100vh] bg-white block margin-">
         <div class="p-[10px]">
-            <div class="mt-[5vh] ml-[4.5vh]">
-                <img src="" id="image" alt="Click to upload" />
+            <div class="mt-[5vh] flex flex-col items-center">
+                <img src="img/Profile_Picture.png" id="image" alt="Click to upload" />
                 <div class="hidden fixed top-0 left-0 z-1 w-100% h-100% overflow-auto bg-white-100/[.4]">
                     <form action="/upload" method="post" enctype="multipart/form-data">
                         <input id="imageUpload" type="file" name="image">
                         <button type="submit">Upload</button>
                     </form>
                 </div>
-                <h4 class="text-[17px] font-[700] mt-5">Max Musterman</h4>
+                <h4 class="text-[20px] font-[700] mt-5">Max Musterman</h4>
             </div>
-            <ul class="ml-[2vh] mt-[5vh]">
-                <li class="p-[10px] grid-cols-5 grid">
+            <ul class="ml-[1vh] mt-[5vh]">
+                <li class="p-[1vh] grid-cols-5 grid bg-blue-50 rounded-lg">
                     <img src="./img/MenuIcons/Message.svg" alt="Message" class="col-span-1">
-                    <p class="col-span-4">Messages</p>
+                    <p class="col-span-4 text-blue-800">Messages</p>
                 </li>
-                <li class="p-[10px] grid-cols-5 grid">
+                <li class="p-[1vh] grid-cols-5 grid">
                     <img src="./img/MenuIcons/PersonAdd.svg" alt="Add Contacts" class="col-span-1">
                     <p class="col-span-4">Add Contacts</p>
                 </li>
-                <li class="p-[10px] grid-cols-5 grid">
+                <li class="p-[1vh] grid-cols-5 grid">
                     <img src="./img/MenuIcons/Home.svg" alt="Start" class="col-span-1">
                     <p class="col-span-4">Start</p>
                 </li>
             </ul>
-            <ul class="ml-[2vh] bottom-0 absolute mb-10">
-                <li class="p-[10px] grid-cols-5 grid rounded-lg border-red-500 bg-red-100 hover:ring-2 ring-red-500 transition-ease-0.3">
+            <ul class="ml-[1vh] bottom-0 absolute mb-10 w-[20vh]">
+                <li class="p-[1vh] grid-cols-5 grid rounded-lg bg-red-100 hover:ring-2 ring-red-500 transition-ease-0.3">
                     <img src="./img/MenuIcons/LogOut.svg" alt="Message" class="col-span-1">
                     <p class="col-span-4 text-red-600 font-[600]">Log Out</p>
                 </li>
-                <li class="p-[10px] grid-cols-5 grid">
+                <li class="p-[1vh] grid-cols-5 grid">
                     <img src="./img/MenuIcons/Settings.svg" alt="Settings" class="col-span-1 fill-black"></img>
                     <p class="col-span-4">Settings</p>
                 </li>
-                <li class="p-[10px] grid-cols-5 grid">
+                <li class="p-[1vh] grid-cols-5 grid">
                     <img src="./img/MenuIcons/Help.svg" alt="Help" class="col-span-1 fill-black"></img>
                     <p class="col-span-4">Help</p>
                 </li>
@@ -61,12 +61,12 @@
         <div class="pl-[5vw] col-span-2">
             <h1 class="font-[700] mt-[3vh] text-3xl text-white">Contacts</h1>
             <div class="w-[32vw]">
-                    <div class="">
-                        <div class="mt-[5vh]">
-                            <input type="text" class="w-full border-2 border-gray-300 p-[10px] rounded-lg" placeholder="Search">
-                        </div>
+                <div class="">
+                    <div class="mt-[5vh]">
+                        <input type="text" id="searchInput" class="w-full border-2 border-gray-300 p-[10px] rounded-lg" placeholder="Search">
                     </div>
-                    <div class="grid grid-cols-1 mt-[5vh] overflow-y-auto h-[75vh]">
+                </div>
+                <div id="searchableDiv" class="grid grid-cols-1 mt-[5vh] overflow-y-auto h-[75vh]">
                         <div class="col-span-1 mt-[2vh]">
                             <div class="border-2 border-gray-300 p-[4vh] rounded-lg grid-cols-4 grid bg-white">
                                 <img src="#" class="col-span-1" alt="Image">
@@ -182,23 +182,22 @@
                     <img src="./img/Placement.png" class="w-full col-span-6" alt="NSCS-File.png">
                 </div>
                 <div class="mx-auto">
-                    <div class="bg-blue-400 w-[37.2vw] h-[28vh] rounded-2xl relative -top-14 -left-1.5">
-                        <div id="file-drop-area" class="bg-blue-300 w-[36.1vw] outline-dashed outline-white outline-2 h-[21vh] rounded-2xl absolute left-[1vh] top-[1vh] transition-all">
+                    <div class="bg-blue-400 w-[37.2vw] h-[28vh] rounded-2xl relative -top-14 -left-1.5 flex flex-col items-center justify-center">
+                        <div id="file-drop-area" class="bg-blue-300 w-[36.1vw] outline-dashed outline-white outline-2 h-[21vh] rounded-2xl relative transition-all flex flex-col items-center justify-center">
                             <div class="mx-auto h-[4.3rem] w-20"><img src="./img/PutInFile.png" alt="Input"></div>
                             <div class="text-center font-[650] text-white text-sm">Drop Files here</div>
                             <div class="text-center font-[500] mt-1 text-white text-sm">Drag and drop your Files Here.</div>
                             <img src="./img/Grid.svg" class="-top-28 absolute left-20 inset-0" alt="Grid.svg">
-                            <div class="mx-auto absolute right-11">
-                                <input type="file" name="upload" class="rounded-lg block w-28 mx-auto mr-52 text-white file:mr-4
-                                file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold bg-[#4453F9] file:bg-transparent
-                                file:text-white hover:bg-[#AACCFF] ease-in-out duration-500 transition-all">
+                            <div class="mx-auto mt-8">
+                                <input type="file" name="upload" class="rounded-lg block w-28 mx-auto text-white file:mr-4
+          file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold bg-[#4453F9] file:bg-transparent
+          file:text-white hover:bg-[#AACCFF] ease-in-out duration-500 transition-all">
                             </div>
                         </div>
-
-
-                    </div>
                     </div>
                 </div>
+
+            </div>
             </div>
         </div>
     </div>

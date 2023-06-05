@@ -50,3 +50,23 @@ function uploadFile(files) {
 
     uploadRequest.send(formData);
 }
+
+
+const searchInput = document.getElementById('searchInput');
+const searchableDiv = document.getElementById('searchableDiv');
+const items = searchableDiv.getElementsByClassName('border-2');
+
+searchInput.addEventListener('input', function(event) {
+    const query = event.target.value.toLowerCase();
+
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const text = item.textContent.toLowerCase();
+
+        if (text.includes(query)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    }
+});
