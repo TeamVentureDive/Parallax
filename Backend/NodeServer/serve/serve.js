@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
         });
 
         validAccounts.forEach(email => {
-            dbc.db.get(`SELECT * FROM f__files WHERE f_a_email LIKE ${email}`, (err, row) => {
+            dbc.db.get(`SELECT * FROM f_files WHERE f_a_email LIKE ${email}`, (err, row) => {
                 if (err) throw err;
                 if (!row) return;
                 data.push(row);
@@ -58,8 +58,9 @@ app.get("/", (req, res) => {
             let tempEntry = rawFileContainer + " ";
             tempEntry
             .replace("<!--NAME_HERE-->", entry.name)
-            .replace("<!--FILENAME_HERE-->", entry.filename)
-            .replace("<!--FILEDATE_HERE-->", entry.filedate);
+            .replace("<!--FILENAME_HERE-->", entry.f_name)
+            .replace("<!--FILEDATE_HERE-->", entry.f_date)
+            .replace("<!--LINK_HERE-->", entry.f_id);
             insertData += tempEntry;
         });
     
