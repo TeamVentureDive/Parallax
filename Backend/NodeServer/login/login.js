@@ -58,21 +58,12 @@ function checkToken(token) {
 
 app.post("/signup", (req, res) => {
   console.log(req.body);
-  const token = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
+  const token = Math.floor(Math.random() * (9000000)) + 1000000;
   const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
   if (isTokenValid(token)) {
-    dbc.db.get(
-        'SELECT * FROM a_accounts WHERE a_hash LIKE "' + token + '"',
-        (err, row) => {
-          if (row) {
-            token = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
-          } else {
-            
-          }
-        }
-    );
+    
   }
   if (isEmailTokenValid(email)) {
     dbc.db.get(
