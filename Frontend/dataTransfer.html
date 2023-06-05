@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <Style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+        ::-webkit-scrollbar{
+            display: none
+        }
     </Style>
 </head>
 <body class="grid-cols-7 grid font-[Poppins] font-[300] text-[16px] bg-blue-500">
@@ -55,15 +58,15 @@
         </div>
     </div>
     <div class="bg-[url('../img/Background.png')] bg-no-repeat bg-cover col-span-6 grid-cols-4 grid text-xl">
-        <div class="pl-[100px] col-span-2">
-            <h1 class="font-[700] mt-[3vh] text-white">Contacts</h1>
-            <div class="w-[30vw]">
+        <div class="pl-[5vw] col-span-2">
+            <h1 class="font-[700] mt-[3vh] text-3xl text-white">Contacts</h1>
+            <div class="w-[32vw]">
                     <div class="">
                         <div class="mt-[5vh]">
                             <input type="text" class="w-full border-2 border-gray-300 p-[10px] rounded-lg" placeholder="Search">
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 mt-[5vh] overflow-y-auto h-[75vh] pr-[2vh]">
+                    <div class="grid grid-cols-1 mt-[5vh] overflow-y-auto h-[75vh]">
                         <div class="col-span-1 mt-[2vh]">
                             <div class="border-2 border-gray-300 p-[4vh] rounded-lg grid-cols-4 grid bg-white">
                                 <img src="#" class="col-span-1" alt="Image">
@@ -113,6 +116,39 @@
                                 </div>
                                 <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
                             </div>
+                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
+                                <img src="#" class="col-span-1" alt="Image">
+                                <div class="col-span-2">
+                                    <h1 class="font-[600]">Max Musterman</h1>
+                                    <h3 class="font-[300]">NSCS-File.png</h3>
+                                </div>
+                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
+                            </div>
+                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
+                                <img src="#" class="col-span-1" alt="Image">
+                                <div class="col-span-2">
+                                    <h1 class="font-[600]">Max Musterman</h1>
+                                    <h3 class="font-[300]">NSCS-File.png</h3>
+                                </div>
+                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
+                            </div>
+                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
+                                <img src="#" class="col-span-1" alt="Image">
+                                <div class="col-span-2">
+                                    <h1 class="font-[600]">Max Musterman</h1>
+                                    <h3 class="font-[300]">NSCS-File.png</h3>
+                                </div>
+                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
+                            </div>
+                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
+                                <img src="#" class="col-span-1" alt="Image">
+                                <div class="col-span-2">
+                                    <h1 class="font-[600]">Max Musterman</h1>
+                                    <h3 class="font-[300]">NSCS-File.png</h3>
+                                </div>
+                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
+                            </div>
+
                         </div>
                 </div>
             </div>
@@ -143,13 +179,20 @@
                     <h3 class="col-span-2">Icon</h3>
                 </div>
                 <div class="">
-                    <img src="./img/Placement.png" class="w-full col-span-6 " alt="NSCS-File.png">
+                    <img src="./img/Placement.png" class="w-full col-span-6" alt="NSCS-File.png">
                 </div>
-                <div class="mx-5">
-                    <div class="bg-blue-300 w-full h-[20vh] rounded-lg">
-                        <img src="./img/PutInFile.png" alt="Input" class="mx-auto">
-                        <div class="mx-auto">
-                        <input type="file" name="upload" class="rounded-lg">
+                <div class="mx-auto">
+                    <div class="bg-blue-400 w-[37.2vw] h-[28vh] rounded-2xl relative -top-14 -left-1.5">
+                        <div class="bg-blue-300 w-[36.1vw] outline-dashed outline-white outline-2 h-[21vh] rounded-2xl absolute left-[1vh] top-[1vh]">
+                            <div class="mx-auto h-[4.3rem] w-20"><img src="./img/PutInFile.png" alt="Input" class></div>
+                            <div class="text-center font-[650] text-white text-sm">Drop Files here</div>
+                            <div class="text-center font-[500] mt-1 text-white text-sm">Drag an drop your Files Here.</div>
+                            <img src="./img/Grid.svg" class="-top-28 absolute left-20" alt="Grid.svg">
+                            <div class="mx-auto absolute right-11">
+                                <input type="file" name="upload" class="rounded-lg block w-28 mx-auto mr-52 text-white file:mr-4
+                                file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold bg-[#4453F9] file:bg-transparent
+                                file:text-white hover:bg-[#AACCFF] ease-in-out duration-500 transition-all">
+                            </div>
                         </div>
                     </div>
                 </div>
