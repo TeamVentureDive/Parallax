@@ -17,7 +17,7 @@ app.post("/upload", async (req, res) => {
             return;
         }
         uploadFile(res, fields, files.upload); // New Implementation
-        res.send(JSON.stringify({uploadLink:  `http://${urlHostname}:420/${files.upload.newFilename}`}));
+        res.send(JSON.stringify({uploadLink:  `http://${urlHostname}:420/download/${files.upload.newFilename}`}));
         console.log(`[Fileserver-Upload] ${fields.email} uploaded file "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
     });
 });

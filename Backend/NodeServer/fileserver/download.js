@@ -1,10 +1,12 @@
 const app = require("../serve/webserver");
 const path = require("path");
+const dbc = require("../connectDb");
 
-app.get("/:fileId", (req, res) => {
+app.get("/download/:fileId", (req, res) => {
     const fileId = req.params.fileId;
-    db.get(`SELECT * FROM f_files WHERE f_id = "${fileId}"`, (err, row) => {
+    dbc.db.get(`SELECT * FROM f_files WHERE f_id = "${fileId}"`, (err, row) => {
         if (err) throw err;
+        if (!row) return;
         res.sendFile(path.join(__dirname, "uploaded_files", fileId));
         res.attachment(row.f_name);
     });

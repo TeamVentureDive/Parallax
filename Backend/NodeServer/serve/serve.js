@@ -11,7 +11,16 @@ const friendSystem = require("../login/friendsystem");
 
 app.use(bodyParser.json());
 
+app.get("/signup", (req, res) => {
+    res.sendFile(path.join(__dirname, "..", "..", "..", "Frontend", "signup.html"));
+});
+
 app.get("/", (req, res) => {
+
+    if (!req.body.email || !req.body.password) {
+        res.sendFile(path.join(__dirname, "..", "..", "..", "Frontend", "login.html"));
+        return;
+    }
 
     loginInvalid = false;
 
@@ -65,7 +74,7 @@ app.get("/", (req, res) => {
         });
     
         const stringToSend = rawIndexData.replace("<!--DATA_HERE-->", insertData);
-        res.send(stringToSend);
+        res.type("html").send(stringToSend);
     });
 });
 
