@@ -14,8 +14,8 @@
         }
     </Style>
 </head>
-<body class="grid-cols-7 grid font-[Poppins] font-[300] text-[16px] bg-blue-500">
-    <div class="col-span-1 h-[100vh] bg-white block margin-">
+<body class="grid grid-cols-1 sm:grid-cols-7 font-[Poppins] font-[300] text-[16px] bg-blue-500">
+    <div class="col-span-1 h-[100vh] bg-white block">
         <div class="p-[10px]">
             <div class="mt-[5vh] flex flex-col items-center">
                 <img src="img/Profile_Picture.png" id="image" alt="Click to upload" />
@@ -33,7 +33,7 @@
                     <p class="col-span-4 text-blue-800">Messages</p>
                 </li>
                 <li class="p-[1vh] grid-cols-5 grid">
-                    <img src="./img/MenuIcons/PersonAdd.svg" alt="Add Contacts" class="col-span-1">
+                    <img src="./img/MenuIcons/PersonAdd.svg" alt="Add Contacts" class="col-span-1 pr-4 p-0.5">
                     <p class="col-span-4">Add Contacts</p>
                 </li>
                 <li class="p-[1vh] grid-cols-5 grid">
@@ -57,13 +57,13 @@
             </ul>
         </div>
     </div>
-    <div class="bg-[url('../img/Background.png')] bg-no-repeat bg-cover col-span-6 grid-cols-4 grid text-xl">
+    <div class="bg-[url('../img/Background.png')] bg-no-repeat bg-cover col-span-1 sm:col-span-6 grid-cols-1 sm:grid-cols-4 grid text-xl">
         <div class="pl-[5vw] col-span-2">
             <h1 class="font-[700] mt-[3vh] text-3xl text-white">Contacts</h1>
             <div class="w-[32vw]">
                 <div class="">
                     <div class="mt-[5vh]">
-                        <input type="text" id="searchInput" class="w-full border-2 border-gray-300 p-[10px] rounded-lg" placeholder="Search">
+                        <input type="text" id="searchInput" class="w-full border-2 border-gray-300 rounded-lg p-5" placeholder="Search">
                     </div>
                 </div>
                 <div id="searchableDiv" class="grid grid-cols-1 mt-[5vh] overflow-y-auto h-[75vh]">
