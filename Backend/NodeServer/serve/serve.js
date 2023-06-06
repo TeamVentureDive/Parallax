@@ -1,4 +1,7 @@
-const app = require("./webserver");
+const webserver = require("./webserver");
+const app = webserver.app;
+const express = webserver.express;
+
 const fs = require("fs");
 const path = require("path");
 const dbc = require("../connectDb");
@@ -11,8 +14,32 @@ const friendSystem = require("../login/friendsystem");
 
 app.use(bodyParser.json());
 
+app.use(express.static(path.join("..", "..", "..", "Frontend")));
+
 app.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "..", "..", "Frontend", "signup.html"));
+});
+
+app.post("/signup", (req, res) => {
+
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+
+    console.log(req.body);
+
+    if (!username || !email ||!password) {
+        res.json({login: "blocked"});
+        return;
+    }
+
+    const codeHash = (Math.floor(Math.random() * 100000) + "").padStart(5, "0");
+
+    dbc.db.run(`INSERT INTO a_accounts VALUES ("${username}", "${email}", "${password}", "${codeHash}")`, err => {
+        if (err) throw err;
+    });
+    res.json({login: "success"});
+    console.log(`[Signup] Signed up User ${username} with email ${email}, password ${password} and code (hash) ${codeHash}`);
 });
 
 app.get("/", (req, res) => {

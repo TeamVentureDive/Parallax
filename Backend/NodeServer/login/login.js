@@ -42,18 +42,20 @@ app.post("/login", (req, res) => {
 });
 
 function checkToken(token) {
+  //THATS NOT HOW ASYNC FUNCTION WORK!!!  
     var check = false;
-    dbc.db.get(
-        'SELECT * FROM a_accounts WHERE a_hash LIKE "' + token + '"',
-        (err, row) => {
-          if (row) {
-            check = false;
-          } else {
-            
+      dbc.db.get(
+          'SELECT * FROM a_accounts WHERE a_hash LIKE "' + token + '"',
+          (err, row) => {
+            if (row) {
+              check = false;
+            } else {
+              
+            }
           }
-        }
-    );
-    return check;
+      );
+      return check;
+  //THATS NOT HOW ASYNC FUNCTION WORK!!!  
 }
 
 app.post("/signup", (req, res) => {

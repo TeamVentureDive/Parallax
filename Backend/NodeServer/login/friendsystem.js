@@ -1,4 +1,5 @@
-const app = require("../serve/webserver");
+const webserver = require("../serve/webserver");
+const app = webserver.app;
 const bodyParser = require("body-parser");
 const path = require("path");
 const fs = require("fs");
