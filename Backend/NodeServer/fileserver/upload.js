@@ -30,7 +30,7 @@ dbc.db.all(`SELECT * FROM f_files`, (err, rows) => {
         setTimeout(() => {
             removeFromDatabase(element.f_id);
             fs.unlinkSync(path.join(__dirname, "uploaded_files", element.f_id));
-        }, 3600000)
+        }, 3600000);
     });
 });
 
