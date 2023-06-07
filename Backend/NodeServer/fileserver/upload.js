@@ -1,84 +1,68 @@
 const formidable = require("formidable");
 const path = require("path");
-const express = require("express");
+const webserver = require("../serve/webserver");
+const app = webserver.app;
 const fs = require("fs");
-const app = express();
 const dbc = require("../connectDb");
-const urlHostname = "localhost"
+const urlHostname = "localhost";
 
-function start() {
-    //DEBUG VVV
-    app.get("/", (req, res) => {
-        res.setHeader("Content-Type", "text/html");
-        
-        fs.readFile("temp.html", (err, data) => {
-            if (err) throw err;
-            res.send(data);
-        });
-    });
-    //DEBUG ^^^
-
-    app.use(express.json());
-
-    app.post("/upload", async (req, res) => {
-        const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
-        form.parse(req, async (err, fields, files) => {
-            res.status(400).setHeader("Content-Type", "application/json");
-            if (files.upload.length) {
-                for (let i = 0; i < files.upload.length; i++) {
-                    uploadFile(res, fields, files.upload[i]);
-                    res.send(JSON.stringify({uploadLink:  `http://${urlHostname}:420/${file.newFilename}`}));
-                }
-                return;
+app.post("/upload", async (req, res) => {
+    const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
+    form.parse(req, async (err, fields, files) => {
+        res.status(400).setHeader("Content-Type", "application/json");
+        if (files.upload.length) {
+            for (let i = 0; i < files.upload.length; i++) {
+                uploadFile(res, fields, files.upload[i]);
+                res.send(JSON.stringify({uploadLink:  `http://${urlHostname}:420/${file.newFilename}`}));
             }
-            uploadFile(res, fields, files.upload); // New Implementation
-            res.send(JSON.stringify({uploadLink:  `http://${urlHostname}:420/${files.upload.newFilename}`}));
-            console.log(`[Fileserver-Upload] ${fields.email} uploaded file "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
-        });
+            return;
+        }
+        uploadFile(res, fields, files.upload); // New Implementation
+        res.send(JSON.stringify({uploadLink:  `http://${urlHostname}:420/download/${files.upload.newFilename}`}));
+        console.log(`[Fileserver-Upload] ${fields.email} uploaded file "${files.upload.originalFilename}" as "${files.upload.newFilename}"`);
     });
+});
 
-    app.listen(611, urlHostname);
+app.listen(611, urlHostname);
 
-    console.info("[FileServer] Upload Online")
 
-    dbc.db.all(`SELECT * FROM f_files`, (err, rows) => {
-        rows.forEach(element => {
-            setTimeout(() => {
-                removeFromDatabase(element.f_id);
-                fs.unlinkSync(path.join(__dirname, "uploaded_files", element.f_id));
-            }, 3600000)
-        });
+dbc.db.all(`SELECT * FROM f_files`, (err, rows) => {
+    rows.forEach(element => {
+        setTimeout(() => {
+            removeFromDatabase(element.f_id);
+            fs.unlinkSync(path.join(__dirname, "uploaded_files", element.f_id));
+        }, 3600000);
     });
+});
 
-    function uploadFile(res, fields, file) {
-        dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${fields.email}" AND a_password LIKE "${fields.password}"`, async (err, row) => {
-            if (err) throw err;
-            if (!row) {
-                fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
-                removeFromDatabase(file.newFilename);
-                res.status(401).json({upload:"blocked"});
-                console.log(`[FileServer-Upload] Blocked Upload of File "${file.originalFilename}" due to wrong credentials`);
-                return;
-            }
-            addToDatabase(file, fields.email);
-            setTimeout(() => {
-                fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
-                removeFromDatabase(file.newFilename);
-            }, 3600000);
-        });
-    }
+console.info("[FileServer] Upload Online");
 
-    function addToDatabase(file, email) {
-        dbc.db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
-            if (err) throw err;
-        });
-    }
-
-    function removeFromDatabase(fileId) {
-        dbc.db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
-            if (err) throw err;
-        });
-    }
+function uploadFile(res, fields, file) {
+    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${fields.email}" AND a_password LIKE "${fields.password}"`, async (err, row) => {
+        if (err) throw err;
+        if (!row) {
+            fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
+            removeFromDatabase(file.newFilename);
+            res.status(401).json({upload:"blocked"});
+            console.log(`[FileServer-Upload] Blocked Upload of File "${file.originalFilename}" due to wrong credentials`);
+            return;
+        }
+        addToDatabase(file, fields.email);
+        setTimeout(() => {
+            fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
+            removeFromDatabase(file.newFilename);
+        }, 3600000);
+    });
 }
 
-module.exports = {start};
+function addToDatabase(file, email) {
+    dbc.db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
+        if (err) throw err;
+    });
+}
+
+function removeFromDatabase(fileId) {
+    dbc.db.run(`DELETE FROM f_files WHERE f_a_email like "${fileId}"`, err => {
+        if (err) throw err;
+    });
+}

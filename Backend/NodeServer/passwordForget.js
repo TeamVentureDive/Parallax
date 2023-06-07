@@ -1,12 +1,12 @@
-var createCode = Math.floor(Math.random() * (9999999 - 1000000 + 1)) + 1000000;
+var createCode = Math.floor(Math.random() * 9000000) + 1000000;
 
-const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('para.db');
-const express = require('express');
-const app = express();
+let dbc = require("./connectDb");
+const webserver = require("./serve/webserver");
+const express = webserver.express;
+const app = webserver.app;
 var bodyParser  = require("body-parser");
 
-db.run(`INSERT INTO t_tempcode(t_code, t_active) VALUES(${createCode}, ${true})`, function(err) {
+dbc.db.run(`INSERT INTO t_tempcode(t_code, t_active) VALUES(${createCode}, ${true})`, function(err) {
   if (err) {
     return console.log(err.message);
   }
@@ -26,23 +26,24 @@ var transporter = nodemailer.createTransport({
   }
 });
 
+//dumb find better method VVVV
+  /*app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Content-Type', 'application/json');
+    next();
+  });
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Content-Type', 'application/json');
-  next();
-});
-
-app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(express.json());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));*/
+//dumb find better method^^^^
 
 app.post('/sendMail', async(req, res) => {
   const mail = req.body.email;
   const row = await new Promise((resolve, reject) => {
-    db.get(`SELECT * FROM a_accounts WHERE a_email LIKE '${mail}'` , (err , row) => {
+    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE '${mail}'` , (err , row) => {
       if (err) return reject(err);
       resolve(row);
     });
@@ -82,54 +83,56 @@ app.post('/sendMail', async(req, res) => {
   });
 });
 
-app.use('/checkVerification', (req, res) => {
-  const token = req.body.token;
-  db.get(`SELECT * FROM t_tempcode WHERE t_code LIKE ${token}`, (err, row) => {
-    if(err || !row) {
-      res.status = 500;
-      res.json("No rows found");
+//Stop using app.use!!! VVV
+  /*app.use('/checkVerification', (req, res) => {
+    const token = req.body.token;
+    dbc.db.get(`SELECT * FROM t_tempcode WHERE t_code LIKE ${token}`, (err, row) => {
+      if(err || !row) {
+        res.status = 500;
+        res.json("No rows found");
+        res.send();
+        return;
+      } else {
+        res.status = 200;
+        res.json("Approved");
+        res.send();
+        dbc.db.run(`DELETE FROM t_tempcode WHERE t_code LIKE ${token}`);
+      }
+    })
+  });
+
+
+  app.use('/passwordCheck', (req, res) => {
+    const pw1 = req.body.f1PW;
+    const pw2 = req.body.f2PW;
+    const email = req.body.email;
+    if (pw1 != pw2 || /^[A-Za-z0-9?!]{5,}$/.test(pw1) == false) {
+      res.status = 200;
+      res.json("The password typed in wasn't correct!");
       res.send();
       return;
     } else {
-      res.status = 200;
-      res.json("Approved");
-      res.send();
-      db.run(`DELETE FROM t_tempcode WHERE t_code LIKE ${token}`);
-    }
-  })
-});
-
-
-app.use('/passwordCheck', (req, res) => {
-  const pw1 = req.body.f1PW;
-  const pw2 = req.body.f2PW;
-  const email = req.body.email;
-  if (pw1 != pw2 || /^[A-Za-z0-9?!]{5,}$/.test(pw1) == false) {
-    res.status = 200;
-    res.json("The password typed in wasn't correct!");
-    res.send();
-    return;
-  } else {
-    db.get(
-      `SELECT * FROM a_accounts WHERE a_email LIKE '${email}'`,
-      (err, row) => {
-        if (err || !row) {
-          res.status = 500;
-          res.json(`${err}`);
-          res.send();
-          return;
-        } else {
-          res.status = 200;
-          res.json("Approved");
-          res.send();
-          db.run(
-            `UPDATE a_accounts SET a_password = '${pw1}' WHERE a_email LIKE '${email}'`
-          )
+      dbc.db.get(
+        `SELECT * FROM a_accounts WHERE a_email LIKE '${email}'`,
+        (err, row) => {
+          if (err || !row) {
+            res.status = 500;
+            res.json(`${err}`);
+            res.send();
+            return;
+          } else {
+            res.status = 200;
+            res.json("Approved");
+            res.send();
+            dbc.db.run(
+              `UPDATE a_accounts SET a_password = '${pw1}' WHERE a_email LIKE '${email}'`
+            )
+          }
         }
-      }
-    );
-  }
-});
+      );
+    }
+  });*/
+//Seriusly??? ^^^^
 
 const port = 2500;
 app.listen(port, () => {
