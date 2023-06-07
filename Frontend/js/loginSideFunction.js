@@ -3,25 +3,26 @@
 
 
 function fetchDataFromServer() {
-    let login = "http://localhost:6969/login";
+    //let login = "http://localhost:6969/login";
     console.log("login fetch!")
     let emailInput = document.getElementById('emailInput');
     let passwordInput = document.getElementById('passwordInput');
 
-    const formData = new URLSearchParams();
+    /*const formData = new URLSearchParams();
     formData.append('email', emailInput.value);
-    formData.append('password', passwordInput.value);
+    formData.append('password', passwordInput.value);*/
 
     fetch(
-        login,
+        //login,
+        "login",
         {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
-            body: formData
+            body: {email: emailInput.value, password: passwordInput.value}
         })
-        .then((response) => response.json())
+        .then((response) => response.text())
         .then((data) => {
             console.log(data);
         });
