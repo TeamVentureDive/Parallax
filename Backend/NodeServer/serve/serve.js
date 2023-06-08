@@ -95,11 +95,11 @@ app.post("/login", (req, res) => {
                     fileAccountRows.forEach(fileAccountRow => {
                         let tempEntry = rawFileContainer + " ";
                         insertData += tempEntry
-                                        .replace("<!--EMAIL_HERE-->", fileAccountRow.f_a_email)
-                                        .replace("<!--FILENAME_HERE-->", fileAccountRow.f_name)
-                                        .replace("<!--FILEDATE_HERE-->", fileAccountRow.f_date)
-                                        .replace("<!--LINK_HERE-->", fileAccountRow.f_id)
-                                        .replace("<!--USERNAME_HERE-->", fileAccountRow.a_username);
+                                        .replaceAll("<!--EMAIL_HERE-->", fileAccountRow.f_a_email)
+                                        .replaceAll("<!--FILENAME_HERE-->", fileAccountRow.f_name)
+                                        .replaceAll("<!--FILEDATE_HERE-->", fileAccountRow.f_date)
+                                        .replaceAll("<!--LINK_HERE-->", fileAccountRow.f_id)
+                                        .replaceAll("<!--USERNAME_HERE-->", fileAccountRow.a_username);
                     });
                     
                     index++;
@@ -107,11 +107,11 @@ app.post("/login", (req, res) => {
                     if (index >= validAccounts.length) {
                         //Inserting Data
                         const stringToSend = rawIndexData
-                                        .replace("<!--DATA_HERE-->", insertData)
-                                        .replace("<!--USERNAME_HERE-->", accountRow.a_username)
-                                        .replace("<!--EMAIL_HERE-->", accountRow.a_email)
-                                        .replace("<!--HASH_HERE-->", accountRow.a_hash)
-                                        .replace("<!--PASSWORD_HERE-->", accountRow.a_password);
+                                        .replaceAll("<!--DATA_HERE-->", insertData)
+                                        .replaceAll("<!--USERNAME_HERE-->", accountRow.a_username)
+                                        .replaceAll("<!--EMAIL_HERE-->", accountRow.a_email)
+                                        .replaceAll("<!--HASH_HERE-->", accountRow.a_hash)
+                                        .replaceAll("<!--PASSWORD_HERE-->", accountRow.a_password);
                         res.type("html").send(stringToSend);
                     }
                 });
