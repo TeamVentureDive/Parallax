@@ -68,3 +68,8 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 }
 }
 });
+
+
+function openSettings() {
+    window.location.href = 'settings.html';
+}
