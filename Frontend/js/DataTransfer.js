@@ -82,8 +82,16 @@ function closeSettings() {
     settings.classList.add("hidden");
 
 }
+const addfriendCont = document.getElementById("addFriendContainer");
+function addFriendPopUp() {
+    field.classList.add("blur");
+    addfriendCont.classList.remove("hidden");
+}
 
-
+function closeAddContacts(){
+    field.classList.remove("blur");
+    addfriendCont.classList.add("hidden");
+}
 
 function resetPassword() {
     window.location.href = "resetPwEmail.html";
@@ -128,7 +136,6 @@ function copyCode(){
 }
 
 
-
 function showNotification() {
     Toastify({
       text: "No Info for you (yet). In Germany we call it 'Kannziel'",
@@ -137,4 +144,17 @@ function showNotification() {
       position: "right", // Ausrichtung der Benachrichtigung ("left", "right", "center")
       backgroundColor: "linear-gradient(to right, #667eea, #764ba2)", // Hintergrundfarbe der Benachrichtigung
     }).showToast();
+  }
+
+
+
+
+  const hackenButt = document.getElementById("hacken");
+  hackenButt.addEventListener("click",addfriend);
+
+  function addfriend(){
+    hackenButt.innerHTML = "Friend Added";
+    hackenButt.classList.add("bg-green-500","text-white");
+    hackenButt.classList.remove("pl-1.5","pr-1.5","pb-0.5,","rounded-full","ml-20","text-sm","pb-0.5");
+    hackenButt.classList.add("pl-1","pr-1","rounded-lg","text-xs","ml-1","pl-1,5","pr-1,5");
   }
