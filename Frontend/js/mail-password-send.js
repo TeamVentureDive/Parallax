@@ -1,5 +1,5 @@
 document.getElementById('login').addEventListener("click", () => {
-    let sendTo = "http://localhost:2500/passwordCheck";
+    let sendTo = "http://localhost:80/passwordCheck";
     let firstPwInput = document.getElementById('f1PW');
     let secondPwInput = document.getElementById('f2PW');
     let email = sessionStorage.getItem("email");

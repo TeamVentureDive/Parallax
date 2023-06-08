@@ -1,7 +1,7 @@
 var createCode = Math.floor(Math.random() * 9000000) + 1000000;
 
-let dbc = require("./connectDb");
-const webserver = require("./serve/webserver");
+let dbc = require("../connectDb");
+const webserver = require("./webserver");
 const express = webserver.express;
 const app = webserver.app;
 var bodyParser  = require("body-parser");
@@ -25,20 +25,6 @@ var transporter = nodemailer.createTransport({
     refreshToken: process.env.OAUTH_REFRESH_TOKEN = "1//04zEaJZDhUL5eCgYIARAAGAQSNwF-L9IrJ3ecYrKGUhxXqz6e2--AvjusHo3ZG1uttkwyitRM3-smL7RNclUsAE4caoxLCPx7IVI"
   }
 });
-
-//dumb find better method VVVV
-  /*app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Content-Type', 'application/json');
-    next();
-  });
-
-  app.use(express.json());
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));*/
-//dumb find better method^^^^
 
 app.post('/sendMail', async(req, res) => {
   const mail = req.body.email;
@@ -83,8 +69,8 @@ app.post('/sendMail', async(req, res) => {
   });
 });
 
-//Stop using app.use!!! VVV
-  /*app.use('/checkVerification', (req, res) => {
+
+app.post('/checkVerification', (req, res) => {
     const token = req.body.token;
     dbc.db.get(`SELECT * FROM t_tempcode WHERE t_code LIKE ${token}`, (err, row) => {
       if(err || !row) {
@@ -102,7 +88,7 @@ app.post('/sendMail', async(req, res) => {
   });
 
 
-  app.use('/passwordCheck', (req, res) => {
+  app.post('/passwordCheck', (req, res) => {
     const pw1 = req.body.f1PW;
     const pw2 = req.body.f2PW;
     const email = req.body.email;
@@ -131,8 +117,7 @@ app.post('/sendMail', async(req, res) => {
         }
       );
     }
-  });*/
-//Seriusly??? ^^^^
+  });
 
 const port = 2500;
 app.listen(port, () => {

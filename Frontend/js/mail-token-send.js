@@ -1,5 +1,5 @@
 function checkDatabaseForCode(token) {
-     let sendTo = "http://localhost:2500/checkVerification";
+     let sendTo = "http://localhost:80/checkVerification";
      fetch(
         sendTo, {
             method: "POST",
