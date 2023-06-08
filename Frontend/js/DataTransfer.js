@@ -1,20 +1,20 @@
 const fileDropArea = document.getElementById('file-drop-area');
 
-fileDropArea.addEventListener('dragenter', function(event) {
+fileDropArea.addEventListener('dragenter', function (event) {
     event.preventDefault();
     fileDropArea.style.backgroundColor = 'rgba(25, 53, 209, 0.5)';
 });
 
-fileDropArea.addEventListener('dragleave', function(event) {
+fileDropArea.addEventListener('dragleave', function (event) {
     event.preventDefault();
     fileDropArea.style.backgroundColor = 'initial';
 });
 
-fileDropArea.addEventListener('dragover', function(event) {
+fileDropArea.addEventListener('dragover', function (event) {
     event.preventDefault();
 });
 
-fileDropArea.addEventListener('drop', function(event) {
+fileDropArea.addEventListener('drop', function (event) {
     event.preventDefault();
     fileDropArea.style.backgroundColor = 'initial';
 
@@ -44,8 +44,8 @@ function uploadFile(files) {
         method: "POST",
         body: formData
     })
-    .then(response => response.json())
-    .then(data => console.log(data));
+        .then(response => response.json())
+        .then(data => console.log(data));
 
     /*const uploadRequest = new XMLHttpRequest();
 
@@ -66,20 +66,20 @@ function uploadFile(files) {
 
 
 
-document.getElementById('searchInput').addEventListener('keyup', function() {
+document.getElementById('searchInput').addEventListener('keyup', function () {
     let searchQuery = this.value.toLowerCase();
     let names = document.getElementsByClassName('searchable-name');
 
     for (let i = 0; i < names.length; i++) {
-    let name = names[i].textContent.toLowerCase();
-    let parentDiv = names[i].closest('.border-2');
+        let name = names[i].textContent.toLowerCase();
+        let parentDiv = names[i].closest('.border-2');
 
-    if (name.includes(searchQuery)) {
-    parentDiv.style.display = '';
-} else {
-    parentDiv.style.display = 'none';
-}
-}
+        if (name.includes(searchQuery)) {
+            parentDiv.style.display = '';
+        } else {
+            parentDiv.style.display = 'none';
+        }
+    }
 });
 const field = document.getElementById("content-datatransfer");
 const settings = document.getElementById("settingsover");
@@ -87,7 +87,7 @@ const settings = document.getElementById("settingsover");
 function openSettings() {
     field.classList.add("blur");
     settings.classList.remove("hidden");
-    
+
 }
 
 function closeSettings() {
@@ -101,7 +101,7 @@ function addFriendPopUp() {
     addfriendCont.classList.remove("hidden");
 }
 
-function closeAddContacts(){
+function closeAddContacts() {
     field.classList.remove("blur");
     addfriendCont.classList.add("hidden");
 }
@@ -118,31 +118,31 @@ const loginSecurityBtn = document.getElementById("loginSecurityBtn");
 const accountSettingsSection = document.getElementById("accountSettingsSection");
 const loginSecuritySection = document.getElementById("loginSecuritySection");
 
-accountSettingsBtn.addEventListener("click", function() {
-  accountSettingsBtn.classList.add("bg-gray-200");
-  loginSecurityBtn.classList.remove("bg-gray-200");
-  accountSettingsSection.classList.remove("hidden");
-  loginSecuritySection.classList.add("hidden");
-  accountSettingsBtn.classList.remove("font-light");
-  accountSettingsBtn.classList.add("font-semibold");
-  loginSecurityBtn.classList.add("font-light");
-  loginSecurityBtn.classList.remove("font-semibold");
+accountSettingsBtn.addEventListener("click", function () {
+    accountSettingsBtn.classList.add("bg-gray-200");
+    loginSecurityBtn.classList.remove("bg-gray-200");
+    accountSettingsSection.classList.remove("hidden");
+    loginSecuritySection.classList.add("hidden");
+    accountSettingsBtn.classList.remove("font-light");
+    accountSettingsBtn.classList.add("font-semibold");
+    loginSecurityBtn.classList.add("font-light");
+    loginSecurityBtn.classList.remove("font-semibold");
 
 });
 
-loginSecurityBtn.addEventListener("click", function() {
-  accountSettingsBtn.classList.remove("bg-gray-200");
-  loginSecurityBtn.classList.add("bg-gray-200");
-  accountSettingsSection.classList.add("hidden");
-  loginSecuritySection.classList.remove("hidden");
-  accountSettingsBtn.classList.add("font-light");
-  accountSettingsBtn.classList.remove("font-semibold");
-  loginSecurityBtn.classList.remove("font-light");
-  loginSecurityBtn.classList.add("font-semibold");
+loginSecurityBtn.addEventListener("click", function () {
+    accountSettingsBtn.classList.remove("bg-gray-200");
+    loginSecurityBtn.classList.add("bg-gray-200");
+    accountSettingsSection.classList.add("hidden");
+    loginSecuritySection.classList.remove("hidden");
+    accountSettingsBtn.classList.add("font-light");
+    accountSettingsBtn.classList.remove("font-semibold");
+    loginSecurityBtn.classList.remove("font-light");
+    loginSecurityBtn.classList.add("font-semibold");
 
 });
 
-function copyCode(){
+function copyCode() {
     let copyText = document.getElementById("hashCodeCopy");
     let copytextValue = copyText.innerText;
     navigator.clipboard.writeText(copytextValue);
@@ -151,23 +151,37 @@ function copyCode(){
 
 function showNotification() {
     Toastify({
-      text: "No Info for you (yet). In Germany we call it 'Kannziel'",
-      duration: 3000, // Anzeigedauer in Millisekunden (hier 3 Sekunden)
-      gravity: "top", // Position der Benachrichtigung ("top", "bottom", "center")
-      position: "right", // Ausrichtung der Benachrichtigung ("left", "right", "center")
-      backgroundColor: "linear-gradient(to right, #667eea, #764ba2)", // Hintergrundfarbe der Benachrichtigung
+        text: "No Info for you (yet). In Germany we call it 'Kannziel'",
+        duration: 3000, // Anzeigedauer in Millisekunden (hier 3 Sekunden)
+        gravity: "top", // Position der Benachrichtigung ("top", "bottom", "center")
+        position: "right", // Ausrichtung der Benachrichtigung ("left", "right", "center")
+        backgroundColor: "linear-gradient(to right, #667eea, #764ba2)", // Hintergrundfarbe der Benachrichtigung
     }).showToast();
-  }
+}
 
 
 
 
-  const hackenButt = document.getElementById("hacken");
-  hackenButt.addEventListener("click",addfriend);
+const hackenButt = document.getElementById("hacken");
+hackenButt.addEventListener("click", addfriend);
 
-  function addfriend(){
+function addfriend() {
     hackenButt.innerHTML = "Friend Added";
-    hackenButt.classList.add("bg-green-500","text-white");
-    hackenButt.classList.remove("pl-1.5","pr-1.5","pb-0.5,","rounded-full","ml-20","text-sm","pb-0.5");
-    hackenButt.classList.add("pl-1","pr-1","rounded-lg","text-xs","ml-1","pl-1,5","pr-1,5");
-  }
+    hackenButt.classList.add("bg-green-500", "text-white");
+    hackenButt.classList.remove("pl-1.5", "pr-1.5", "pb-0.5,", "rounded-full", "ml-20", "text-sm", "pb-0.5");
+    hackenButt.classList.add("pl-1", "pr-1", "rounded-lg", "text-xs", "ml-1", "pl-1,5", "pr-1,5");
+}
+
+function handleClick(element) {
+    // Retrieve the data from the clicked element
+    var filename = element.getAttribute('data-filename');
+    var name = element.getAttribute('data-name');
+    var email = element.getAttribute('data-email');
+    var lick = element.getAttribute('data-lick');
+
+    // Update the content of the segment with the retrieved data
+    document.getElementById('rightFilename').textContent = filename;
+    document.getElementById('rightLink').href = lick;
+    document.getElementById('rightName').textContent = name;
+    document.getElementById('rightEmail').textContent = email;
+}
