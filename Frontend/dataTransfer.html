@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Data Transfer</title>
@@ -9,11 +10,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <Style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-        ::-webkit-scrollbar{
+
+        ::-webkit-scrollbar {
             display: none
         }
     </Style>
 </head>
+
 <body class="grid grid-cols-1 sm:grid-cols-7 font-[Poppins] font-[300] text-[16px] bg-blue-500">
     <div class="col-span-1 h-[100vh] bg-white block">
         <div class="p-[10px]">
@@ -41,8 +44,10 @@
                     <p class="col-span-4">Start</p>
                 </li>
             </ul>
+
             <ul class="ml-[1vh] bottom-0 absolute mb-4 w-[20vh]">
                 <li class="p-[1vh] grid-cols-5 grid rounded-lg bg-red-100 hover:ring-2 ring-red-500 transition-ease-0.3 cursor-pointer">
+
                     <img src="./img/MenuIcons/LogOut.svg" alt="Message" class="col-span-1">
                     <p class="col-span-4 text-red-600 font-[600]">Log Out</p>
                 </li>
@@ -58,96 +63,46 @@
         </div>
     </div>
     <div class="bg-[url('./img/Background.png')] bg-no-repeat bg-cover col-span-1 sm:col-span-6 grid-cols-1 sm:grid-cols-4 grid text-xl">
+
         <div class="pl-[5vw] col-span-2">
             <h1 class="font-[700] mt-[3vh] text-3xl text-white">Contacts</h1>
             <div class="w-[32vw]">
                 <div class="relative mt-[5vh]">
-                    <input type="text" id="searchInput" class="w-full border-2 border-gray-300 rounded-lg p-5 pl-12" placeholder="Search">
-                    <img src="./img/search.svg" alt="Search" class="absolute top-1/2 transform -translate-y-1/2 left-3 h-6 w-6">
+                    <input type="text" id="searchInput" class="w-full border-2 border-gray-300 rounded-lg p-5 pl-12"
+                        placeholder="Search">
+                    <img src="./img/search.svg" alt="Search"
+                        class="absolute top-1/2 transform -translate-y-1/2 left-3 h-6 w-6">
                 </div>
                 <div id="searchableDiv" class="grid grid-cols-1 mt-[5vh] overflow-y-auto h-[75vh]">
-                        <div class="col-span-1 mt-[2vh]">
-                            <div class="border-2 border-gray-300 p-[4vh] rounded-lg grid-cols-4 grid bg-white">
-                                <img src="#" class="col-span-1" alt="Image">
-                                <div class="col-span-2">
-                                    <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                    <h3 class="font-[300]">NSCS-File.png</h3>
-                                </div>
-                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
+                    <div class="col-span-1 mt-[2vh]">
+
+                        <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
+                            <img src="#" class="col-span-1" alt="Image">
+                            <div class="col-span-2">
+                                <h1 class="font-[600] searchable-name">Max Musterman</h1>
+                                <h3 class="font-[300]">NSCS-File.png</h3>
                             </div>
-                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
-                                <img src="#" class="col-span-1" alt="Image">
-                                <div class="col-span-2">
-                                    <h1 class="font-[600] searchable-name">Brigitte Petschenig</h1>
-                                    <h3 class="font-[300]">NSCS-File.png</h3>
-                                </div>
-                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
-                            </div>
-                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
-                                <img src="#" class="col-span-1" alt="Image">
-                                <div class="col-span-2">
-                                    <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                    <h3 class="font-[300]">NSCS-File.png</h3>
-                                </div>
-                                <img  src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
-                            </div>
-                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
-                                <img src="#" class="col-span-1" alt="Image">
-                                <div class="col-span-2">
-                                    <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                    <h3 class="font-[300]">NSCS-File.png</h3>
-                                </div>
-                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
-                            </div>
-                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
-                                <img src="#" class="col-span-1" alt="Image">
-                                <div class="col-span-2">
-                                    <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                    <h3 class="font-[300]">NSCS-File.png</h3>
-                                </div>
-                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
-                            </div>
-                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
-                                <img src="#" class="col-span-1" alt="Image">
-                                <div class="col-span-2">
-                                    <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                    <h3 class="font-[300]">NSCS-File.png</h3>
-                                </div>
-                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
-                            </div>
-                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
-                                <img src="#" class="col-span-1" alt="Image">
-                                <div class="col-span-2">
-                                    <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                    <h3 class="font-[300]">NSCS-File.png</h3>
-                                </div>
-                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
-                            </div>
-                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
-                                <img src="#" class="col-span-1" alt="Image">
-                                <div class="col-span-2">
-                                    <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                    <h3 class="font-[300]">NSCS-File.png</h3>
-                                </div>
-                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
-                            </div>
-                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
-                                <img src="#" class="col-span-1" alt="Image">
-                                <div class="col-span-2">
-                                    <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                    <h3 class="font-[300]">NSCS-File.png</h3>
-                                </div>
-                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
-                            </div>
-                            <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
-                                <img src="#" class="col-span-1" alt="Image">
-                                <div class="col-span-2">
-                                    <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                    <h3 class="font-[300]">NSCS-File.png</h3>
-                                </div>
-                                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
-                            </div>
+
+                            <svg class="progress-ring -rotate-90" width="54" height="54">
+                                <circle class="progress-ring__circle" stroke="#FFD37E" stroke-width="6" data-time="1686245437"
+                                    fill="transparent" r="19" cx="27" cy="27" />
+                            </svg>
                         </div>
+
+                        <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
+                            <img src="#" class="col-span-1" alt="Image">
+                            <div class="col-span-2">
+                                <h1 class="font-[600] searchable-name">Max Musterman</h1>
+                                <h3 class="font-[300]">NSCS-File.png</h3>
+                            </div>
+                            <svg class="progress-ring -rotate-90" width="54" height="54">
+                                <circle class="progress-ring__circle" stroke="#FFD37E" stroke-width="6" data-time="1686243637"
+                                    fill="transparent" r="19" cx="27" cy="27" />
+                            </svg>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -160,7 +115,8 @@
                 </div>
                 <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
             </div>
-            <div class="w-full h-[70vh] border-2 border-gray-300 h-[25vh] mt-[4vh] rounded-lg grid bg-white p-[2vh] grid-rows-6 grid">
+            <div
+                class="w-full h-[70vh] border-2 border-gray-300 h-[25vh] mt-[4vh] rounded-lg grid bg-white p-[2vh] grid-rows-6 grid">
                 <div class="grid-cols-6 grid m-[1vh] row-span-1">
                     <h3 class="col-span-3">Document.docx</h3>
                     <h3 class="col-span-2">#############</h3>
@@ -180,11 +136,14 @@
                     <img src="./img/Placement.png" class="w-full col-span-6" alt="NSCS-File.png">
                 </div>
                 <div class="mx-auto">
-                    <div class="bg-blue-400 w-[37.2vw] h-[28vh] rounded-2xl relative -top-14 -left-1.5 flex flex-col items-center justify-center">
-                        <div id="file-drop-area" class="bg-blue-300 w-[36.1vw] outline-dashed outline-white outline-2 h-[21vh] rounded-2xl relative transition-all flex flex-col items-center justify-center bottom-5">
+                    <div
+                        class="bg-blue-400 w-[37.2vw] h-[28vh] rounded-2xl relative -top-14 -left-1.5 flex flex-col items-center justify-center">
+                        <div id="file-drop-area"
+                            class="bg-blue-300 w-[36.1vw] outline-dashed outline-white outline-2 h-[21vh] rounded-2xl relative transition-all flex flex-col items-center justify-center bottom-5">
                             <div class="mx-auto h-[4.3rem] w-20"><img src="./img/PutInFile.png" alt="Input"></div>
                             <div class="text-center font-[650] text-white text-sm">Drop Files here</div>
-                            <div class="text-center font-[500] mt-1 text-white text-sm">Drag and drop your Files Here.</div>
+                            <div class="text-center font-[500] mt-1 text-white text-sm">Drag and drop your Files Here.
+                            </div>
                             <img src="./img/Grid.svg" class="-top-28 absolute left-20 inset-0" alt="Grid.svg">
                             <div class="mx-auto mt-8">
                                 <input type="file" name="upload" class="rounded-lg block w-28 mx-auto text-white file:mr-4
@@ -196,9 +155,45 @@
                 </div>
 
             </div>
-            </div>
         </div>
     </div>
+    </div>
     <script src="./js/DataTransfer.js"></script>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const circles = document.querySelectorAll('.progress-ring__circle');
+    
+    circles.forEach(circle => {
+      const radius = circle.r.baseVal.value;
+      const circumference = radius * 2 * Math.PI;
+      circle.style.strokeDasharray = `${circumference} ${circumference}`;
+      
+      const unixTimestamp = circle.getAttribute('data-time');
+      const startTime = unixTimestamp * 1000;
+      const endTime = startTime + 60 * 60 * 1000;
+      const totalDuration = endTime - startTime;
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const remaining = Math.max(endTime - now, 0);
+        const percent = 100 - (remaining / totalDuration) * 100;
+        setProgress(percent, circle);
+
+        if (remaining <= 0) {
+          clearInterval(intervalId);
+        }
+      }
+      
+      function setProgress(percent, circle) {
+        const offset = percent / 100 * circumference;
+        circle.style.strokeDashoffset = circumference - offset;
+      }
+
+      updateCountdown();
+      const intervalId = setInterval(updateCountdown, 1000);
+    });
+  });
+    </script>
 </body>
+
 </html>
