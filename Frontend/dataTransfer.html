@@ -7,6 +7,8 @@
     <script src="https://kit.fontawesome.com/de6708ee14.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <Style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
         ::-webkit-scrollbar{
@@ -64,7 +66,7 @@
                     <img src="./img/MenuIcons/Settings.svg" alt="Settings" class="col-span-1 fill-black"></img>
                     <p class="col-span-4">Settings</p>
                 </li>                
-                <li class="p-[1vh] grid-cols-5 grid hover:bg-blue-50 rounded-lg flex items-center cursor-pointer mt-1">
+                <li class="p-[1vh] grid-cols-5 grid hover:bg-blue-50 rounded-lg flex items-center cursor-pointer mt-1"onclick="showNotification()">
                     <img src="./img/MenuIcons/Help.svg" alt="Help" class="col-span-1 fill-black"></img>
                     <p class="col-span-4">Help</p>
                 </li>
@@ -212,11 +214,6 @@
             </div>
             </div>
         </div>
-
-
-
-
-    
         <div id="settingsover" class="fixed inset-0 flex items-center justify-center z-50 ml-[30vh] hidden">
             <div class="bg-white max-w-3xl p-8 rounded-lg relative">
               <span class="absolute top-0 right-0 p-2 m-2 rounded-full transition-all hover:bg-gray-200" onclick="closeSettings()">

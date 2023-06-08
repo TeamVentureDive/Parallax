@@ -126,3 +126,15 @@ function copyCode(){
     let copytextValue = copyText.innerText;
     navigator.clipboard.writeText(copytextValue);
 }
+
+
+
+function showNotification() {
+    Toastify({
+      text: "No Info for you (yet). In Germany we call it 'Kannziel'",
+      duration: 3000, // Anzeigedauer in Millisekunden (hier 3 Sekunden)
+      gravity: "top", // Position der Benachrichtigung ("top", "bottom", "center")
+      position: "right", // Ausrichtung der Benachrichtigung ("left", "right", "center")
+      backgroundColor: "linear-gradient(to right, #667eea, #764ba2)", // Hintergrundfarbe der Benachrichtigung
+    }).showToast();
+  }
