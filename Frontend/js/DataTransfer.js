@@ -89,7 +89,6 @@ const settingsBtn = document.getElementById("settingsBtn");
 const addfriendCont = document.getElementById("addFriendContainer");
 
 function openSettings() {
-    closeAllPopups();
     field.classList.add("blur");
     settings.classList.remove("hidden");
     settingsBtn.classList.add("bg-gray-200");
@@ -102,7 +101,6 @@ function closeSettings() {
 }
 
 function addFriendPopUp() {
-    closeAllPopups();
     field.classList.add("blur");
     addfriendCont.classList.remove("hidden");
     contactsBtn.classList.add("text-blue-800");
@@ -120,10 +118,25 @@ function closeAddContacts() {
     messagesBtn.classList.add("text-blue-800");
 }
 
-function closeAllPopups() {
-    closeSettings();
+document.addEventListener("click", function (event) {
+    const target = event.target;
+    const isAddFriendPopup = target.closest("#addFriendContainer");
+    const isAddFriendButton = target.closest("#addContactsBtn");
+    const isMessagesButton = target.closest("#messagesBtn");
+
+    if (!isAddFriendPopup && !isAddFriendButton && !isMessagesButton && !addfriendCont.classList.contains("hidden")) {
+        closeAddContacts();
+    }
+});
+
+contactsBtn.addEventListener("click", function () {
+    addFriendPopUp();
+});
+
+messagesBtn.addEventListener("click", function () {
     closeAddContacts();
-}
+});
+
 
 document.addEventListener("click", function (event) {
     const target = event.target;
