@@ -86,7 +86,10 @@ const settings = document.getElementById("settingsover");
 const contactsBtn = document.getElementById("addContactsBtn");
 const messagesBtn = document.getElementById("messagesBtn");
 const settingsBtn = document.getElementById("settingsBtn");
+const addfriendCont = document.getElementById("addFriendContainer");
+
 function openSettings() {
+    closeAllPopups();
     field.classList.add("blur");
     settings.classList.remove("hidden");
     settingsBtn.classList.add("bg-gray-200");
@@ -97,8 +100,9 @@ function closeSettings() {
     settings.classList.add("hidden");
     settingsBtn.classList.remove("bg-gray-200");
 }
-const addfriendCont = document.getElementById("addFriendContainer");
+
 function addFriendPopUp() {
+    closeAllPopups();
     field.classList.add("blur");
     addfriendCont.classList.remove("hidden");
     contactsBtn.classList.add("text-blue-800");
@@ -107,7 +111,7 @@ function addFriendPopUp() {
     messagesBtn.classList.remove("text-blue-800");
 }
 
-function closeAddContacts(){
+function closeAddContacts() {
     field.classList.remove("blur");
     addfriendCont.classList.add("hidden");
     contactsBtn.classList.remove("text-blue-800");
@@ -116,9 +120,30 @@ function closeAddContacts(){
     messagesBtn.classList.add("text-blue-800");
 }
 
-function resetPassword() {
-    window.location.href = "resetPwEmail.html";
+function closeAllPopups() {
+    closeSettings();
+    closeAddContacts();
 }
+
+document.addEventListener("click", function (event) {
+    const target = event.target;
+    const isAddFriendPopup = target.closest("#addFriendContainer");
+    const isAddFriendButton = target.closest("#addContactsBtn");
+    const isMessagesButton = target.closest("#messagesBtn");
+
+    if (!isAddFriendPopup && !isAddFriendButton && !isMessagesButton) {
+        closeAllPopups();
+    }
+});
+
+contactsBtn.addEventListener("click", function () {
+    addFriendPopUp();
+});
+
+messagesBtn.addEventListener("click", function () {
+    closeAddContacts();
+});
+
 
 
 const accountSettingsBtn = document.getElementById("accountSettingsBtn");
