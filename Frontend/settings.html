@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Transfer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/de6708ee14.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <Style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+        ::-webkit-scrollbar{
+            display: none
+        }
+    </Style>
+    <style>
+        .with-underline::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 15px;
+        width: 80%;
+        height: 2px;
+        background-color: #dbdbdb;
+        }
+        .gradient-button {
+        background: linear-gradient(to right, rgb(77, 25, 77), rgb(100, 9, 50));
+        }
+    </style>
+</head>
+<body class="grid grid-cols-1 sm:grid-cols-7 font-[Poppins] font-[300] text-[16px] bg-blue-500">
+    <div class="col-span-1 h-[100vh] bg-white block">
+        <div class="p-[10px]">
+            <div class="mt-[5vh] flex flex-col items-center">
+                <img src="img/Profile_Picture.png" id="image" alt="Click to upload" />
+                <div class="hidden fixed top-0 left-0 z-1 w-100% h-100% overflow-auto bg-white-100/[.4]">
+                    <form action="/upload" method="post" enctype="multipart/form-data">
+                        <input id="imageUpload" type="file" name="image">
+                        <button type="submit">Upload</button>
+                    </form>
+                </div>
+                <h4 class="text-[20px] font-[700] mt-5">Max Musterman</h4>
+            </div>
+            <ul class="ml-[1vh] mt-[5vh]">
+                <li class="p-[1vh] grid-cols-5 grid bg-blue-50 rounded-lg w-[20vh] cursor-pointer flex items-center">
+                    <img src="./img/MenuIcons/Message.svg" alt="Message" class="col-span-1">
+                    <p class="col-span-4 text-blue-800">Messages</p>
+                </li>
+                <li class="pt-[1vh] pb-[1vh] pr-[1vh] pl-[0.5vh] grid-cols-5 grid cursor-pointer w-[20vh] flex items-center rounded-lg mt-1 hover:bg-blue-50">
+                    <img src="./img/MenuIcons/PersonAdd.svg" alt="Add Contacts" class="col-span-1 pl-[0.12vh]">
+                    <p class="col-span-4 pl-[0.4vh]">Add Contacts</p>
+                </li>
+                <li class="p-[1vh] grid-cols-5 grid cursor-pointer w-[20vh] rounded-lg mt-1 hover:bg-blue-50">
+                    <img src="./img/MenuIcons/Home.svg" alt="Start" class="col-span-1">
+                    <p class="col-span-4">Start</p>
+                </li>
+            </ul>
+            <ul class="ml-[1vh] bottom-0 absolute mb-4 w-[20vh]">
+                <li class="p-[1vh] grid-cols-5 grid rounded-lg bg-red-100 hover:ring-2 ring-red-500 transition-ease-0.3 cursor-pointer">
+                    <img src="./img/MenuIcons/LogOut.svg" alt="Message" class="col-span-1">
+                    <p class="col-span-4 text-red-600 font-[600]">Log Out</p>
+                </li>
+                <li class="p-[1vh] grid-cols-5 grid bg-gray-300 rounded-lg mt-1 flex items-center cursor-pointer">
+                    <img src="./img/MenuIcons/Settings.svg" alt="Settings" class="col-span-1 fill-black"></img>
+                    <p class="col-span-4">Settings</p>
+                </li>                
+                <li class="p-[1vh] grid-cols-5 grid hover:bg-blue-50 rounded-lg flex items-center cursor-pointer mt-1">
+                    <img src="./img/MenuIcons/Help.svg" alt="Help" class="col-span-1 fill-black"></img>
+                    <p class="col-span-4">Help</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="bg-[url('./img/Background.png')] bg-no-repeat bg-cover col-span-1 sm:col-span-6 grid-cols-1 sm:grid-cols-4 grid text-xl relative">
+
+        <div class="fixed inset-0 flex items-center justify-center z-50 ml-[30vh]">
+            <div class="bg-white max-w-3xl p-8 rounded-lg relative">
+              <span class="absolute top-0 right-0 p-2 m-2 rounded-full transition-all hover:bg-gray-200" onclick="closeSettings()">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                  <path d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+              </span>
+              <div class="flex justify-center mb-8 button-container">
+                <button id="accountSettingsBtn" class="text-[1.6vh] font-light rounded-2xl mr-3 pl-2 pr-2 pb-[0.2vh] pt-[0.2vh] transition-all hover:bg-gray-200 relative with-underline">Account Settings</button>
+                <button id="loginSecurityBtn" class="text-[1.6vh] font-semibold bg-gray-200 pl-2 pr-2 pb-[0.2vh] pt-[0.2vh] rounded-2xl relative with-underline">Login and Security</button>
+              </div>
+            <div id="loginSecuritySection">
+              <div class="bg-red-100 p-3 rounded-lg text-red-800 mb-6">
+                <p class="font-bold">Resetting your password</p>
+                <p class="text-sm">
+                  It's crucial to update your password regularly when using websites, as it helps to protect your sensitive information from being accessed by unauthorized users. When you use the same password for an extended period, it can become easier for hackers to guess or use tools to crack it, leaving you vulnerable to data breaches.<br>
+                  When creating a new password, make sure it is unique and complex, containing a mix of upper and lower case letters, numbers, and special characters. Avoid using personal information such as your name, birthdate, or any easily accessible data that hackers can easily find. Additionally, it is crucial to avoid using the same password for multiple websites or accounts, as a compromised password can lead to multiple account breaches.
+                </p>
+              </div>
+              <div class="flex justify-center">
+                <button class="text-white px-4 py-2 rounded-lg gradient-button" onclick="resetPassword()">Reset Password</button>
+            </div>
+        </div>
+            <div id="accountSettingsSection" class="hidden p-3 rounded-lg mb-6">
+                <p class="text-sm ">You can give other people your Friend Code <br> and they can add you to their friendlist.</p>
+                <p class="text-sm pb-5 text-red-600">Do not show this Code to strangers!</p>
+                <p class="text-lg font-bold mb-2">Your Friend Code:</p>
+                <div class="bg-gray-200 rounded-2xl p-2 inline-flex items-center">
+                    <p class="text-4xl font-semibold">69420</p>
+                    <i class="fa-solid fa-copy ml-2 p-3 rounded-lg cursor-pointer transition-all hover:bg-white"></i>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <script src="./js/settings.js"></script>
+</body>
+</html>
