@@ -13,6 +13,7 @@ const passwordForget = require("../passwordForget");
 const friendSystem = require("../login/friendsystem");
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(path.join("..", "..", "..", "Frontend")));
 
@@ -42,47 +43,52 @@ app.post("/signup", (req, res) => {
     console.log(`[Signup] Signed up User ${username} with email ${email}, password ${password} and code (hash) ${codeHash}`);
 });
 
-app.get("/", (req, res) => {
+app.get("/",  (req, res) => {
+    res.sendFile(path.join(__dirname,"..", "..", "..", "Frontend", "login.html"));
+});
+
+app.post("/login", (req, res) => {
 
     if (!req.body.email || !req.body.password) {
-        res.sendFile(path.join(__dirname, "..", "..", "..", "Frontend", "login.html"));
+        res.json({login: "blocked"});
         return;
     }
 
-    loginInvalid = false;
-
-    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE ${req.body.email} AND a_password LIKE ${req.body.password}`, (err, row) => {
+    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${req.body.email}" AND a_password LIKE "${req.body.password}"`, (err, accountRow) => {
         if (err) throw err;
-        if (!row) {
+        if (!accountRow) {
+            res.json({login: "blocked"});
             return;
         }
 
-        const rawIndexData = fs.readFileSync(path.join(__dirname, "..", "..", "Frontend", "dataTransfer.html"), "utf-8");
-        const rawFileContainer = fs.readFileSync(path.join(__dirname, "..", "..", "Frontend", "fileContainer.html"), "utf-8");
+        console.log(accountRow);
+
+        const rawIndexData = fs.readFileSync(path.join(__dirname, "..", "..", "..", "Frontend", "dataTransfer.html"), "utf-8");
+        const rawFileContainer = fs.readFileSync(path.join(__dirname, "..", "..", "..", "Frontend", "fileContainer.html"), "utf-8");
         let insertData = "";
     
         //GET DATA
         let data;
-        dbc.db.all(`SELECT * FROM f_friends WHERE f1_a_email LIKE ${req.body.email} OR f2_a_email LIKE ${req.body.email}`, (err, rows) => {
+        dbc.db.all(`SELECT * FROM f_friends WHERE f1_a_email LIKE "${req.body.email}" OR f2_a_email LIKE "${req.body.email}"`, (err, friendRows) => {
             if (err) throw err;
-            if (!rows) return;
+            if (!friendRows) return;
     
             const validAccounts = [req.body.email];
     
-            rows.forEach(row => {
-                if (row.f1_a_email != req.body.email) {
-                    validAccounts.push(row.f1_a_email);
+            friendRows.forEach(friend => {
+                if (friend.f1_a_email != req.body.email) {
+                    validAccounts.push(friend.f1_a_email);
                 }
-                if (row.f2_a_email != req.body.email) {
-                    validAccounts.push(row.f2_a_email);
+                if (friend.f2_a_email != req.body.email) {
+                    validAccounts.push(friend.f2_a_email);
                 }
             });
     
             validAccounts.forEach(email => {
-                dbc.db.get(`SELECT * FROM f_files WHERE f_a_email LIKE ${email}`, (err, row) => {
+                dbc.db.get(`SELECT * FROM f_files WHERE f_a_email LIKE "${email}"`, (err, fileRow) => {
                     if (err) throw err;
-                    if (!row) return;
-                    data.push(row);
+                    if (!fileRow) return;
+                    data.push(fileRow);
                 });
             });
     
@@ -90,15 +96,18 @@ app.get("/", (req, res) => {
     
             data.forEach(entry => {
                 let tempEntry = rawFileContainer + " ";
-                tempEntry
-                .replace("<!--NAME_HERE-->", entry.name)
-                .replace("<!--FILENAME_HERE-->", entry.f_name)
-                .replace("<!--FILEDATE_HERE-->", entry.f_date)
-                .replace("<!--LINK_HERE-->", entry.f_id);
-                insertData += tempEntry;
+                insertData += tempEntry
+                                .replace("<!--NAME_HERE-->", entry.name)
+                                .replace("<!--FILENAME_HERE-->", entry.f_name)
+                                .replace("<!--FILEDATE_HERE-->", entry.f_date)
+                                .replace("<!--LINK_HERE-->", entry.f_id);
             });
         
-            const stringToSend = rawIndexData.replace("<!--DATA_HERE-->", insertData);
+            const stringToSend = rawIndexData
+                                    .replace("<!--DATA_HERE-->", insertData)
+                                    .replace("<!--USERNAME_HERE-->", accountRow.a_username)
+                                    .replace("<!--EMAIL_HERE-->", accountRow.a_email)
+                                    .replace("<!--HASH_HERE-->", accountRow.a_hash);
             res.type("html").send(stringToSend);
         });
 
