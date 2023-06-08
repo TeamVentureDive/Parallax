@@ -93,7 +93,7 @@ function uploadFile(res, fields, file) {
 
 function addToDatabase(file, email) {
     console.log(file);
-    dbc.db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${new Date(Date.now()).toDateString()}")`, err => {
+    dbc.db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${Date.now()}")`, err => {
         if (err) throw err;
     });
 }

@@ -29,7 +29,7 @@
                     </form>
                 </div>
                 <h4 class="text-[20px] font-[700] mt-5"><!--USERNAME_HERE--></h4>
-                <h4 id="emailHere" class="text-[20px] font-[500] mt-5"><!--EMAIL_HERE--></h4>
+                <h4 id="emailHere" class="text-[15px] font-[700] mt-5"><!--EMAIL_HERE--></h4>
                 <input id="passwordHere" type="hidden" value="<!--PASSWORD_HERE-->">
             </div>
             <ul class="ml-[1vh] mt-[5vh]">
@@ -150,7 +150,7 @@
       const totalDuration = endTime - startTime;
 
       function updateCountdown() {
-        const now = new Date().getTime();
+        const now = Date.now();
         const remaining = Math.max(endTime - now, 0);
         const percent = 100 - (remaining / totalDuration) * 100;
         setProgress(percent, circle);
