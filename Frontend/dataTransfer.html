@@ -47,11 +47,11 @@
                 <h4 class="text-[20px] font-[700] mt-5">Max Musterman</h4>
             </div>
             <ul class="ml-[1vh] mt-[5vh]">
-                <li class="p-[1vh] grid-cols-5 grid bg-blue-50 rounded-lg w-[20vh] cursor-pointer flex items-center">
+                <li id="messagesBtn" class="p-[1vh] grid-cols-5 grid bg-blue-50 rounded-lg w-[20vh] cursor-pointer flex items-center text-blue-800">
                     <img src="./img/MenuIcons/Message.svg" alt="Message" class="col-span-1">
-                    <p class="col-span-4 text-blue-800">Messages</p>
+                    <p class="col-span-4 ">Messages</p>
                 </li>
-                <li class="pt-[1vh] pb-[1vh] pr-[1vh] pl-[0.5vh] grid-cols-5 grid cursor-pointer w-[20vh] flex items-center rounded-lg mt-1 hover:bg-blue-50" onclick="addFriendPopUp()">
+                <li id="addContactsBtn" class="pt-[1vh] pb-[1vh] pr-[1vh] pl-[0.5vh] grid-cols-5 grid cursor-pointer w-[20vh] flex items-center rounded-lg mt-1 hover:bg-blue-50" onclick="addFriendPopUp()">
                     <img src="./img/MenuIcons/PersonAdd.svg" alt="Add Contacts" class="col-span-1 pl-[0.12vh]">
                     <p class="col-span-4 pl-[0.4vh]">Add Contacts</p>
                 </li>
@@ -67,7 +67,7 @@
                     <img src="./img/MenuIcons/LogOut.svg" alt="Message" class="col-span-1">
                     <p class="col-span-4 text-red-600 font-[600]">Log Out</p>
                 </li>
-                <li class="p-[1vh] grid-cols-5 grid hover:bg-gray-200 rounded-lg mt-1 flex items-center cursor-pointer" onclick="openSettings()">
+                <li id="settingsBtn" class="p-[1vh] grid-cols-5 grid hover:bg-gray-200 rounded-lg mt-1 flex items-center cursor-pointer" onclick="openSettings()">
                     <img src="./img/MenuIcons/Settings.svg" alt="Settings" class="col-span-1 fill-black"></img>
                     <p class="col-span-4">Settings</p>
                 </li>                
@@ -91,7 +91,7 @@
                 <div id="searchableDiv" class="grid grid-cols-1 mt-[5vh] overflow-y-auto h-[75vh]">
                     <div class="col-span-1 mt-[2vh]">
 
-                        <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
+                        <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white cursor-pointer">
                             <img src="#" class="col-span-1" alt="Image">
                             <div class="col-span-2">
                                 <h1 class="font-[600] searchable-name">Max Musterman</h1>
@@ -104,7 +104,7 @@
                             </svg>
                         </div>
 
-                        <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white">
+                        <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white cursor-pointer">
                             <img src="#" class="col-span-1" alt="Image">
                             <div class="col-span-2">
                                 <h1 class="font-[600] searchable-name">Max Musterman</h1>

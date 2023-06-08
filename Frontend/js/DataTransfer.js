@@ -70,27 +70,37 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 });
 const field = document.getElementById("content-datatransfer");
 const settings = document.getElementById("settingsover");
-
+const contactsBtn = document.getElementById("addContactsBtn");
+const messagesBtn = document.getElementById("messagesBtn");
+const settingsBtn = document.getElementById("settingsBtn");
 function openSettings() {
     field.classList.add("blur");
     settings.classList.remove("hidden");
-    
+    settingsBtn.classList.add("bg-gray-200");
 }
 
 function closeSettings() {
     field.classList.remove("blur");
     settings.classList.add("hidden");
-
+    settingsBtn.classList.remove("bg-gray-200");
 }
 const addfriendCont = document.getElementById("addFriendContainer");
 function addFriendPopUp() {
     field.classList.add("blur");
     addfriendCont.classList.remove("hidden");
+    contactsBtn.classList.add("text-blue-800");
+    contactsBtn.classList.add("bg-blue-50");
+    messagesBtn.classList.remove("bg-blue-50");
+    messagesBtn.classList.remove("text-blue-800");
 }
 
 function closeAddContacts(){
     field.classList.remove("blur");
     addfriendCont.classList.add("hidden");
+    contactsBtn.classList.remove("text-blue-800");
+    contactsBtn.classList.remove("bg-blue-50");
+    messagesBtn.classList.add("bg-blue-50");
+    messagesBtn.classList.add("text-blue-800");
 }
 
 function resetPassword() {
@@ -98,8 +108,6 @@ function resetPassword() {
 }
 
 
-
-// JavaScript code to handle button clicks and toggle sections
 const accountSettingsBtn = document.getElementById("accountSettingsBtn");
 const loginSecurityBtn = document.getElementById("loginSecurityBtn");
 const accountSettingsSection = document.getElementById("accountSettingsSection");
