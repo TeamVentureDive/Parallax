@@ -205,24 +205,17 @@
                   <div>
                     <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 drop-shadow-lg" placeholder="Input Friend Code" required>
                   </div>
-                  <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-lg">Search Now</button>
+                  <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-lg">Add Now</button>
                 </form>
-                <div class="flex item">
-                    <div class="max-h-64 overflow-y-scroll">
-                      <a href="#" id="contacts" class="flex items-center rounded-lg bg-gray-50 hover:bg-gray-100 p-2 mt-5 transition-all">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-full bg-gray-300 mr-4">
-                          <img class="rounded-full" src="https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947_960_720.jpg" alt="Profile Picture">
-                        </div>
-                        <div>
-                          <div class="flex items-center">
-                            <p class="font-bold whitespace-nowrap">Max Mustermann</p>
-                            <div id="hacken" class="text-sm ml-20 bg-slate-300 rounded-full pl-1.5 pr-1.5 pb-0.5 hover:bg-green-500 hover:text-white">&#x2b</div>
-                          </div>
-                          <p class="text-gray-600">#10203</p>
-                        </div>
-                      </a> 
-                    </div>
-                  </div>  
+                <div class="flex items-center mt-5 bg-green-100 rounded-2xl hidden">
+                    <i class="fa-regular fa-circle-check fa-2xl text-green-500 mr-2 pl-2"></i>
+                    <p class="p-3 ">New Contact Succesfully Added</p>
+                </div>
+                <div class="flex items-center mt-5 bg-red-100 rounded-2xl">
+                    <i class="fa-solid fa-triangle-exclamation fa-2xl text-red-500 mr-2 pl-2"></i>
+                    <p class="p-3 ">Failed To Add New Contact. Try Again</p>
+                </div>
+                  
               </div>
             </div>
           </div>
