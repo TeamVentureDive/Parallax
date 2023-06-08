@@ -68,8 +68,61 @@ document.getElementById('searchInput').addEventListener('keyup', function() {
 }
 }
 });
-
+const field = document.getElementById("content-datatransfer");
+const settings = document.getElementById("settingsover");
 
 function openSettings() {
-    window.location.href = 'settings.html';
+    field.classList.add("blur");
+    settings.classList.remove("hidden");
+    
+}
+
+function closeSettings() {
+    field.classList.remove("blur");
+    settings.classList.add("hidden");
+
+}
+
+
+
+function resetPassword() {
+    window.location.href = "resetPwEmail.html";
+}
+
+
+
+// JavaScript code to handle button clicks and toggle sections
+const accountSettingsBtn = document.getElementById("accountSettingsBtn");
+const loginSecurityBtn = document.getElementById("loginSecurityBtn");
+const accountSettingsSection = document.getElementById("accountSettingsSection");
+const loginSecuritySection = document.getElementById("loginSecuritySection");
+
+accountSettingsBtn.addEventListener("click", function() {
+  accountSettingsBtn.classList.add("bg-gray-200");
+  loginSecurityBtn.classList.remove("bg-gray-200");
+  accountSettingsSection.classList.remove("hidden");
+  loginSecuritySection.classList.add("hidden");
+  accountSettingsBtn.classList.remove("font-light");
+  accountSettingsBtn.classList.add("font-semibold");
+  loginSecurityBtn.classList.add("font-light");
+  loginSecurityBtn.classList.remove("font-semibold");
+
+});
+
+loginSecurityBtn.addEventListener("click", function() {
+  accountSettingsBtn.classList.remove("bg-gray-200");
+  loginSecurityBtn.classList.add("bg-gray-200");
+  accountSettingsSection.classList.add("hidden");
+  loginSecuritySection.classList.remove("hidden");
+  accountSettingsBtn.classList.add("font-light");
+  accountSettingsBtn.classList.remove("font-semibold");
+  loginSecurityBtn.classList.remove("font-light");
+  loginSecurityBtn.classList.add("font-semibold");
+
+});
+
+function copyCode(){
+    let copyText = document.getElementById("hashCodeCopy");
+    let copytextValue = copyText.innerText;
+    navigator.clipboard.writeText(copytextValue);
 }
