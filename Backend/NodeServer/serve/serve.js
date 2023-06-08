@@ -63,8 +63,8 @@ app.post("/login", (req, res) => {
 
         console.log(accountRow);
 
-        const rawIndexData = fs.readFileSync(path.join(__dirname, "..", "..", "Frontend", "dataTransfer.html"), "utf-8");
-        const rawFileContainer = fs.readFileSync(path.join(__dirname, "..", "..", "Frontend", "fileContainer.html"), "utf-8");
+        const rawIndexData = fs.readFileSync(path.join(__dirname, "..", "..", "..", "Frontend", "dataTransfer.html"), "utf-8");
+        const rawFileContainer = fs.readFileSync(path.join(__dirname, "..", "..", "..", "Frontend", "fileContainer.html"), "utf-8");
         let insertData = "";
     
         //GET DATA
