@@ -49,12 +49,12 @@ app.get("/",  (req, res) => {
 
 app.post("/login", (req, res) => {
 
-    if (!req.body.email || !req.body.password) {
+    if (!email || !req.body.password) {
         res.json({login: "blocked"});
         return;
     }
 
-    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${req.body.email}" AND a_password LIKE "${req.body.password}"`, (err, accountRow) => {
+    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${req.body.password}"`, (err, accountRow) => {
         if (err) throw err;
         if (!accountRow) {
             res.json({login: "blocked"});
@@ -69,26 +69,27 @@ app.post("/login", (req, res) => {
     
         //GET DATA
         let data;
-        dbc.db.all(`SELECT * FROM f_friends WHERE f1_a_email LIKE "${req.body.email}" OR f2_a_email LIKE "${req.body.email}"`, (err, friendRows) => {
+        dbc.db.all(`SELECT * FROM f_friends WHERE f1_a_email LIKE "${email}" OR f2_a_email LIKE "${email}"`, (err, friendRows) => {
             if (err) throw err;
             if (!friendRows) return;
     
-            const validAccounts = [req.body.email];
+            const validAccounts = [email];
     
             friendRows.forEach(friend => {
-                if (friend.f1_a_email != req.body.email) {
+                if (friend.f1_a_email != email) {
                     validAccounts.push(friend.f1_a_email);
                 }
-                if (friend.f2_a_email != req.body.email) {
+                if (friend.f2_a_email != email) {
                     validAccounts.push(friend.f2_a_email);
                 }
             });
+
     
             validAccounts.forEach(email => {
-                dbc.db.get(`SELECT * FROM f_files WHERE f_a_email LIKE "${email}"`, (err, fileRow) => {
+                dbc.db.get(`select * from a_accounts as a inner join f_files as f on a.a_email = f.f_a_email where a_email like ${email}`, (err, fileAccountRow) => {
                     if (err) throw err;
-                    if (!fileRow) return;
-                    data.push(fileRow);
+                    if (!fileAccountRow) return;
+                    data.push(fileAccountRow);
                 });
             });
     
@@ -100,14 +101,16 @@ app.post("/login", (req, res) => {
                                 .replace("<!--EMAIL_HERE-->", entry.f_a_email)
                                 .replace("<!--FILENAME_HERE-->", entry.f_name)
                                 .replace("<!--FILEDATE_HERE-->", entry.f_date)
-                                .replace("<!--LINK_HERE-->", entry.f_id);
+                                .replace("<!--LINK_HERE-->", entry.f_id)
+                                .replace("<!--USERNAME_HERE-->", entry.a_username);
             });
         
             const stringToSend = rawIndexData
                                     .replace("<!--DATA_HERE-->", insertData)
                                     .replace("<!--USERNAME_HERE-->", accountRow.a_username)
                                     .replace("<!--EMAIL_HERE-->", accountRow.a_email)
-                                    .replace("<!--HASH_HERE-->", accountRow.a_hash);
+                                    .replace("<!--HASH_HERE-->", accountRow.a_hash)
+                                    .replace("<!--PASSWORD_HERE-->", accountRow.a_password);
             res.type("html").send(stringToSend);
         });
 
