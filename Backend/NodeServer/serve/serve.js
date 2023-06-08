@@ -49,12 +49,17 @@ app.get("/",  (req, res) => {
 
 app.post("/login", (req, res) => {
 
-    if (!email || !req.body.password) {
-        res.json({login: "blocked"});
+    const email = req.body.email;
+    const password = req.body.password;
+
+    console.log(req.body);
+
+    if (!email || !password) {
+        res.json({login: "blocked_no_credentials"});
         return;
     }
 
-    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${req.body.password}"`, (err, accountRow) => {
+    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, accountRow) => {
         if (err) throw err;
         if (!accountRow) {
             res.json({login: "blocked"});
@@ -68,7 +73,7 @@ app.post("/login", (req, res) => {
         let insertData = "";
     
         //GET DATA
-        let data;
+        let data = [];
         dbc.db.all(`SELECT * FROM f_friends WHERE f1_a_email LIKE "${email}" OR f2_a_email LIKE "${email}"`, (err, friendRows) => {
             if (err) throw err;
             if (!friendRows) return;
