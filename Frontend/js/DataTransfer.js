@@ -24,17 +24,30 @@ fileDropArea.addEventListener('drop', function(event) {
     uploadFile(files);
 });
 
+const email = document.querySelector("#emailHere").innerText;
+const password = document.querySelector("#passwordHere").value;
+
 function uploadFile(files) {
     // Create a FormData object to store the file
     const formData = new FormData();
 
     // Append the file to the FormData object
     formData.append('upload', files[0]);
+    formData.append("email", email);
+    formData.append("password", password);
 
     // Perform the file upload using your preferred method (e.g., AJAX request)
     // Replace the URL and request method with your own implementation
-    const uploadUrl = 'https://example.com/upload';
-    const uploadRequest = new XMLHttpRequest();
+    const uploadUrl = '/upload';
+
+    fetch(uploadUrl, {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => console.log(data));
+
+    /*const uploadRequest = new XMLHttpRequest();
 
     uploadRequest.open('POST', uploadUrl);
 
@@ -48,7 +61,7 @@ function uploadFile(files) {
         }
     };
 
-    uploadRequest.send(formData);
+    uploadRequest.send(formData);*/
 }
 
 
