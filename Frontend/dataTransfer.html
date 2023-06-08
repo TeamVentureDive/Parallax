@@ -52,7 +52,7 @@
                     </form>
                 </div>
                 <h4 class="text-[20px] font-[700] mt-5"><!--USERNAME_HERE--></h4>
-                <h4 id="emailHere" class="text-[15px] font-[700] mt-5"><!--EMAIL_HERE--></h4>
+                <h4 id="emailHere" class="text-[15px] font-[700] mt-5" hidden><!--EMAIL_HERE--></h4>
                 <input id="passwordHere" type="hidden" value="<!--PASSWORD_HERE-->">
             </div>
             <ul class="ml-[1vh] mt-[5vh]">
@@ -142,6 +142,7 @@
                             <div class="text-center font-[650] text-white text-sm">Drop Files here</div>
                             <div class="text-center font-[500] mt-1 text-white text-sm">Drag and drop your Files Here.
                             </div>
+                            <img src="./img/Grid.svg" class="-top-28 absolute left-20 inset-0" draggable="false" alt="Grid.svg">
                             <div class="mx-auto mt-8">
                                 <input type="file" name="upload" class="rounded-lg block w-28 mx-auto text-white file:mr-4
                                 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold bg-[#4453F9] file:bg-transparent
@@ -166,7 +167,7 @@
               </div>
             <div id="loginSecuritySection">
                 <div class="mb-4">
-                    <div>Username: <!--USERNAME_HERE--></div>
+                    <div>Username:  <!--USERNAME_HERE--></div>
                     <p>Email: <!--EMAIL_HERE--></p>
                 </div>
               <div class="bg-red-100 p-3 rounded-lg text-red-800 mb-6">
@@ -202,7 +203,7 @@
                     </g>
                 </svg>
             </div>
-            <div class="p-6">
+            <div class="pb-6 pl-6 pr-6">
                 <form class="space-y-6" action="#">
                     <div>
                         <h5 class="text-xl font-medium text-slate-900">Add Contact</h5>
@@ -213,27 +214,18 @@
                     </div>
                     <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5">Search Now</button>
                 </form>
-                <div class="flex item">
-                    <div class="max-h-64 overflow-y-scroll">
-                        <a href="#" id="contacts" class="flex items-center rounded-lg bg-gray-50 hover:bg-gray-100 p-2 mt-5 transition-all">
-                            <div class="flex items-center justify-center h-12 w-12 rounded-full bg-gray-300 mr-4">
-                                <img class="rounded-full" src="https://cdn.pixabay.com/photo/2017/08/30/12/45/girl-2696947_960_720.jpg" alt="Profile Picture">
-                            </div>
-                            <div>
-                                <div class="flex items-center">
-                                    <p class="font-bold whitespace-nowrap">Max Mustermann</p>
-                                    <div id="hacken" class="text-sm ml-20 bg-slate-300 rounded-full pl-1.5 pr-1.5 pb-0.5 hover:bg-green-500 hover:text-white">&#x2b</div>
-                                </div>
-                                <p class="text-gray-600">#10203</p>
-                            </div>
-                        </a>
-                    </div>
+                <div class="flex items-center mt-5 bg-green-100 rounded-2xl hidden">
+                    <i class="fa-regular fa-circle-check fa-2xl text-green-500 mr-2 pl-2"></i>
+                    <p class="p-3 ">New Contact Succesfully Added</p>
                 </div>
+                <div class="flex items-center mt-5 bg-red-100 rounded-2xl">
+                    <i class="fa-solid fa-triangle-exclamation fa-2xl text-red-500 mr-2 pl-2"></i>
+                    <p class="p-3 ">Failed To Add New Contact. Try Again</p>
+                </div>
+                  
+              </div>
             </div>
-        </div>
-    </div>
-
-    </div>
+          </div>
     </div>
     <script src="./js/DataTransfer.js"></script>
     <script>
