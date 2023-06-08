@@ -27,8 +27,6 @@ app.post("/signup", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log(req.body);
-
     if (!username || !email ||!password) {
         res.json({login: "blocked"});
         return;
@@ -52,8 +50,6 @@ app.post("/login", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log(req.body);
-
     if (!email || !password) {
         res.json({login: "blocked_no_credentials"});
         return;
@@ -65,8 +61,6 @@ app.post("/login", (req, res) => {
             res.json({login: "blocked"});
             return;
         }
-
-        console.log(accountRow);
 
         const rawIndexData = fs.readFileSync(path.join(__dirname, "..", "..", "..", "Frontend", "dataTransfer.html"), "utf-8");
         const rawFileContainer = fs.readFileSync(path.join(__dirname, "..", "..", "..", "Frontend", "fileContainer.html"), "utf-8");
@@ -91,7 +85,7 @@ app.post("/login", (req, res) => {
 
     
             validAccounts.forEach(email => {
-                dbc.db.get(`select * from a_accounts as a inner join f_files as f on a.a_email = f.f_a_email where a_email like ${email}`, (err, fileAccountRow) => {
+                dbc.db.get(`select * from a_accounts as a inner join f_files as f on a.a_email = f.f_a_email where a_email like "${email}"`, (err, fileAccountRow) => {
                     if (err) throw err;
                     if (!fileAccountRow) return;
                     data.push(fileAccountRow);
