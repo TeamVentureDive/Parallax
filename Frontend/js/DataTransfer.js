@@ -86,6 +86,8 @@ const settings = document.getElementById("settingsover");
 const contactsBtn = document.getElementById("addContactsBtn");
 const messagesBtn = document.getElementById("messagesBtn");
 const settingsBtn = document.getElementById("settingsBtn");
+const addfriendCont = document.getElementById("addFriendContainer");
+
 function openSettings() {
     field.classList.add("blur");
     settings.classList.remove("hidden");
@@ -97,7 +99,7 @@ function closeSettings() {
     settings.classList.add("hidden");
     settingsBtn.classList.remove("bg-gray-200");
 }
-const addfriendCont = document.getElementById("addFriendContainer");
+
 function addFriendPopUp() {
     field.classList.add("blur");
     addfriendCont.classList.remove("hidden");
@@ -107,7 +109,7 @@ function addFriendPopUp() {
     messagesBtn.classList.remove("text-blue-800");
 }
 
-function closeAddContacts(){
+function closeAddContacts() {
     field.classList.remove("blur");
     addfriendCont.classList.add("hidden");
     contactsBtn.classList.remove("text-blue-800");
@@ -116,9 +118,45 @@ function closeAddContacts(){
     messagesBtn.classList.add("text-blue-800");
 }
 
-function resetPassword() {
-    window.location.href = "resetPwEmail.html";
-}
+document.addEventListener("click", function (event) {
+    const target = event.target;
+    const isAddFriendPopup = target.closest("#addFriendContainer");
+    const isAddFriendButton = target.closest("#addContactsBtn");
+    const isMessagesButton = target.closest("#messagesBtn");
+
+    if (!isAddFriendPopup && !isAddFriendButton && !isMessagesButton && !addfriendCont.classList.contains("hidden")) {
+        closeAddContacts();
+    }
+});
+
+contactsBtn.addEventListener("click", function () {
+    addFriendPopUp();
+});
+
+messagesBtn.addEventListener("click", function () {
+    closeAddContacts();
+});
+
+
+document.addEventListener("click", function (event) {
+    const target = event.target;
+    const isAddFriendPopup = target.closest("#addFriendContainer");
+    const isAddFriendButton = target.closest("#addContactsBtn");
+    const isMessagesButton = target.closest("#messagesBtn");
+
+    if (!isAddFriendPopup && !isAddFriendButton && !isMessagesButton) {
+        closeAllPopups();
+    }
+});
+
+contactsBtn.addEventListener("click", function () {
+    addFriendPopUp();
+});
+
+messagesBtn.addEventListener("click", function () {
+    closeAddContacts();
+});
+
 
 
 const accountSettingsBtn = document.getElementById("accountSettingsBtn");

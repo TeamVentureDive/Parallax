@@ -30,6 +30,13 @@
             .gradient-button {
             background: linear-gradient(to right, rgb(77, 25, 77), rgb(100, 9, 50));
             }
+            #file-drop-area {
+                position: relative;
+                background-image: url('./img/Grid.svg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 60%; /* Adjust the value as desired */
+            }
         </style>
 </head>
 
@@ -185,27 +192,27 @@
                 </div>
             </div>
           </div>
-          
-          <div id="addFriendContainer" class="hidden">
-            <div class="fixed inset-0 max-w-sm bg-white border border-gray-200 rounded-lg shadow items-center justify-center z-50 ml-[100vh] mt-8 mb-8">
-              <div class="ml-auto w-7 hover:bg-slate-200 rounded-full transition-all cursor-pointer" onclick="closeAddContacts()">
+
+    <div id="addFriendContainer" class="hidden fixed inset-0 flex items-center justify-center z-50">
+        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+            <div class="ml-auto w-7 hover:bg-slate-200 rounded-full transition-all cursor-pointer" onclick="closeAddContacts()">
                 <svg class="fill-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                  <g>
-                    <path fill="none" d="M0 0h24v24H0z"/>
-                    <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/>
-                  </g>
+                    <g>
+                        <path fill="none" d="M0 0h24v24H0z"/>
+                        <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/>
+                    </g>
                 </svg>
-              </div>
-              <div class="pb-4 pr-4 pl-4 sm:pb-6 sm:pr-6 sm:pl-6 md:pb-8 md:pr-8 md:pl-8">
+            </div>
+            <div class="pb-6 pl-6 pr-6">
                 <form class="space-y-6" action="#">
-                  <div>
-                    <h5 class="text-xl font-medium text-slate-900">Add Contact</h5>
-                    <h4 class="text-base text-gray-900">Input Friend Code to search user</h4>
-                  </div>
-                  <div>
-                    <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 drop-shadow-lg" placeholder="Input Friend Code" required>
-                  </div>
-                  <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center drop-shadow-lg">Add Now</button>
+                    <div>
+                        <h5 class="text-xl font-medium text-slate-900">Add Contact</h5>
+                        <h4 class="text-base text-gray-900">Input Friend Code to search user</h4>
+                    </div>
+                    <div>
+                        <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5" placeholder="Input Friend Code" required>
+                    </div>
+                    <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5">Search Now</button>
                 </form>
                 <div class="flex items-center mt-5 bg-green-100 rounded-2xl hidden">
                     <i class="fa-regular fa-circle-check fa-2xl text-green-500 mr-2 pl-2"></i>
