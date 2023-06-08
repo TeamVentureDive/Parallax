@@ -44,7 +44,9 @@
                         <button type="submit">Upload</button>
                     </form>
                 </div>
-                <h4 class="text-[20px] font-[700] mt-5">Max Musterman</h4>
+                <h4 class="text-[20px] font-[700] mt-5"><!--USERNAME_HERE--></h4>
+                <h4 id="emailHere" class="text-[15px] font-[700] mt-5"><!--EMAIL_HERE--></h4>
+                <input id="passwordHere" type="hidden" value="<!--PASSWORD_HERE-->">
             </div>
             <ul class="ml-[1vh] mt-[5vh]">
                 <li id="messagesBtn" class="p-[1vh] grid-cols-5 grid bg-blue-50 rounded-lg w-[20vh] cursor-pointer flex items-center text-blue-800">
@@ -90,33 +92,7 @@
                 </div>
                 <div id="searchableDiv" class="grid grid-cols-1 mt-[5vh] overflow-y-auto h-[75vh]">
                     <div class="col-span-1 mt-[2vh]">
-
-                        <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white cursor-pointer">
-                            <img src="#" class="col-span-1" alt="Image">
-                            <div class="col-span-2">
-                                <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                <h3 class="font-[300]">NSCS-File.png</h3>
-                            </div>
-
-                            <svg class="progress-ring -rotate-90" width="54" height="54">
-                                <circle class="progress-ring__circle" stroke="#FFD37E" stroke-width="6" data-time="1686245437"
-                                    fill="transparent" r="19" cx="27" cy="27" />
-                            </svg>
-                        </div>
-
-                        <div class="border-2 border-gray-300 p-[4vh] mt-[4vh] rounded-lg grid-cols-4 grid bg-white cursor-pointer">
-                            <img src="#" class="col-span-1" alt="Image">
-                            <div class="col-span-2">
-                                <h1 class="font-[600] searchable-name">Max Musterman</h1>
-                                <h3 class="font-[300]">NSCS-File.png</h3>
-                            </div>
-                            <svg class="progress-ring -rotate-90" width="54" height="54">
-                                <circle class="progress-ring__circle" stroke="#FFD37E" stroke-width="6" data-time="1686243637"
-                                    fill="transparent" r="19" cx="27" cy="27" />
-                            </svg>
-
-                        </div>
-
+                        <!--DATA_HERE-->
                     </div>
                 </div>
             </div>
@@ -263,7 +239,7 @@
       const totalDuration = endTime - startTime;
 
       function updateCountdown() {
-        const now = new Date().getTime();
+        const now = Date.now();
         const remaining = Math.max(endTime - now, 0);
         const percent = 100 - (remaining / totalDuration) * 100;
         setProgress(percent, circle);

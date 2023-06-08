@@ -27,8 +27,6 @@ app.post("/signup", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
-    console.log(req.body);
-
     if (!username || !email ||!password) {
         res.json({login: "blocked"});
         return;
@@ -49,32 +47,32 @@ app.get("/",  (req, res) => {
 
 app.post("/login", (req, res) => {
 
-    if (!email || !req.body.password) {
-        res.json({login: "blocked"});
+    const email = req.body.email;
+    const password = req.body.password;
+
+    if (!email || !password) {
+        res.json({login: "blocked_no_credentials"});
         return;
     }
 
-    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${req.body.password}"`, (err, accountRow) => {
+    dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE "${email}" AND a_password LIKE "${password}"`, (err, accountRow) => {
         if (err) throw err;
         if (!accountRow) {
             res.json({login: "blocked"});
             return;
         }
 
-        console.log(accountRow);
-
         const rawIndexData = fs.readFileSync(path.join(__dirname, "..", "..", "..", "Frontend", "dataTransfer.html"), "utf-8");
         const rawFileContainer = fs.readFileSync(path.join(__dirname, "..", "..", "..", "Frontend", "fileContainer.html"), "utf-8");
         let insertData = "";
     
         //GET DATA
-        let data;
         dbc.db.all(`SELECT * FROM f_friends WHERE f1_a_email LIKE "${email}" OR f2_a_email LIKE "${email}"`, (err, friendRows) => {
             if (err) throw err;
             if (!friendRows) return;
-    
+            
             const validAccounts = [email];
-    
+            
             friendRows.forEach(friend => {
                 if (friend.f1_a_email != email) {
                     validAccounts.push(friend.f1_a_email);
@@ -83,35 +81,45 @@ app.post("/login", (req, res) => {
                     validAccounts.push(friend.f2_a_email);
                 }
             });
-
-    
+            
+            
+            let data = [];
+            let index = 0;
+            console.log(validAccounts);
             validAccounts.forEach(email => {
-                dbc.db.get(`select * from a_accounts as a inner join f_files as f on a.a_email = f.f_a_email where a_email like ${email}`, (err, fileAccountRow) => {
+                dbc.db.all(`select * from a_accounts as a inner join f_files as f on a.a_email = f.f_a_email where a_email like "${email}"`, (err, fileAccountRows) => {
+                    
                     if (err) throw err;
-                    if (!fileAccountRow) return;
-                    data.push(fileAccountRow);
+                    if (!fileAccountRows) return;
+
+                    fileAccountRows.forEach(fileAccountRow => {
+                        let tempEntry = rawFileContainer + " ";
+                        insertData += tempEntry
+                                        .replace("<!--EMAIL_HERE-->", fileAccountRow.f_a_email)
+                                        .replace("<!--FILENAME_HERE-->", fileAccountRow.f_name)
+                                        .replace("<!--FILEDATE_HERE-->", fileAccountRow.f_date)
+                                        .replace("<!--LINK_HERE-->", fileAccountRow.f_id)
+                                        .replace("<!--USERNAME_HERE-->", fileAccountRow.a_username);
+                    });
+                    
+                    index++;
+
+                    if (index >= validAccounts.length) {
+                        //Inserting Data
+                        const stringToSend = rawIndexData
+                                        .replace("<!--DATA_HERE-->", insertData)
+                                        .replace("<!--USERNAME_HERE-->", accountRow.a_username)
+                                        .replace("<!--EMAIL_HERE-->", accountRow.a_email)
+                                        .replace("<!--HASH_HERE-->", accountRow.a_hash)
+                                        .replace("<!--PASSWORD_HERE-->", accountRow.a_password);
+                        res.type("html").send(stringToSend);
+                    }
                 });
             });
+
+
+            
     
-            //Inserting Data
-    
-            data.forEach(entry => {
-                let tempEntry = rawFileContainer + " ";
-                insertData += tempEntry
-                                .replace("<!--EMAIL_HERE-->", entry.f_a_email)
-                                .replace("<!--FILENAME_HERE-->", entry.f_name)
-                                .replace("<!--FILEDATE_HERE-->", entry.f_date)
-                                .replace("<!--LINK_HERE-->", entry.f_id)
-                                .replace("<!--USERNAME_HERE-->", entry.a_username);
-            });
-        
-            const stringToSend = rawIndexData
-                                    .replace("<!--DATA_HERE-->", insertData)
-                                    .replace("<!--USERNAME_HERE-->", accountRow.a_username)
-                                    .replace("<!--EMAIL_HERE-->", accountRow.a_email)
-                                    .replace("<!--HASH_HERE-->", accountRow.a_hash)
-                                    .replace("<!--PASSWORD_HERE-->", accountRow.a_password);
-            res.type("html").send(stringToSend);
         });
 
     });
