@@ -97,7 +97,7 @@ app.post("/login", (req, res) => {
             data.forEach(entry => {
                 let tempEntry = rawFileContainer + " ";
                 insertData += tempEntry
-                                .replace("<!--NAME_HERE-->", entry.name)
+                                .replace("<!--EMAIL_HERE-->", entry.f_a_email)
                                 .replace("<!--FILENAME_HERE-->", entry.f_name)
                                 .replace("<!--FILEDATE_HERE-->", entry.f_date)
                                 .replace("<!--LINK_HERE-->", entry.f_id);
