@@ -1,5 +1,5 @@
 document.getElementById('login').addEventListener("click", () => {
-    let sendTo = "http://localhost:80/sendMail";
+    let sendTo = "/sendMail";
     let emailInput = document.getElementById('email');
     sessionStorage.setItem("email", emailInput.value);
     fetch(
