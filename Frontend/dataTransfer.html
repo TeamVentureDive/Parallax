@@ -53,6 +53,7 @@
                 </div>
                 <h4 class="text-[20px] font-[700] mt-5"><!--USERNAME_HERE--></h4>
                 <h4 id="emailHere" class="text-[15px] font-[700] mt-5" hidden><!--EMAIL_HERE--></h4>
+                <input id="emailHereBeste" type="hidden" value="<!--EMAIL_HERE-->">
                 <input id="passwordHere" type="hidden" value="<!--PASSWORD_HERE-->">
             </div>
             <ul class="ml-[1vh] mt-[5vh]">
@@ -203,11 +204,11 @@
                     </div>
                     <button type="submit" onclick="addFriendFunction()" class="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5">Add Now</button>
                 </div>
-                <div id="sucessfullMessage" class="flex items-center mt-5 bg-green-100 rounded-2xl">
+                <div id="sucessfullMessage" class="flex items-center mt-5 bg-green-100 rounded-2xl hidden">
                     <i class="fa-regular fa-circle-check fa-2xl text-green-500 mr-2 pl-2"></i>
                     <p class="p-3 ">New Contact Succesfully Added</p>
                 </div>
-                <div id="notSucessfullMessage" class="flex items-center mt-5 bg-red-100 rounded-2xl">
+                <div id="notSucessfullMessage" class="flex items-center mt-5 bg-red-100 rounded-2xl hidden">
                     <i class="fa-solid fa-triangle-exclamation fa-2xl text-red-500 mr-2 pl-2"></i>
                     <p class="p-3 ">Failed To Add New Contact. Try Again</p>
                 </div>
