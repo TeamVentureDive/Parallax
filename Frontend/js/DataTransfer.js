@@ -87,6 +87,9 @@ const contactsBtn = document.getElementById("addContactsBtn");
 const messagesBtn = document.getElementById("messagesBtn");
 const settingsBtn = document.getElementById("settingsBtn");
 const addfriendCont = document.getElementById("addFriendContainer");
+const succesfull = document.getElementById("sucessfullMessage");
+const notsuccesfull = document.getElementById("notSucessfullMessage");
+
 
 function openSettings() {
     field.classList.add("blur");
@@ -116,6 +119,8 @@ function closeAddContacts() {
     contactsBtn.classList.remove("bg-blue-50");
     messagesBtn.classList.add("bg-blue-50");
     messagesBtn.classList.add("text-blue-800");
+    notsuccesfull.classList.add("hidden");
+    notsuccesfull.classList.add("hidden");
 }
 
 document.addEventListener("click", function (event) {
@@ -230,4 +235,32 @@ function handleClick(element) {
     document.getElementById('rightLink').href = lick;
     document.getElementById('rightName').textContent = name;
     document.getElementById('rightEmail').textContent = email;
+}
+
+
+function addFriendFunction() {
+    let emailHidden = document.getElementById('emailHere');
+    let passwordHidden = document.getElementById('passwordHere');
+    let friendCode = document.getElementById('friendNumber');
+    fetch(
+        "friend",
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email: emailHidden.value, password: passwordHidden.value, code:friendCode.value})
+        })
+        .then((response) => response.text())
+        .then((data) => {
+            console.log(data);
+        });
+        if(data.friend){
+            console.log("Friend succesfully added!");
+            succesfull.classList.remove("hidden");
+
+        }else{
+            console.log("Friend not added!");
+            succesfull.classList.remove("notsuccesfull");
+        }
 }
