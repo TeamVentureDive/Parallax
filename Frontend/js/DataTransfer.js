@@ -250,3 +250,7 @@ for (let i = 0; i < fileContainer.length; i++) {
     const currentFileContainer = fileContainer[i];
     fileContainer[i].addEventListener("click", () => handleClick(currentFileContainer));
 }
+
+function resetPassword(){
+    window.location = "/resetPwEmail.html";
+}
