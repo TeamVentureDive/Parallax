@@ -9,10 +9,11 @@ Und das ist auch schon alles!
 ## Installation
 1. Lade dir das Repository herunter
 2. Öffne die Konsole und navigiere in das heruntergeladene Repository
-3. Gehe in das Verzeichniss //TODO
+3. Gehe in das Verzeichniss /serve
 4. Gib folgenden Befehl ein: `npm install`
-5. Gib folgenden Befehl ein: `node index.js` //TODO (index.js)
-6. Fertig!
+5. Gib folgenden Befehl ein: `node serve.js`
+6. Öffne nun einen Browser und gehe auf [localhost](http://localhost)
+7. Fertig!
 
 ## Fehlerbehebung
 Wenn du einen Fehler beim Installieren unserer Software hast, erstelle ein Issue auf unserem [GitHub Repository Parallax](https://github.com/TeamVentureDive/Parallax/issues/new). Schaue aber bitte davor noch in den vorhandenen [Issues](https://github.com/TeamVentureDive/Parallax/issues) nach, ob dein Fehler schon bekannt ist.
