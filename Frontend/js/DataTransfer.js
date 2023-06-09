@@ -137,18 +137,6 @@ messagesBtn.addEventListener("click", function () {
     closeAddContacts();
 });
 
-
-document.addEventListener("click", function (event) {
-    const target = event.target;
-    const isAddFriendPopup = target.closest("#addFriendContainer");
-    const isAddFriendButton = target.closest("#addContactsBtn");
-    const isMessagesButton = target.closest("#messagesBtn");
-
-    if (!isAddFriendPopup && !isAddFriendButton && !isMessagesButton) {
-        closeAllPopups();
-    }
-});
-
 contactsBtn.addEventListener("click", function () {
     addFriendPopUp();
 });
@@ -203,19 +191,6 @@ function showNotification() {
         position: "right", // Ausrichtung der Benachrichtigung ("left", "right", "center")
         backgroundColor: "linear-gradient(to right, #667eea, #764ba2)", // Hintergrundfarbe der Benachrichtigung
     }).showToast();
-}
-
-
-
-
-const hackenButt = document.getElementById("hacken");
-hackenButt.addEventListener("click", addfriend);
-
-function addfriend() {
-    hackenButt.innerHTML = "Friend Added";
-    hackenButt.classList.add("bg-green-500", "text-white");
-    hackenButt.classList.remove("pl-1.5", "pr-1.5", "pb-0.5,", "rounded-full", "ml-20", "text-sm", "pb-0.5");
-    hackenButt.classList.add("pl-1", "pr-1", "rounded-lg", "text-xs", "ml-1", "pl-1,5", "pr-1,5");
 }
 
 function handleClick(element) {
