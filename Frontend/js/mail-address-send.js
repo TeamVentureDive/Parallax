@@ -2,19 +2,13 @@ document.getElementById('login').addEventListener("click", () => {
     let sendTo = "/sendMail";
     let emailInput = document.getElementById('email');
     sessionStorage.setItem("email", emailInput.value);
-    fetch(
-            sendTo, {
+    fetch("/sendMail", {
                 method: "POST",
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*', 
-                    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-                    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                    'Access-Control-Allow-Credentials': true
+                    //'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    email: emailInput.value
-                })
+                body: JSON.stringify({email: emailInput.value})
             })
         .then((response) => response.json())
         .then((data) => {

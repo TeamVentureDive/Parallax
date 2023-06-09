@@ -2,9 +2,7 @@ var createCode = Math.floor(Math.random() * 9000000) + 1000000;
 
 let dbc = require("../connectDb");
 const webserver = require("./webserver");
-const express = webserver.express;
 const app = webserver.app;
-var bodyParser  = require("body-parser");
 
 dbc.db.run(`INSERT INTO t_tempcode(t_code, t_active) VALUES(${createCode}, ${true})`, function(err) {
   if (err) {
@@ -27,6 +25,7 @@ var transporter = nodemailer.createTransport({
 });
 
 app.post('/sendMail', async(req, res) => {
+  console.log(req.body);
   const mail = req.body.email;
   const row = await new Promise((resolve, reject) => {
     dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE '${mail}'` , (err , row) => {
@@ -118,8 +117,4 @@ app.post('/checkVerification', (req, res) => {
       );
     }
   });
-
-const port = 2500;
-app.listen(port, () => {
-    console.log(`Database API started on Port: ${port}`);
-});
+console.log(`Database API started`);
