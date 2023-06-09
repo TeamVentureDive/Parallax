@@ -2,9 +2,7 @@ var createCode = Math.floor(Math.random() * 9000000) + 1000000;
 
 let dbc = require("../connectDb");
 const webserver = require("./webserver");
-const express = webserver.express;
 const app = webserver.app;
-var bodyParser  = require("body-parser");
 
 dbc.db.run(`INSERT INTO t_tempcode(t_code, t_active) VALUES(${createCode}, ${true})`, function(err) {
   if (err) {
@@ -119,3 +117,4 @@ app.post('/checkVerification', (req, res) => {
       );
     }
   });
+console.log(`Database API started`);

@@ -5,17 +5,12 @@ const express = webserver.express;
 const fs = require("fs");
 const path = require("path");
 const dbc = require("../connectDb");
-const bodyParser = require("body-parser");
 
 const download = require("../fileserver/download");
 const upload = require("../fileserver/upload");
-const passwordForget = require("./passwordForget");
 const friendSystem = require("../login/friendsystem");
+const passwordForget = require("./passwordForget");
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
-
-app.use(express.static(path.join("..", "..", "..", "Frontend")));
 
 app.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, "..", "..", "..", "Frontend", "signup.html"));
@@ -85,7 +80,6 @@ app.post("/login", (req, res) => {
             
             let data = [];
             let index = 0;
-            console.log(validAccounts);
             validAccounts.forEach(email => {
                 dbc.db.all(`select * from a_accounts as a inner join f_files as f on a.a_email = f.f_a_email where a_email like "${email}"`, (err, fileAccountRows) => {
                     

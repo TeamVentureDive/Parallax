@@ -10,7 +10,7 @@ app.post("/upload", async (req, res) => {
     const form = new formidable.IncomingForm({uploadDir: path.join(__dirname, "uploaded_files")});
     form.parse(req, async (err, fields, files) => {
         if (err) throw err;
-        res.status(400).setHeader("Content-Type", "application/json");
+        res.status(200).setHeader("Content-Type", "application/json");
         if (files.upload?.length) {
             for (let i = 0; i < files.upload.length; i++) {
                 //uploadFile(res, fields, files.upload[i]);
@@ -45,7 +45,6 @@ app.post("/upload", async (req, res) => {
                 console.log(`[FileServer-Upload] Blocked Upload of File "${files.upload.originalFilename}" due to wrong credentials`);
                 return;
             }
-            console.log(files.upload)
             addToDatabase(files.upload, fields.email);
             setTimeout(() => {
                 fs.unlinkSync(path.join(__dirname, "uploaded_files", file.newFilename));
@@ -59,7 +58,7 @@ app.post("/upload", async (req, res) => {
     });
 });
 
-app.listen(611, urlHostname);
+//app.listen(611, urlHostname);
 
 
 dbc.db.all(`SELECT * FROM f_files`, (err, rows) => {
@@ -92,7 +91,6 @@ function uploadFile(res, fields, file) {
 }
 
 function addToDatabase(file, email) {
-    console.log(file);
     dbc.db.run(`INSERT INTO f_files values ("${file.newFilename}", "${file.originalFilename}", "${email}" ,"${Date.now()}")`, err => {
         if (err) throw err;
     });

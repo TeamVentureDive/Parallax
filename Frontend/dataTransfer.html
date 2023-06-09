@@ -74,72 +74,79 @@
         <ul class="ml-[1vh] bottom-0 absolute mb-4 w-[20vh]">
             <li class="p-[1vh] grid-cols-5 grid rounded-lg bg-red-100 hover:ring-2 ring-red-500 transition-ease-0.3 cursor-pointer">
 
-                <img src="./img/MenuIcons/LogOut.svg" alt="Message" class="col-span-1">
-                <p class="col-span-4 text-red-600 font-[600]">Log Out</p>
-            </li>
-            <li id="settingsBtn" class="p-[1vh] grid-cols-5 grid hover:bg-gray-200 rounded-lg mt-1 flex items-center cursor-pointer" onclick="openSettings()">
-                <img src="./img/MenuIcons/Settings.svg" alt="Settings" class="col-span-1 fill-black"></img>
-                <p class="col-span-4">Settings</p>
-            </li>
-            <li class="p-[1vh] grid-cols-5 grid hover:bg-blue-50 rounded-lg flex items-center cursor-pointer mt-1"onclick="showNotification()">
-                <img src="./img/MenuIcons/Help.svg" alt="Help" class="col-span-1 fill-black"></img>
-                <p class="col-span-4">Help</p>
-            </li>
-        </ul>
+                    <img src="./img/MenuIcons/LogOut.svg" alt="Message" class="col-span-1">
+                    <p class="col-span-4 text-red-600 font-[600]">Log Out</p>
+                </li>
+                <li id="settingsBtn" class="p-[1vh] grid-cols-5 grid hover:bg-gray-200 rounded-lg mt-1 flex items-center cursor-pointer" onclick="openSettings()">
+                    <img src="./img/MenuIcons/Settings.svg" alt="Settings" class="col-span-1 fill-black"></img>
+                    <p class="col-span-4">Settings</p>
+                </li>                
+                <li class="p-[1vh] grid-cols-5 grid hover:bg-blue-50 rounded-lg flex items-center cursor-pointer mt-1"onclick="showNotification()">
+                    <img src="./img/MenuIcons/Help.svg" alt="Help" class="col-span-1 fill-black"></img>
+                    <p class="col-span-4">Help</p>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
-<div id="content-datatransfer" class="bg-[url('./img/Background.png')] bg-no-repeat bg-cover col-span-1 sm:col-span-6 grid-cols-1 sm:grid-cols-4 grid text-xl">
-    <div class="pl-[5vw] col-span-2">
-        <h1 class="font-[700] mt-[3vh] text-3xl text-white">Contacts</h1>
-        <div class="w-[32vw]">
-            <div class="relative mt-[5vh]">
-                <input type="text" id="searchInput" class="w-full border-2 border-gray-300 rounded-lg p-5 pl-12"
-                       placeholder="Search">
-                <img src="./img/search.svg" alt="Search"
-                     class="absolute top-1/2 transform -translate-y-1/2 left-3 h-6 w-6">
-            </div>
-            <div id="searchableDiv" class="grid grid-cols-1 mt-[5vh] overflow-y-auto h-[75vh]">
-                <div class="col-span-1 mt-[2vh]">
-                    <!--DATA_HERE-->
+    <div id="content-datatransfer" class="bg-[url('./img/Background.png')] bg-no-repeat bg-cover col-span-1 sm:col-span-6 grid-cols-1 sm:grid-cols-4 grid text-xl">
+        <div class="pl-[5vw] col-span-2">
+            <h1 class="font-[700] mt-[3vh] text-3xl text-white">Contacts</h1>
+            <div class="w-[32vw]">
+                <div class="relative mt-[5vh]">
+                    <input type="text" id="searchInput" class="w-full border-2 border-gray-300 rounded-lg p-5 pl-12"
+                        placeholder="Search">
+                    <img src="./img/search.svg" alt="Search"
+                        class="absolute top-1/2 transform -translate-y-1/2 left-3 h-6 w-6">
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-span-2 mr-[3vw]">
-        <div class="w-full border-2 border-gray-300 p-[4vh] mt-[6vh] rounded-lg grid-cols-4 grid bg-white">
-            <img src="https://th.bing.com/th/id/OIP.kOfFgFozkavE6uMjxjj-UAHaHa?w=199&h=199&c=7&r=0&o=5&pid=1.7" class="col-span-1 rounded-full w-20 h-20" alt="Image" id="rightImage">
-            <div class="col-span-2">
-                <h1 class="font-[700]" id="rightName">Max Musterman</h1>
-                <h3 class="font-[300]" id="rightEmail">mega@mail.com</h3>
-            </div>
-            <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
-        </div>
-        <div class="w-full h-[70vh] border-2 border-gray-300 h-[25vh] mt-[4vh] rounded-lg grid bg-white p-[2vh] grid-rows-6 grid">
-            <div class="grid-cols-6 grid m-[1vh] row-span-1">
-                <h3 class="col-span-3" id="rightFilename"></h3>
-            </div>
-            <div class="">
-                <img src="./img/Menu Item.png" class="w-10 h-10 col-span-6" href="" id="rightLink" alt="NSCS-File.png">
-            </div>
-            <div class="absolute bottom-10">
-                <div class="bg-blue-400 w-[37.2vw] h-[28vh] rounded-2xl left-1.5 flex flex-col items-center justify-center">
-                    <div id="file-drop-area" class="bg-blue-300 w-[36.1vw] outline-dashed outline-white outline-2 h-[21vh] rounded-2xl transition-all flex flex-col items-center justify-center -top-6">
-                        <div class="mx-auto h-[4.3rem] w-20">
-                            <img src="./img/PutInFile.png" alt="Input">
-                        </div>
-                        <div class="text-center font-[650] text-white text-sm">Drop Files here</div>
-                        <div class="text-center font-[500] mt-1 text-white text-sm">Drag and drop your Files Here.</div>
-                        <div class="mx-auto mt-8">
-                            <input type="file" name="upload" class="rounded-lg block w-28 mx-auto text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold bg-[#4453F9] file:bg-transparent file:text-white hover:bg-[#AACCFF] ease-in-out duration-500 transition-all">
-                        </div>
+                <div id="searchableDiv" class="grid grid-cols-1 mt-[5vh] overflow-y-auto h-[75vh]">
+                    <div class="col-span-1 mt-[2vh]">
+                        <!--DATA_HERE-->
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div id="settingsover" class="fixed inset-0 flex items-center justify-center z-50 ml-[30vh] hidden">
-    <div class="bg-white max-w-3xl p-8 rounded-lg relative">
+        <div class="col-span-2 mr-[3vw] ">
+            <div class="w-full border-2 border-gray-300 p-[4vh] mt-[6vh] rounded-lg grid-cols-4 grid bg-white">
+                <img src="https://th.bing.com/th/id/OIP.kOfFgFozkavE6uMjxjj-UAHaHa?w=199&h=199&c=7&r=0&o=5&pid=1.7" class="col-span-1 rounded-full w-20 h-20" alt="Image" id="rightImage">
+                <div class="col-span-2">
+                    <h1 class="font-[700]" id="rightName">Max Musterman</h1>
+                    <h3 class="font-[300]" id="rightEmail">mega@mail.com</h3>
+                </div>
+                <img src=".\img\Icons\YellowRing.png" class="col-span-1" alt="NSCS-File.png">
+            </div>
+            <div
+                class="w-full h-[70vh] border-2 border-gray-300 h-[25vh] mt-[4vh] rounded-lg grid bg-white p-[2vh] grid-rows-6 grid">
+                <div class="grid-cols-6 grid m-[1vh] row-span-1">
+                    <h3 class="col-span-3" id="rightFilename">Document.docx</h3>
+                    <!-- <h3 class="col-span-2">Icon</h3> -->
+                </div>
+                <div class="">
+                    <a id="rightLink" download href="">
+                        <img src="./img/Menu Item.png" class="w-10 h-10 col-span-6" alt="NSCS-File.png">
+                    </a>
+                </div>
+                <div class="mx-auto">
+                    <div
+                        class="bg-blue-400 w-[37.2vw] h-[28vh] rounded-2xl relative -top-14 -left-1.5 flex flex-col items-center justify-center">
+                        <div id="file-drop-area"
+                            class="bg-blue-300 w-[36.1vw] outline-dashed outline-white outline-2 h-[21vh] rounded-2xl relative transition-all flex flex-col items-center justify-center bottom-5">
+                            <div class="mx-auto h-[4.3rem] w-20"><img src="./img/PutInFile.png" alt="Input"></div>
+                            <div class="text-center font-[650] text-white text-sm">Drop Files here</div>
+                            <div class="text-center font-[500] mt-1 text-white text-sm">Drag and drop your Files Here.
+                            </div>
+                            <div class="mx-auto mt-8">
+                                <input type="file" name="upload" class="rounded-lg block w-28 mx-auto text-white file:mr-4
+                                file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold bg-[#4453F9] file:bg-transparent
+                                file:text-white hover:bg-[#AACCFF] ease-in-out duration-500 transition-all">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div id="settingsover" class="fixed inset-0 flex items-center justify-center z-50 ml-[30vh] hidden">
+            <div class="bg-white max-w-3xl p-8 rounded-lg relative">
               <span class="absolute top-0 right-0 p-2 m-2 rounded-full transition-all hover:bg-gray-200" onclick="closeSettings()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
                   <path d="M6 18L18 6M6 6l12 12"></path>

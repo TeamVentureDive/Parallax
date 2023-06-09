@@ -144,18 +144,6 @@ messagesBtn.addEventListener("click", function () {
     closeAddContacts();
 });
 
-
-document.addEventListener("click", function (event) {
-    const target = event.target;
-    const isAddFriendPopup = target.closest("#addFriendContainer");
-    const isAddFriendButton = target.closest("#addContactsBtn");
-    const isMessagesButton = target.closest("#messagesBtn");
-
-    if (!isAddFriendPopup && !isAddFriendButton && !isMessagesButton) {
-        closeAllPopups();
-    }
-});
-
 contactsBtn.addEventListener("click", function () {
     addFriendPopUp();
 });
@@ -220,11 +208,11 @@ function handleClick(element) {
     var filename = element.getAttribute('data-filename');
     var name = element.getAttribute('data-name');
     var email = element.getAttribute('data-email');
-    var lick = element.getAttribute('data-lick');
+    var link = "http://" + window.location.hostname + "/download/" +  element.getAttribute('data-link');
 
     // Update the content of the segment with the retrieved data
     document.getElementById('rightFilename').textContent = filename;
-    document.getElementById('rightLink').href = lick;
+    document.getElementById('rightLink').href = link;
     document.getElementById('rightName').textContent = name;
     document.getElementById('rightEmail').textContent = email;
 }
@@ -255,4 +243,10 @@ function addFriendFunction() {
                 succesfull.classList.remove("notsuccesfull");
             }
         });
+}
+
+const fileContainer = document.querySelectorAll(".file-container");
+for (let i = 0; i < fileContainer.length; i++) {
+    const currentFileContainer = fileContainer[i];
+    fileContainer[i].addEventListener("click", () => handleClick(currentFileContainer));
 }
