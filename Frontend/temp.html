@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .progress-ring__circle {
+      transition: stroke-dashoffset 0.35s;
+      transform-origin: 50% 50%;
+      rotate: -90deg;
+    }
+  </style>
+  <body class="bg-blue-700">
+    <div class="w-72 h-24 bg-white rounded-2xl flex items-stretch">
+      <div class="w-16 h-full flex items-center">
+        <img
+          src="https://th.bing.com/th/id/OIP.f3DM2upCo-p_NPRwBAwbKQHaHa?w=202&h=202&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+          class="self-center"
+        />
+      </div>
+      <div class="grow h-full grid grid-rows-2 grid-cols-1 place-content-stretch">
+        <div class="self-end font-[700] pb-1">adhgl@gmai.com</div>
+        <div class="text-xs text-gray-500">hallo bin ein packet</div>
+      </div>
+      <div class="w-16 h-full flex items-center">
+        <svg class="progress-ring self-center" width="56" height="56">
+            <circle class="progress-ring__circle bg-red-500 stroke-current" stroke="blue" stroke-width="4" fill="transparent" r="26" cx="28" cy="28"/>
+          </svg>
+      </div>
+    </div>
+    <img src="../Group 2.png" width="300px" height="120px" alt="">
+  </body>
+  <script src="https://cdn.tailwindcss.com"></script>
+</html>
+
+<script>
+    const circle = document.querySelector('.progress-ring__circle');
+    const radius = circle.r.baseVal.value;
+    const circumference = radius * 2 * Math.PI;
+
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = circumference;
+
+    const endTime = new Date().getTime() + 1 * 1000; // 1 hour from now
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const remaining = endTime - now; // Remaining time in milliseconds
+      const percent = 100 - (remaining / (10 * 1000)) * 100; // Convert remaining time to percent
+      setProgress(percent);
+    }
+
+    function setProgress(percent) {
+      const offset = percent / 100 * circumference;
+      circle.style.strokeDashoffset = circumference - offset;
+    }
+
+    setInterval(updateCountdown, 1000);  // Update the countdown every second
+  </script>

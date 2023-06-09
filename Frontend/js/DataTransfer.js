@@ -87,6 +87,10 @@ const contactsBtn = document.getElementById("addContactsBtn");
 const messagesBtn = document.getElementById("messagesBtn");
 const settingsBtn = document.getElementById("settingsBtn");
 const addfriendCont = document.getElementById("addFriendContainer");
+const succesfull = document.getElementById("sucessfullMessage");
+const notsuccesfull = document.getElementById("notSucessfullMessage");
+let friendCode = document.getElementById('friendNumber');
+
 
 function openSettings() {
     field.classList.add("blur");
@@ -107,6 +111,7 @@ function addFriendPopUp() {
     contactsBtn.classList.add("bg-blue-50");
     messagesBtn.classList.remove("bg-blue-50");
     messagesBtn.classList.remove("text-blue-800");
+    friendCode.value="";
 }
 
 function closeAddContacts() {
@@ -116,6 +121,8 @@ function closeAddContacts() {
     contactsBtn.classList.remove("bg-blue-50");
     messagesBtn.classList.add("bg-blue-50");
     messagesBtn.classList.add("text-blue-800");
+    notsuccesfull.classList.add("hidden");
+    succesfull.classList.add("hidden");
 }
 
 document.addEventListener("click", function (event) {
@@ -193,6 +200,9 @@ function showNotification() {
     }).showToast();
 }
 
+
+
+
 function handleClick(element) {
     // Retrieve the data from the clicked element
     var filename = element.getAttribute('data-filename');
@@ -205,6 +215,34 @@ function handleClick(element) {
     document.getElementById('rightLink').href = link;
     document.getElementById('rightName').textContent = name;
     document.getElementById('rightEmail').textContent = email;
+}
+
+
+function addFriendFunction() {
+    let emailHidden = document.getElementById('emailHereBeste');
+    let passwordHidden = document.getElementById('passwordHere');
+    console.log(emailHidden.value,passwordHidden.value,friendCode.value)
+    fetch(
+        "friend",
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({email: emailHidden.value, password: passwordHidden.value, code:friendCode.value})
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            if(data.friend){
+                console.log("Friend succesfully added!");
+                succesfull.classList.remove("hidden");
+    
+            }else{
+                console.log("Friend not added!");
+                succesfull.classList.remove("notsuccesfull");
+            }
+        });
 }
 
 const fileContainer = document.querySelectorAll(".file-container");
