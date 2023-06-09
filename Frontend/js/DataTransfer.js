@@ -198,11 +198,11 @@ function handleClick(element) {
     var filename = element.getAttribute('data-filename');
     var name = element.getAttribute('data-name');
     var email = element.getAttribute('data-email');
-    var lick = element.getAttribute('data-lick');
+    var link = "http://" + window.location.hostname + "/download/" +  element.getAttribute('data-link');
 
     // Update the content of the segment with the retrieved data
     document.getElementById('rightFilename').textContent = filename;
-    document.getElementById('rightLink').href = lick;
+    document.getElementById('rightLink').href = link;
     document.getElementById('rightName').textContent = name;
     document.getElementById('rightEmail').textContent = email;
 }

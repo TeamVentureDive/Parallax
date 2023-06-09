@@ -85,7 +85,6 @@ app.post("/login", (req, res) => {
             
             let data = [];
             let index = 0;
-            console.log(validAccounts);
             validAccounts.forEach(email => {
                 dbc.db.all(`select * from a_accounts as a inner join f_files as f on a.a_email = f.f_a_email where a_email like "${email}"`, (err, fileAccountRows) => {
                     
