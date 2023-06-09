@@ -17,8 +17,8 @@
             display: none
         }
     </Style>
-        <style>
-            .with-underline::after {
+    <style>
+        .with-underline::after {
             content: "";
             position: absolute;
             bottom: -5px;
@@ -26,53 +26,53 @@
             width: 80%;
             height: 2px;
             background-color: #dbdbdb;
-            }
-            .gradient-button {
+        }
+        .gradient-button {
             background: linear-gradient(to right, rgb(77, 25, 77), rgb(100, 9, 50));
-            }
-            #file-drop-area {
-                position: relative;
-                background-image: url('./img/Grid.svg');
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: 60%; /* Adjust the value as desired */
-            }
-        </style>
+        }
+        #file-drop-area {
+            position: relative;
+            background-image: url('./img/Grid.svg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 60%; /* Adjust the value as desired */
+        }
+    </style>
 </head>
 
 <body class="grid grid-cols-1 sm:grid-cols-7 font-[Poppins] font-[300] text-[16px] bg-blue-500">
-    <div class="col-span-1 h-[100vh] bg-white block">
-        <div class="p-[10px]">
-            <div class="mt-[5vh] flex flex-col items-center">
-                <img src="img/Profile_Picture.png" id="image" alt="Click to upload" />
-                <div class="hidden fixed top-0 left-0 z-1 w-100% h-100% overflow-auto bg-white-100/[.4]">
-                    <form action="/upload" method="post" enctype="multipart/form-data">
-                        <input id="imageUpload" type="file" name="image">
-                        <button type="submit">Upload</button>
-                    </form>
-                </div>
-                <h4 class="text-[20px] font-[700] mt-5"><!--USERNAME_HERE--></h4>
-                <h4 id="emailHere" class="text-[15px] font-[700] mt-5" hidden><!--EMAIL_HERE--></h4>
-                <input id="emailHereBeste" type="hidden" value="<!--EMAIL_HERE-->">
-                <input id="passwordHere" type="hidden" value="<!--PASSWORD_HERE-->">
+<div class="col-span-1 h-[100vh] bg-white block">
+    <div class="p-[10px]">
+        <div class="mt-[5vh] flex flex-col items-center">
+            <img src="img/Profile_Picture.png" id="image" alt="Click to upload" />
+            <div class="hidden fixed top-0 left-0 z-1 w-100% h-100% overflow-auto bg-white-100/[.4]">
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <input id="imageUpload" type="file" name="image">
+                    <button type="submit">Upload</button>
+                </form>
             </div>
-            <ul class="ml-[1vh] mt-[5vh]">
-                <li id="messagesBtn" class="p-[1vh] grid-cols-5 grid bg-blue-50 rounded-lg w-[20vh] cursor-pointer flex items-center text-blue-800">
-                    <img src="./img/MenuIcons/Message.svg" alt="Message" class="col-span-1">
-                    <p class="col-span-4 ">Messages</p>
-                </li>
-                <li id="addContactsBtn" class="pt-[1vh] pb-[1vh] pr-[1vh] pl-[0.5vh] grid-cols-5 grid cursor-pointer w-[20vh] flex items-center rounded-lg mt-1 hover:bg-blue-50" onclick="addFriendPopUp()">
-                    <img src="./img/MenuIcons/PersonAdd.svg" alt="Add Contacts" class="col-span-1 pl-[0.12vh]">
-                    <p class="col-span-4 pl-[0.4vh]">Add Contacts</p>
-                </li>
-                <li class="p-[1vh] grid-cols-5 grid cursor-pointer w-[20vh] rounded-lg mt-1 hover:bg-blue-50">
-                    <img src="./img/MenuIcons/Home.svg" alt="Start" class="col-span-1">
-                    <p class="col-span-4">Start</p>
-                </li>
-            </ul>
+            <h4 class="text-[20px] font-[700] mt-5"><!--USERNAME_HERE--></h4>
+            <h4 id="emailHere" class="text-[15px] font-[700] mt-5" hidden><!--EMAIL_HERE--></h4>
+            <input id="emailHereBeste" type="hidden" value="<!--EMAIL_HERE-->">
+            <input id="passwordHere" type="hidden" value="<!--PASSWORD_HERE-->">
+        </div>
+        <ul class="ml-[1vh] mt-[5vh]">
+            <li id="messagesBtn" class="p-[1vh] grid-cols-5 grid bg-blue-50 rounded-lg w-[20vh] cursor-pointer flex items-center text-blue-800">
+                <img src="./img/MenuIcons/Message.svg" alt="Message" class="col-span-1">
+                <p class="col-span-4 ">Messages</p>
+            </li>
+            <li id="addContactsBtn" class="pt-[1vh] pb-[1vh] pr-[1vh] pl-[0.5vh] grid-cols-5 grid cursor-pointer w-[20vh] flex items-center rounded-lg mt-1 hover:bg-blue-50" onclick="addFriendPopUp()">
+                <img src="./img/MenuIcons/PersonAdd.svg" alt="Add Contacts" class="col-span-1 pl-[0.12vh]">
+                <p class="col-span-4 pl-[0.4vh]">Add Contacts</p>
+            </li>
+            <li class="p-[1vh] grid-cols-5 grid cursor-pointer w-[20vh] rounded-lg mt-1 hover:bg-blue-50">
+                <img src="./img/MenuIcons/Home.svg" alt="Start" class="col-span-1">
+                <p class="col-span-4">Start</p>
+            </li>
+        </ul>
 
-            <ul class="ml-[1vh] bottom-0 absolute mb-4 w-[20vh]">
-                <li class="p-[1vh] grid-cols-5 grid rounded-lg bg-red-100 hover:ring-2 ring-red-500 transition-ease-0.3 cursor-pointer">
+        <ul class="ml-[1vh] bottom-0 absolute mb-4 w-[20vh]">
+            <li class="p-[1vh] grid-cols-5 grid rounded-lg bg-red-100 hover:ring-2 ring-red-500 transition-ease-0.3 cursor-pointer">
 
                     <img src="./img/MenuIcons/LogOut.svg" alt="Message" class="col-span-1">
                     <p class="col-span-4 text-red-600 font-[600]">Log Out</p>
@@ -152,108 +152,108 @@
                   <path d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
               </span>
-              <div class="flex justify-center mb-8 button-container">
-                <button id="accountSettingsBtn" class="text-[1.6vh] font-light rounded-2xl mr-3 pl-2 pr-2 pb-[0.2vh] pt-[0.2vh] transition-all hover:bg-gray-200 relative with-underline">Account Settings</button>
-                <button id="loginSecurityBtn" class="text-[1.6vh] font-semibold bg-gray-200 pl-2 pr-2 pb-[0.2vh] pt-[0.2vh] rounded-2xl relative with-underline">Login and Security</button>
-              </div>
-            <div id="loginSecuritySection">
-                <div class="mb-4">
-                    <div>Username:  <!--USERNAME_HERE--></div>
-                    <p>Email: <!--EMAIL_HERE--></p>
-                </div>
-              <div class="bg-red-100 p-3 rounded-lg text-red-800 mb-6">
+        <div class="flex justify-center mb-8 button-container">
+            <button id="accountSettingsBtn" class="text-[1.6vh] font-light rounded-2xl mr-3 pl-2 pr-2 pb-[0.2vh] pt-[0.2vh] transition-all hover:bg-gray-200 relative with-underline">Account Settings</button>
+            <button id="loginSecurityBtn" class="text-[1.6vh] font-semibold bg-gray-200 pl-2 pr-2 pb-[0.2vh] pt-[0.2vh] rounded-2xl relative with-underline">Login and Security</button>
+        </div>
+        <div id="loginSecuritySection">
+            <div class="mb-4">
+                <div>Username:  <!--USERNAME_HERE--></div>
+                <p>Email: <!--EMAIL_HERE--></p>
+            </div>
+            <div class="bg-red-100 p-3 rounded-lg text-red-800 mb-6">
                 <p class="font-bold">Resetting your password</p>
                 <p class="text-sm">
-                  It's crucial to update your password regularly when using websites, as it helps to protect your sensitive information from being accessed by unauthorized users. When you use the same password for an extended period, it can become easier for hackers to guess or use tools to crack it, leaving you vulnerable to data breaches.<br>
-                  When creating a new password, make sure it is unique and complex, containing a mix of upper and lower case letters, numbers, and special characters. Avoid using personal information such as your name, birthdate, or any easily accessible data that hackers can easily find. Additionally, it is crucial to avoid using the same password for multiple websites or accounts, as a compromised password can lead to multiple account breaches.
+                    It's crucial to update your password regularly when using websites, as it helps to protect your sensitive information from being accessed by unauthorized users. When you use the same password for an extended period, it can become easier for hackers to guess or use tools to crack it, leaving you vulnerable to data breaches.<br>
+                    When creating a new password, make sure it is unique and complex, containing a mix of upper and lower case letters, numbers, and special characters. Avoid using personal information such as your name, birthdate, or any easily accessible data that hackers can easily find. Additionally, it is crucial to avoid using the same password for multiple websites or accounts, as a compromised password can lead to multiple account breaches.
                 </p>
-              </div>
-              <div class="flex justify-center">
+            </div>
+            <div class="flex justify-center">
                 <button class="text-white px-4 py-2 rounded-lg gradient-button" onclick="resetPassword()">Reset Password</button>
             </div>
         </div>
-            <div id="accountSettingsSection" class="hidden p-3 rounded-lg mb-6">
-                <p class="text-sm ">You can give other people your Friend Code <br> and they can add you to their friendlist.</p>
-                <p class="text-sm pb-5 text-red-600">Do not show this Code to strangers!</p>
-                <p class="text-lg font-bold mb-2">Your Friend Code:</p>
-                <div class="bg-gray-200 rounded-2xl p-2 inline-flex items-center">
-                    <p id="hashCodeCopy" class="text-4xl font-semibold"><!--HASH_HERE--></p>
-                    <i class="fa-solid fa-copy ml-2 p-3 rounded-lg cursor-pointer transition-all hover:bg-white" onclick="copyCode()"></i>
-                  </div>
-                </div>
+        <div id="accountSettingsSection" class="hidden p-3 rounded-lg mb-6">
+            <p class="text-sm ">You can give other people your Friend Code <br> and they can add you to their friendlist.</p>
+            <p class="text-sm pb-5 text-red-600">Do not show this Code to strangers!</p>
+            <p class="text-lg font-bold mb-2">Your Friend Code:</p>
+            <div class="bg-gray-200 rounded-2xl p-2 inline-flex items-center">
+                <p id="hashCodeCopy" class="text-4xl font-semibold"><!--HASH_HERE--></p>
+                <i class="fa-solid fa-copy ml-2 p-3 rounded-lg cursor-pointer transition-all hover:bg-white" onclick="copyCode()"></i>
             </div>
-          </div>
-
-    <div id="addFriendContainer" class="hidden fixed inset-0 flex items-center justify-center z-50">
-        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
-            <div class="ml-auto w-7 hover:bg-slate-200 rounded-full transition-all cursor-pointer m-1" onclick="closeAddContacts()">
-                <svg class="fill-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <g>
-                        <path fill="none" d="M0 0h24v24H0z"/>
-                        <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/>
-                    </g>
-                </svg>
-            </div>
-            <div class="pb-6 pl-6 pr-6">
-                <div class="space-y-6" action="#">
-                    <div>
-                        <h5 class="text-xl font-medium text-slate-900">Add Contact</h5>
-                        <h4 class="text-base text-gray-900">Input Friend Code to search user</h4>
-                    </div>
-                    <div>
-                        <input type="number" name="friendNumber" id="friendNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5" placeholder="Input Friend Code" required>
-                    </div>
-                    <button type="submit" onclick="addFriendFunction()" class="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5">Add Now</button>
-                </div>
-                <div id="sucessfullMessage" class="flex items-center mt-5 bg-green-100 rounded-2xl hidden">
-                    <i class="fa-regular fa-circle-check fa-2xl text-green-500 mr-2 pl-2"></i>
-                    <p class="p-3 ">New Contact Succesfully Added</p>
-                </div>
-                <div id="notSucessfullMessage" class="flex items-center mt-5 bg-red-100 rounded-2xl hidden">
-                    <i class="fa-solid fa-triangle-exclamation fa-2xl text-red-500 mr-2 pl-2"></i>
-                    <p class="p-3 ">Failed To Add New Contact. Try Again</p>
-                </div>
-                  
-              </div>
-            </div>
-          </div>
+        </div>
     </div>
-    <script src="./js/DataTransfer.js"></script>
-    <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const circles = document.querySelectorAll('.progress-ring__circle');
-    
-    circles.forEach(circle => {
-      const radius = circle.r.baseVal.value;
-      const circumference = radius * 2 * Math.PI;
-      circle.style.strokeDasharray = `${circumference} ${circumference}`;
-      
-      const unixTimestamp = circle.getAttribute('data-time');
-      const startTime = unixTimestamp * 1000;
-      const endTime = startTime + 60 * 60 * 1000;
-      const totalDuration = endTime - startTime;
+</div>
 
-      function updateCountdown() {
-        const now = Date.now();
-        const remaining = Math.max(endTime - now, 0);
-        const percent = 100 - (remaining / totalDuration) * 100;
-        setProgress(percent, circle);
+<div id="addFriendContainer" class="hidden fixed inset-0 flex items-center justify-center z-50">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+        <div class="ml-auto w-7 hover:bg-slate-200 rounded-full transition-all cursor-pointer m-1" onclick="closeAddContacts()">
+            <svg class="fill-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g>
+                    <path fill="none" d="M0 0h24v24H0z"/>
+                    <path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"/>
+                </g>
+            </svg>
+        </div>
+        <div class="pb-6 pl-6 pr-6">
+            <div class="space-y-6" action="#">
+                <div>
+                    <h5 class="text-xl font-medium text-slate-900">Add Contact</h5>
+                    <h4 class="text-base text-gray-900">Input Friend Code to search user</h4>
+                </div>
+                <div>
+                    <input type="number" name="friendNumber" id="friendNumber" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5" placeholder="Input Friend Code" required>
+                </div>
+                <button type="submit" onclick="addFriendFunction()" class="w-full text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5">Add Now</button>
+            </div>
+            <div id="sucessfullMessage" class="flex items-center mt-5 bg-green-100 rounded-2xl hidden">
+                <i class="fa-regular fa-circle-check fa-2xl text-green-500 mr-2 pl-2"></i>
+                <p class="p-3 ">New Contact Succesfully Added</p>
+            </div>
+            <div id="notSucessfullMessage" class="flex items-center mt-5 bg-red-100 rounded-2xl hidden">
+                <i class="fa-solid fa-triangle-exclamation fa-2xl text-red-500 mr-2 pl-2"></i>
+                <p class="p-3 ">Failed To Add New Contact. Try Again</p>
+            </div>
 
-        if (remaining <= 0) {
-          clearInterval(intervalId);
-        }
-      }
-      
-      function setProgress(percent, circle) {
-        const offset = percent / 100 * circumference;
-        circle.style.strokeDashoffset = circumference - offset;
-      }
+        </div>
+    </div>
+</div>
+</div>
+<script src="./js/DataTransfer.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const circles = document.querySelectorAll('.progress-ring__circle');
 
-      updateCountdown();
-      const intervalId = setInterval(updateCountdown, 1000);
+        circles.forEach(circle => {
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+
+            const unixTimestamp = circle.getAttribute('data-time');
+            const startTime = unixTimestamp * 1000;
+            const endTime = startTime + 60 * 60 * 1000;
+            const totalDuration = endTime - startTime;
+
+            function updateCountdown() {
+                const now = Date.now();
+                const remaining = Math.max(endTime - now, 0);
+                const percent = 100 - (remaining / totalDuration) * 100;
+                setProgress(percent, circle);
+
+                if (remaining <= 0) {
+                    clearInterval(intervalId);
+                }
+            }
+
+            function setProgress(percent, circle) {
+                const offset = percent / 100 * circumference;
+                circle.style.strokeDashoffset = circumference - offset;
+            }
+
+            updateCountdown();
+            const intervalId = setInterval(updateCountdown, 1000);
+        });
     });
-  });
-    </script>
+</script>
 </body>
 
 </html>

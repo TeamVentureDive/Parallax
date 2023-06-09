@@ -24,20 +24,20 @@ var transporter = nodemailer.createTransport({
   }
 });
 
-app.post('/sendMail', async(req, res) => {
+app.post('/sendMail', (req, res) => {
   console.log(req.body);
   const mail = req.body.email;
-  const row = await new Promise((resolve, reject) => {
+
     dbc.db.get(`SELECT * FROM a_accounts WHERE a_email LIKE '${mail}'` , (err , row) => {
-      if (err) return reject(err);
+      if (err) throw err;
+      if (!row) {
+        res.json("No rows found");
+        res.send();
+        return;
+      }
       resolve(row);
+
     });
-  });
-  if (!row) {
-    res.json("No rows found");
-    res.send();
-    return;
-  }
 
   var mailOptions = {
     from: 'parallax.venturedive.team@gmail.com',
