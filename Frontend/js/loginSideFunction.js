@@ -3,7 +3,6 @@
 
 
 function fetchDataFromServer() {
-    //let login = "http://localhost:6969/login";
     console.log("login fetch!")
     let emailInput = document.getElementById('emailInput');
     let passwordInput = document.getElementById('passwordInput');

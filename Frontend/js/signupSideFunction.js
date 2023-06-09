@@ -1,5 +1,4 @@
 function fetchDataToServer() {
-    //let signup = "http://localhost:6969/signup";
     console.log("signup fetch!")
     let usernameInput = document.getElementById('usernameInput');
     let emailInput = document.getElementById('emailInput');

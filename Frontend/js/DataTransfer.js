@@ -231,3 +231,9 @@ function handleClick(element) {
     document.getElementById('rightName').textContent = name;
     document.getElementById('rightEmail').textContent = email;
 }
+
+const fileContainer = document.querySelectorAll(".file-container");
+for (let i = 0; i < fileContainer.length; i++) {
+    const currentFileContainer = fileContainer[i];
+    fileContainer[i].addEventListener("click", () => handleClick(currentFileContainer));
+}
