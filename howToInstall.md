@@ -9,7 +9,7 @@ Und das ist auch schon alles!
 ## Installation
 1. Lade dir das Repository herunter
 2. Öffne die Konsole und navigiere in das heruntergeladene Repository
-3. Gehe in das Verzeichniss /serve
+3. Gehe in das Verzeichniss Backend/NodeServer/serve
 4. Gib folgenden Befehl ein: `npm install`
 5. Gib folgenden Befehl ein: `node serve.js`
 6. Öffne nun einen Browser und gehe auf [localhost](http://localhost)
